@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Helpers\Breadcrumbs;
+use App\Exports\LicensesExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
+
+
+
 
 class LicenseController extends Controller
 {
@@ -138,6 +144,12 @@ class LicenseController extends Controller
             'success' => session('success'),
             'breadcum' => $breadcrumbs,
         ]);
+    }
+    public function export()
+    {
+        $now = Carbon::now();
+        $filename = "LicensesExport_{$now->format('d-m-Y_H_i')}.xlsx";
+        return Excel::download(new LicensesExport, $filename);
     }
 }
 

@@ -19,11 +19,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('project', ProjectController::class);
     Route::get('/task/my-tasks', [TaskController::class, 'myTasks'])->name('task.myTasks');
+    Route::get('/license/export', [LicenseController::class, 'export'])->name('license.export');
     Route::resource('task', TaskController::class);
     Route::resource('license', LicenseController::class);
     Route::resource('user', UserController::class);
 
-    Route::get('{any}', [RoutingController::class, 'handle'])->where('any', '.*');
+    // Route::get('{any}', [RoutingController::class, 'handle'])->where('any', '.*');
 });
 
 
