@@ -1429,7 +1429,6 @@
         },
         {
             "name": "laravel/framework",
-<<<<<<< HEAD
             "version": "v11.35.1",
             "source": {
                 "type": "git",
@@ -1440,18 +1439,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/dcfa130ede1a6fa4343dc113410963e791ad34fb",
                 "reference": "dcfa130ede1a6fa4343dc113410963e791ad34fb",
-=======
-            "version": "v11.35.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "f1a7aaa3c1235b7a95ccaa58db90e0cd9d8c3fcc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f1a7aaa3c1235b7a95ccaa58db90e0cd9d8c3fcc",
-                "reference": "f1a7aaa3c1235b7a95ccaa58db90e0cd9d8c3fcc",
->>>>>>> 5ac6b0c754c694ad41ec08b8b5bb29ee697267c3
                 "shasum": ""
             },
             "require": {
@@ -1653,11 +1640,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-<<<<<<< HEAD
             "time": "2024-12-12T18:25:58+00:00"
-=======
-            "time": "2024-12-10T16:09:29+00:00"
->>>>>>> 5ac6b0c754c694ad41ec08b8b5bb29ee697267c3
         },
         {
             "name": "laravel/prompts",
@@ -1719,7 +1702,6 @@
             "time": "2024-11-12T14:59:47+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "laravel/scout",
             "version": "v10.11.5",
             "source": {
@@ -1815,25 +1797,6 @@
                 "php": "^8.1"
             },
             "require-dev": {
-=======
-            "name": "laravel/serializable-closure",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "0d8d3d8086984996df86596a86dea60398093a81"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/0d8d3d8086984996df86596a86dea60398093a81",
-                "reference": "0d8d3d8086984996df86596a86dea60398093a81",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.1"
-            },
-            "require-dev": {
->>>>>>> 5ac6b0c754c694ad41ec08b8b5bb29ee697267c3
                 "illuminate/support": "^10.0|^11.0",
                 "nesbot/carbon": "^2.67|^3.0",
                 "pestphp/pest": "^2.36",
@@ -2495,7 +2458,6 @@
             "time": "2024-12-08T08:18:47+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "maatwebsite/excel",
             "version": "3.1.61",
             "source": {
@@ -2761,8 +2723,6 @@
             "time": "2022-12-02T22:17:43+00:00"
         },
         {
-=======
->>>>>>> 5ac6b0c754c694ad41ec08b8b5bb29ee697267c3
             "name": "monolog/monolog",
             "version": "3.8.1",
             "source": {
@@ -3263,7 +3223,6 @@
                 }
             ],
             "time": "2024-11-21T10:39:51+00:00"
-<<<<<<< HEAD
         },
         {
             "name": "phpoffice/phpspreadsheet",
@@ -3369,8 +3328,6 @@
                 "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/1.29.6"
             },
             "time": "2024-12-08T05:49:00+00:00"
-=======
->>>>>>> 5ac6b0c754c694ad41ec08b8b5bb29ee697267c3
         },
         {
             "name": "phpoption/phpoption",
@@ -4164,7 +4121,6 @@
             "time": "2024-04-27T21:32:50+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "riimu/kit-phpencoder",
             "version": "v2.4.2",
             "source": {
@@ -4223,17 +4179,6 @@
             },
             "dist": {
                 "type": "zip",
-=======
-            "name": "symfony/clock",
-            "version": "v7.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/clock.git",
-                "reference": "b81435fbd6648ea425d1ee96a2d8e68f4ceacd24"
-            },
-            "dist": {
-                "type": "zip",
->>>>>>> 5ac6b0c754c694ad41ec08b8b5bb29ee697267c3
                 "url": "https://api.github.com/repos/symfony/clock/zipball/b81435fbd6648ea425d1ee96a2d8e68f4ceacd24",
                 "reference": "b81435fbd6648ea425d1ee96a2d8e68f4ceacd24",
                 "shasum": ""
