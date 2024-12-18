@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\DashBoard;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateProjectRequest extends FormRequest
+class UpdateTaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,16 @@ class UpdateProjectRequest extends FormRequest
             'image' => ['nullable', 'image'],
             "description" => ['nullable', 'string'],
             'due_date' => ['nullable', 'date'],
-            'status' => ['required', Rule::in(['pending', 'in_progress', 'completed'])]
+            'project_id' => ['required', 'exists:projects,id'],
+            'assigned_user_id' => ['required', 'exists:users,id'],
+            'status' => [
+                'required',
+                Rule::in(['pending', 'in_progress', 'completed'])
+            ],
+            'priority' => [
+                'required',
+                Rule::in(['low', 'medium', 'high'])
+            ]
         ];
     }
 }

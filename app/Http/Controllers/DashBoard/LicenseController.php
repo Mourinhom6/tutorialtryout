@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\DashBoard;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\ProjectResource;
 use App\Http\Resources\LicenseResource;
 use App\Http\Resources\UserResource;
 use App\Models\Project;
 use App\Models\License;
 use App\Helpers\CustomNavigation;
-use App\Http\Requests\StoreLicenseRequest;
-use App\Http\Requests\UpdateLicenseRequest;
+use App\Http\Requests\DashBoard\StoreLicenseRequest;
+use App\Http\Requests\DashBoard\UpdateLicenseRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -172,7 +173,7 @@ class LicenseController extends Controller
 // use App\Models\License;
 // use App\Http\Requests\StoreLicenseRequest;
 // use App\Http\Requests\UpdateLicenseRequest;
-// namespace App\Http\Controllers;
+// namespace App\Http\Controllers\DashBoard;
 
 // use App\Http\Resources\ProjectResource;
 // use App\Http\Resources\LicenseResource;

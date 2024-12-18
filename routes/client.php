@@ -11,10 +11,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoutingController;
 use Inertia\Inertia;
 
-Route::redirect('/', '/dashboard');
-
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
 
     Route::resource('project', ProjectController::class);
     Route::get('/task/my-tasks', [TaskController::class, 'myTasks'])->name('task.myTasks');
@@ -34,6 +33,3 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
-
-// require __DIR__ . '/client.php';

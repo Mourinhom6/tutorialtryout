@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Client\LandingController;
+
+
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -12,6 +15,12 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
+
+    Route::redirect('/', '/blog');
+
+    Route::get('blog', [LandingController::class, 'blog'])->name('blog');
+    Route::get('marketing', [LandingController::class, 'marketing'])->name('marketing');
+
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
 
     Route::post('register', [RegisteredUserController::class, 'store']);

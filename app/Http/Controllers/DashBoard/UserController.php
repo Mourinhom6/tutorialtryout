@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\DashBoard;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\UserCrudResource;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\DashBoard\StoreUserRequest;
+use App\Http\Requests\DashBoard\UpdateUserRequest;
 use App\Helpers\Breadcrumbs;
 
 class UserController extends Controller
