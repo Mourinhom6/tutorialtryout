@@ -1,5 +1,5 @@
 import { Link, useForm } from "@inertiajs/react";
-import {useRoute} from "../../../vendor/tightenco/ziggy"
+import {useRoute} from "&/ziggy"
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 

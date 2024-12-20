@@ -1,4 +1,4 @@
-import {useRoute} from "../../../vendor/tightenco/ziggy"
+import {useRoute} from "&/ziggy"
 import { useState } from "react";
 import {Head, Link, usePage} from "@inertiajs/react"
 import Snackbar from '@mui/material/Snackbar';

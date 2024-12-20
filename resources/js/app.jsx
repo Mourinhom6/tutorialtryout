@@ -66,8 +66,8 @@ createInertiaApp({
     },
 
     setup({ el, App, props }) {
-        // createRoot(el).render(<StrictMode><App {...props} /></StrictMode>);
-        createRoot(el).render(<App {...props} />);
+        createRoot(el).render(<StrictMode><App {...props} /></StrictMode>);
+        // createRoot(el).render(<App {...props} />);
     },
 
     progress: {

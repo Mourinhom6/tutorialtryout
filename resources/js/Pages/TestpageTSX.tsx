@@ -1,7 +1,7 @@
 import React from 'react';
 import {Head, Link, usePage, useForm} from "@inertiajs/react";
 import { Container, Typography, Button, AppBar, Toolbar } from '@mui/material';
-import {useRoute} from "../../../vendor/tightenco/ziggy";
+import {useRoute} from "&/ziggy";
 import WorkSpace from "../Layouts/WorkSpace";
 
 export default function MyPage() {

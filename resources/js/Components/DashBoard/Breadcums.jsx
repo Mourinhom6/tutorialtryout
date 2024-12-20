@@ -7,7 +7,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {Link, usePage} from "@inertiajs/react"
 // import PropTypes from 'prop-types'; // Import PropTypes for runtime validation
 
-function Breadcums() {
+export default function Breadcums() {
     const {props: MegaBread } = usePage();
     const { breadcum } = MegaBread;
     console.log("Bread1:", MegaBread);
@@ -39,7 +39,3 @@ function Breadcums() {
         </Stack>
   );
 }
-
-
-
-export default Breadcums;

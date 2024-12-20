@@ -82,16 +82,42 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import SearchIcon from '@mui/icons-material/Search';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DescriptionIcon from '@mui/icons-material/Description';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import LayersIcon from '@mui/icons-material/Layers';
 import { Link, router, Head, useForm, usePage } from "@inertiajs/react";
 import { AppProvider, type Session, type Navigation } from '@toolpad/core/AppProvider';
 import { DashboardLayout, ThemeSwitcher, type SidebarFooterProps,} from '@toolpad/core/DashboardLayout';
 import { PageContainer, PageContainerToolbar } from '@toolpad/core/PageContainer';
-import {useRoute} from "../../../vendor/tightenco/ziggy"
-import Breadcums from "@/Components/Breadcums";
+import {useRoute} from "&/ziggy"
 import Error from "@/Components/Error";
-import { CustomRouter } from '@/Components/CustomRouter';
+
+import { CustomRouter } from '@/Components/DashBoard/CustomRouter';
+import Breadcums from "@/Components/DashBoard/Breadcums";
+// import AppNavbar from '@/components/DashBoard/AppNavbar';
+import SideMenuMobile from '@/Components/DashBoard/SideMenuMobile';
+
+import isMobileFunction from "@/MediaQuery"
+
+import Badge, { badgeClasses } from '@mui/material/Badge';
+
+
+
 const route = useRoute();
+
+
+function MenuButton({ showBadge = false, ...props }) {
+    return (
+      <Badge
+        color="error"
+        variant="dot"
+        invisible={!showBadge}
+        sx={{ [`& .${badgeClasses.badge}`]: { right: 2, top: 2 } }}
+      >
+        <IconButton size="small" {...props} />
+      </Badge>
+    );
+}
+
 
 export const NAVIGATION: Navigation = [
   {
@@ -233,50 +259,67 @@ const BRANDING = {
     title: 'WorkSpace',
   };
 function ToolbarActionsSearch() {
+
+    const [open, setOpen] = React.useState(false);
+
+      const toggleDrawer = (newOpen) => () => {
+        setOpen(newOpen);
+    };
+
+    const { isMobile } = isMobileFunction();
+
     return (
         <Stack
           direction="row"
           spacing={2}
           sx={{ width: '100%', alignItems: 'center', justifyContent: 'space-between' }}
         >
-          {/* Left Section: Breadcrumbs */}
-          <Breadcums />
+            {/* Left Section: Breadcrumbs */}
+            <Breadcums />
 
-          {/* Right Section: Search and Theme Switcher */}
-          <Stack direction="row" spacing={2} alignItems="center">
-            <Tooltip title="Search" enterDelay={1000}>
-              <div>
-                <IconButton
-                  type="button"
-                  aria-label="search"
-                  sx={{
-                    display: { xs: 'inline', md: 'none' },
-                  }}
-                >
-                  <SearchIcon />
-                </IconButton>
-              </div>
-            </Tooltip>
+            {/* Right Section: Search and Theme Switcher */}
+            <Stack direction="row" spacing={2} alignItems="center">
+                <Tooltip title="Search" enterDelay={1000}>
+                    <div>
+                        <IconButton
+                        type="button"
+                        aria-label="search"
+                        sx={{
+                            display: { xs: 'inline', sm: 'none' },
+                        }}
+                        >
+                        <SearchIcon />
+                        </IconButton>
+                    </div>
+                </Tooltip>
 
-            <TextField
-              label="Search"
-              variant="outlined"
-              size="small"
-              slotProps={{
-                input: {
-                  endAdornment: (
-                    <IconButton type="button" aria-label="search" size="small">
-                      <SearchIcon />
-                    </IconButton>
-                  ),
-                  sx: { pr: 0.5 },
-                },
-              }}
-              sx={{ display: { xs: 'none', md: 'inline-block' }, mr: 1 }}
-            />
+                <TextField
+                    label="Search"
+                    variant="outlined"
+                    size="small"
+                    slotProps={{
+                        input: {
+                        endAdornment: (
+                            <IconButton type="button" aria-label="search" size="small">
+                            <SearchIcon />
+                            </IconButton>
+                        ),
+                        sx: { pr: 0.5 },
+                        },
+                    }}
+                    sx={{ display: { xs: 'none', sm: 'inline-block' }, mr: 1 }}
+                />
 
-            <ThemeSwitcher />
-          </Stack>
+                <ThemeSwitcher />
+            {/* </Stack> */}
+                {isMobile ? (
+                    <MenuButton aria-label="menu" onClick={() => toggleDrawer(true)}>
+                        <MenuRoundedIcon />
+                    </MenuButton>
+                    <SideMenuMobile open={open} toggleDrawer={toggleDrawer} />
+                ) : null}
+            </Stack>
+
         </Stack>
       );
     }
@@ -297,6 +340,8 @@ return (
 
     // Use the default function export
 export default function WorkSpace(props: { children: React.ReactNode },) {
+
+    const { isMobile } = isMobileFunction();
     const { props: pageProps } = usePage();
     const routerCust = CustomRouter();
     console.log("CustomRouter:", routerCust);
@@ -341,14 +386,17 @@ export default function WorkSpace(props: { children: React.ReactNode },) {
         console.log('demoTheme:', demoTheme);
   return (
     <AppProvider
-      navigation={NAVIGATION}
-      session={session}
-      authentication={authentication}
-      branding={BRANDING}
-      theme={demoTheme}
-      router={routerCust}
+        navigation={NAVIGATION}
+        //   session={session}
+        // authentication={authentication}
+        session={isMobile ? null : session}
+        authentication={isMobile ? null : authentication}
+        branding={BRANDING}
+        theme={demoTheme}
+        router={routerCust}
     >
-        <DashboardLayout defaultSidebarCollapsed slots={{ toolbarActions: ToolbarActionsSearch, sidebarFooter: SidebarFooter }} slotProps={{ toolbarAccount: {localeText: {signInLabel: 'Entrar', signOutLabel: 'Sair'} }  }}>
+        {/* <AppNavbar /> */}
+        <DashboardLayout  defaultSidebarCollapsed={true} hideNavigation={isMobile} slots={{ toolbarActions: ToolbarActionsSearch, sidebarFooter: SidebarFooter }} slotProps={{ toolbarAccount: {localeText: {signInLabel: 'Entrar', signOutLabel: 'Sair'} }  }}>
             <PageContainer>{props.children}</PageContainer>
             {/* <PageContainer>{children}</PageContainer> */}
         </DashboardLayout>

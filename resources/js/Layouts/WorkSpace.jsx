@@ -1,213 +1,3 @@
-// import * as React from 'react';
-// import Box from '@mui/material/Box';
-// import IconButton from '@mui/material/IconButton';
-// import TextField from '@mui/material/TextField';
-// import Tooltip from '@mui/material/Tooltip';
-// import Typography from '@mui/material/Typography';
-// import { createTheme } from '@mui/material/styles';
-// import DashboardIcon from '@mui/icons-material/Dashboard';
-// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-// import SearchIcon from '@mui/icons-material/Search';
-// import { AppProvider, type Navigation } from '@toolpad/core/AppProvider';
-// import {
-//   DashboardLayout,
-//   type SidebarFooterProps,
-// } from '@toolpad/core/DashboardLayout';
-// import { useDemoRouter } from '@toolpad/core/internal';
-
-// const NAVIGATION: Navigation = [
-//   {
-//     kind: 'header',
-//     title: 'Main items',
-//   },
-//   {
-//     segment: 'dashboard',
-//     title: 'Dashboard',
-//     icon: <DashboardIcon />,
-//   },
-//   {
-//     segment: 'orders',
-//     title: 'Orders',
-//     icon: <ShoppingCartIcon />,
-//   },
-// ];
-
-// const demoTheme = createTheme({
-//   cssVariables: {
-//     colorSchemeSelector: 'data-toolpad-color-scheme',
-//   },
-//   colorSchemes: { light: true, dark: true },
-//   breakpoints: {
-//     values: {
-//       xs: 0,
-//       sm: 600,
-//       md: 600,
-//       lg: 1200,
-//       xl: 1536,
-//     },
-//   },
-// });
-
-// function DemoPageContent({ pathname }: { pathname: string }) {
-//   return (
-//     <Box
-//       sx={{
-//         py: 4,
-//         display: 'flex',
-//         flexDirection: 'column',
-//         alignItems: 'center',
-//         textAlign: 'center',
-//       }}
-//     >
-//       <Typography>Dashboard content for {pathname}</Typography>
-//     </Box>
-//   );
-// }
-
-// function Search() {
-//   return (
-//     <React.Fragment>
-//       <Tooltip title="Search" enterDelay={1000}>
-//         <div>
-//           <IconButton
-//             type="button"
-//             aria-label="search"
-//             sx={{
-//               display: { xs: 'inline', md: 'none' },
-//             }}
-//           >
-//             <SearchIcon />
-//           </IconButton>
-//         </div>
-//       </Tooltip>
-//       <TextField
-//         label="Search"
-//         variant="outlined"
-//         size="small"
-//         slotProps={{
-//           input: {
-//             endAdornment: (
-//               <IconButton type="button" aria-label="search" size="small">
-//                 <SearchIcon />
-//               </IconButton>
-//             ),
-//             sx: { pr: 0.5 },
-//           },
-//         }}
-//         sx={{ display: { xs: 'none', md: 'inline-block' }, mr: 1 }}
-//       />
-//     </React.Fragment>
-//   );
-// }
-
-// function SidebarFooter({ mini }: SidebarFooterProps) {
-//   return (
-//     <Typography
-//       variant="caption"
-//       sx={{ m: 1, whiteSpace: 'nowrap', overflow: 'hidden' }}
-//     >
-//       {mini ? '© MUI' : `© ${new Date().getFullYear()} Made with love by MUI`}
-//     </Typography>
-//   );
-// }
-
-// interface DemoProps {
-//   /**
-// //    * Injected by the documentation to work in an iframe.
-//    * Remove this when copying and pasting into your project.
-//    */
-//   window?: () => Window;
-// }
-
-// export default function DashboardLayoutSlots(props: DemoProps) {
-//   const { window } = props;
-
-//   const router = useDemoRouter('/dashboard');
-
-//   // Remove this const when copying and pasting into your project.
-//   const demoWindow = window !== undefined ? window() : undefined;
-
-//   return (
-//     <AppProvider
-//       navigation={NAVIGATION}
-//       router={router}
-//       theme={demoTheme}
-//       window={demoWindow}
-//     >
-//       <DashboardLayout
-//         slots={{ toolbarActions: Search, sidebarFooter: SidebarFooter }}
-//       >
-//         <DemoPageContent pathname={router.pathname} />
-//       </DashboardLayout>
-//     </AppProvider>
-//   );
-// }
-
-// import * as React from 'react';
-// import {
-//   AuthenticationContext,
-//   SessionContext,
-//   type Session,
-// } from '@toolpad/core/AppProvider';
-// import { Account } from '@toolpad/core/Account';
-
-// const demoSession = {
-//   user: {
-//     name: 'Bharat Kashyap',
-//     email: 'bharatkashyap@outlook.com',
-//     image: 'https://avatars.githubusercontent.com/u/19550456',
-//   },
-// };
-
-// export default function AccountDemoSignedOut() {
-//   const [session, setSession] = React.useState<Session | null>(null);
-//   const authentication = React.useMemo(() => {
-//     return {
-//       signIn: () => {
-//         setSession(demoSession);
-//       },
-//       signOut: () => {
-//         setSession(null);
-//       },
-//     };
-//   }, []);
-
-//   return (
-//     <AuthenticationContext.Provider value={authentication}>
-//       <SessionContext.Provider value={session}>
-//         <Account />
-//       </SessionContext.Provider>
-//     </AuthenticationContext.Provider>
-//   );
-// }
-
-// const [session, setSession] = React.useState<Session | null>({
-//     user: {
-//       name: 'Bharat Kashyap',
-//       email: 'bharatkashyap@outlook.com',
-//       image: 'https://avatars.githubusercontent.com/u/19550456',
-//     },
-//   });
-
-//   const authentication = React.useMemo(() => {
-//     return {
-//       signIn: () => {
-//         setSession({
-//           user: {
-//             name: 'Bharat Kashyap',
-//             email: 'bharatkashyap@outlook.com',
-//             image: 'https://avatars.githubusercontent.com/u/19550456',
-//           },
-//         });
-//       },
-//       signOut: () => {
-//         setSession(null);
-//       },
-//     };
-//   }, []);
-
-
-
 // import { Link } from "@inertiajs/react";
 // import * as React from 'react';
 // import { alpha } from '@mui/material/styles';
@@ -284,19 +74,24 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import { createTheme } from '@mui/material/styles';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
 import AssignmentLateIcon from '@mui/icons-material/AssignmentLate';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import SearchIcon from '@mui/icons-material/Search';
 import BarChartIcon from '@mui/icons-material/BarChart';
+import LayersIcon from '@mui/icons-material/Layers';
+
 import DescriptionIcon from '@mui/icons-material/Description';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import LayersIcon from '@mui/icons-material/Layers';
+import SearchIcon from '@mui/icons-material/Search';
+
+
 import { Link, router, Head, useForm, usePage } from "@inertiajs/react";
-import { AppProvider, type Session, type Navigation } from '@toolpad/core/AppProvider';
-import { DashboardLayout, ThemeSwitcher, type SidebarFooterProps,} from '@toolpad/core/DashboardLayout';
+// import { AppProvider, type Session, type Navigation } from '@toolpad/core/AppProvider';
+import { AppProvider } from '@toolpad/core/AppProvider';
+import { DashboardLayout, ThemeSwitcher } from '@toolpad/core/DashboardLayout';
+
+// import { DashboardLayout, ThemeSwitcher, type SidebarFooterProps,} from '@toolpad/core/DashboardLayout';
 import { PageContainer, PageContainerToolbar } from '@toolpad/core/PageContainer';
 import {useRoute} from "&/ziggy"
 import Error from "@/Components/Error";
@@ -328,8 +123,8 @@ function MenuButton({ showBadge = false, ...props }) {
     );
 }
 
-
-export const NAVIGATION: Navigation = [
+const NAVIGATION = [
+// export const NAVIGATION: Navigation = [
   {
     kind: 'header',
     title: 'Main items',
@@ -354,8 +149,6 @@ export const NAVIGATION: Navigation = [
     icon: <AssignmentIcon />,
     pattern: '/task',
     segment: 'task',
-    // pattern: route('task.index'),
-    // segment: route('task.index'),
   },
   {
     kind: 'page',
@@ -380,7 +173,7 @@ export const NAVIGATION: Navigation = [
   },
   {
     segment: 'profile',
-    title: 'All Tasks',
+    title: 'Profile',
    icon: <BarChartIcon />,
     children: [
       {
@@ -470,13 +263,18 @@ const BRANDING = {
   };
 function ToolbarActionsSearch() {
 
+    // const [open, setOpen] = React.useState(false);
     const [open, setOpen] = React.useState(false);
 
-      const toggleDrawer = (newOpen) => () => {
+    const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };
 
     const { isMobile } = isMobileFunction();
+
+    console.log("isMobile",isMobile);
+    console.log("toggleDrawer",toggleDrawer);
+    // console.log("isMobile",isMobile);
 
     return (
         <Stack
@@ -523,11 +321,15 @@ function ToolbarActionsSearch() {
                 <ThemeSwitcher />
             {/* </Stack> */}
                 {isMobile ? (
-                    <MenuButton aria-label="menu" onClick={() => toggleDrawer(true)}>
-                        <MenuRoundedIcon />
-                    </MenuButton>
-                    <SideMenuMobile open={open} toggleDrawer={toggleDrawer} />
+                    <>
+                        {/* <MenuButton aria-label="menu" onClick={() => toggleDrawer(true)}> */}
+                        <MenuButton aria-label="menu" onClick={toggleDrawer(true)}>
+                            <MenuRoundedIcon />
+                        </MenuButton>
+                        <SideMenuMobile open={open} toggleDrawer={toggleDrawer} />
+                    </>
                 ) : null}
+
             </Stack>
 
         </Stack>
@@ -535,22 +337,23 @@ function ToolbarActionsSearch() {
     }
 
 
-
-function SidebarFooter({ mini }: SidebarFooterProps) {
-return (
-    <Typography
-    variant="caption"
-    sx={{ m: 1, whiteSpace: 'nowrap', overflow: 'hidden',  display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-    >
-    {mini ? '© AVF' : `© Copyright ${new Date().getFullYear()}  Auto Viação Feirense, Lda`}
-    </Typography>
-);
+function SidebarFooter({ mini }) {
+// function SidebarFooter({ mini }: SidebarFooterProps) {
+    return (
+        <Typography
+        variant="caption"
+        sx={{ m: 1, whiteSpace: 'nowrap', overflow: 'hidden',  display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        >
+        {mini ? '© AVF' : `© Copyright ${new Date().getFullYear()}  Auto Viação Feirense, Lda`}
+        </Typography>
+    );
 }
 // {authUser},
 
     // Use the default function export
-export default function WorkSpace(props: { children: React.ReactNode },) {
-
+// export default function WorkSpace(props: { children: React.ReactNode },) {
+export default function WorkSpace({children}) {
+// export default function WorkSpace(props) {
     const { isMobile } = isMobileFunction();
     const { props: pageProps } = usePage();
     const routerCust = CustomRouter();
@@ -563,7 +366,7 @@ export default function WorkSpace(props: { children: React.ReactNode },) {
     console.log("Props:", pageProps);
     console.log("Props_authUser:", pageProps.authUser.name);
     // console.log("Props_auth:", pageProps.auth.user.email);
-    const [session, setSession] = React.useState<Session | null>({
+    const [session, setSession] = React.useState({
         user: {
             name: pageProps.authUser.name ? pageProps.authUser.name : 'Naomi Holt',
             email: pageProps.authUser.email ? pageProps.authUser.email : 'naomiholt@gmail.com',
@@ -594,6 +397,15 @@ export default function WorkSpace(props: { children: React.ReactNode },) {
     }, [pageProps]);
 
         console.log('demoTheme:', demoTheme);
+
+        console.log("authentication1fisrt", authentication);
+
+    // const [open, setOpen] = React.useState(false);
+
+    // const toggleDrawer = (newOpen) => () => {
+    //     setOpen(newOpen);
+    // };
+
   return (
     <AppProvider
         navigation={NAVIGATION}
@@ -607,8 +419,9 @@ export default function WorkSpace(props: { children: React.ReactNode },) {
     >
         {/* <AppNavbar /> */}
         <DashboardLayout  defaultSidebarCollapsed={true} hideNavigation={isMobile} slots={{ toolbarActions: ToolbarActionsSearch, sidebarFooter: SidebarFooter }} slotProps={{ toolbarAccount: {localeText: {signInLabel: 'Entrar', signOutLabel: 'Sair'} }  }}>
-            <PageContainer>{props.children}</PageContainer>
-            {/* <PageContainer>{children}</PageContainer> */}
+            {/* <PageContainer>{props.children}</PageContainer> */}
+            <PageContainer>{children}</PageContainer>
+            {/* <PageContainer>{props}</PageContainer> */}
         </DashboardLayout>
     </AppProvider>
   );
