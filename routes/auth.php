@@ -20,6 +20,10 @@ Route::middleware('guest')->group(function () {
 
     Route::get('blog', [LandingController::class, 'blog'])->name('blog');
     Route::get('marketing', [LandingController::class, 'marketing'])->name('marketing');
+    Route::get('terms', [LandingController::class, 'terms'])->name('terms');
+    Route::get('carreer', [LandingController::class, 'carreer'])->name('carreer');
+    Route::get('job', [LandingController::class, 'job'])->name('job');
+
 
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
 

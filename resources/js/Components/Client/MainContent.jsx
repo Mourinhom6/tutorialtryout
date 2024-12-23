@@ -17,63 +17,6 @@ import { styled } from '@mui/material/styles';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import RssFeedRoundedIcon from '@mui/icons-material/RssFeedRounded';
 
-const cardData = [
-  {
-    img: 'https://picsum.photos/800/450?random=1',
-    tag: 'Engineering',
-    title: 'Revolutionizing software development with cutting-edge tools',
-    description:
-      'Our latest engineering tools are designed to streamline workflows and boost productivity. Discover how these innovations are transforming the software development landscape.',
-    authors: [
-      { name: 'Remy Sharp', avatar: '/static/images/avatar/1.jpg' },
-      { name: 'Travis Howard', avatar: '/static/images/avatar/2.jpg' },
-    ],
-  },
-  {
-    img: 'https://picsum.photos/800/450?random=2',
-    tag: 'Product',
-    title: 'Innovative product features that drive success',
-    description:
-      'Explore the key features of our latest product release that are helping businesses achieve their goals. From user-friendly interfaces to robust functionality, learn why our product stands out.',
-    authors: [{ name: 'Erica Johns', avatar: '/static/images/avatar/6.jpg' }],
-  },
-  {
-    img: 'https://picsum.photos/800/450?random=3',
-    tag: 'Design',
-    title: 'Designing for the future: trends and insights',
-    description:
-      'Stay ahead of the curve with the latest design trends and insights. Our design team shares their expertise on creating intuitive and visually stunning user experiences.',
-    authors: [{ name: 'Kate Morrison', avatar: '/static/images/avatar/7.jpg' }],
-  },
-  {
-    img: 'https://picsum.photos/800/450?random=4',
-    tag: 'Company',
-    title: "Our company's journey: milestones and achievements",
-    description:
-      "Take a look at our company's journey and the milestones we've achieved along the way. From humble beginnings to industry leader, discover our story of growth and success.",
-    authors: [{ name: 'Cindy Baker', avatar: '/static/images/avatar/3.jpg' }],
-  },
-  {
-    img: 'https://picsum.photos/800/450?random=45',
-    tag: 'Engineering',
-    title: 'Pioneering sustainable engineering solutions',
-    description:
-      "Learn about our commitment to sustainability and the innovative engineering solutions we're implementing to create a greener future. Discover the impact of our eco-friendly initiatives.",
-    authors: [
-      { name: 'Agnes Walker', avatar: '/static/images/avatar/4.jpg' },
-      { name: 'Trevor Henderson', avatar: '/static/images/avatar/5.jpg' },
-    ],
-  },
-  {
-    img: 'https://picsum.photos/800/450?random=6',
-    tag: 'Product',
-    title: 'Maximizing efficiency with our latest product updates',
-    description:
-      'Our recent product updates are designed to help you maximize efficiency and achieve more. Get a detailed overview of the new features and improvements that can elevate your workflow.',
-    authors: [{ name: 'Travis Howard', avatar: '/static/images/avatar/2.jpg' }],
-  },
-];
-
 const SyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -153,29 +96,40 @@ Author.propTypes = {
   ).isRequired,
 };
 
-export function Search() {
-  return (
-    <FormControl sx={{ width: { xs: '100%', md: '25ch' } }} variant="outlined">
-      <OutlinedInput
-        size="small"
-        id="search"
-        placeholder="Search…"
-        sx={{ flexGrow: 1 }}
-        startAdornment={
-          <InputAdornment position="start" sx={{ color: 'text.primary' }}>
-            <SearchRoundedIcon fontSize="small" />
-          </InputAdornment>
-        }
-        inputProps={{
-          'aria-label': 'search',
-        }}
-      />
-    </FormControl>
-  );
-}
+export default function MainContent({
+        blogs,
+        queryParams = null,
+}) {
+    const [selectedTag, setSelectedTag] = React.useState("All");
+    const [quickFilterText, setQuickFilterText] = React.useState("");
 
-export default function MainContent() {
-  const [focusedCardIndex, setFocusedCardIndex] = React.useState(null);
+    const searchFieldChanged = (name, value) => {
+      if (value) {
+        queryParams[name] = value;
+      } else {
+        delete queryParams[name];
+      }
+      router.get(route("blog.index"), queryParams); // Use the correct blog route
+    };
+
+    const onKeyDown = (name, e) => {
+      if (e.key !== "Enter") return;
+      searchFieldChanged(name, e.target.value);
+    };
+
+    const handleClick = (tag) => {
+      setSelectedTag(tag);
+      if (tag === "All") {
+        delete queryParams.tags; // Remove the tag filter if 'All' is selected
+      } else {
+        queryParams.tags = tag;
+      }
+      router.get(route("blog.index"), queryParams); // Use the correct blog route
+    };
+
+    // const onQuickFilterChange = (event) => {
+    //   setQuickFilterText(event.target.value);
+    // };
 
   const handleFocus = (index) => {
     setFocusedCardIndex(index);
@@ -185,9 +139,8 @@ export default function MainContent() {
     setFocusedCardIndex(null);
   };
 
-  const handleClick = () => {
-    console.info('You clicked the filter chip.');
-  };
+
+
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
@@ -206,7 +159,29 @@ export default function MainContent() {
           overflow: 'auto',
         }}
       >
-        <Search />
+        {/* <Search /> */}
+        <FormControl sx={{ width: { xs: '100%', md: '25ch' } }} variant="outlined">
+            <OutlinedInput
+                size="small"
+                id="search"
+                // value={quickFilterText}
+                // onChange={onQuickFilterChange}
+                defaultValue={queryParams.name}
+                label="Task Name"
+                onBlur={(e) => searchFieldChanged("name", e.target.value)}
+                onKeyDown={(e) => onKeyDown("name", e)}
+                placeholder="Search…"
+                sx={{ flexGrow: 1 }}
+                startAdornment={
+                <InputAdornment position="start" sx={{ color: 'text.primary' }}>
+                    <SearchRoundedIcon fontSize="small" />
+                </InputAdornment>
+                }
+                inputProps={{
+                'aria-label': 'search',
+                }}
+            />
+        </FormControl>
         <IconButton size="small" aria-label="RSS feed">
           <RssFeedRoundedIcon />
         </IconButton>
@@ -230,43 +205,15 @@ export default function MainContent() {
             overflow: 'auto',
           }}
         >
-          <Chip onClick={handleClick} size="medium" label="All categories" />
-          <Chip
-            onClick={handleClick}
-            size="medium"
-            label="Company"
-            sx={{
-              backgroundColor: 'transparent',
-              border: 'none',
-            }}
-          />
-          <Chip
-            onClick={handleClick}
-            size="medium"
-            label="Product"
-            sx={{
-              backgroundColor: 'transparent',
-              border: 'none',
-            }}
-          />
-          <Chip
-            onClick={handleClick}
-            size="medium"
-            label="Design"
-            sx={{
-              backgroundColor: 'transparent',
-              border: 'none',
-            }}
-          />
-          <Chip
-            onClick={handleClick}
-            size="medium"
-            label="Engineering"
-            sx={{
-              backgroundColor: 'transparent',
-              border: 'none',
-            }}
-          />
+            <Chip onClick={() => handleClick('All')} size="medium" label="All categories" />
+
+            <Chip onClick={() => handleClick('Company')} size="medium" label="Company" sx={{ backgroundColor: 'transparent', border: 'none', }}/>
+
+            <Chip onClick={() => handleClick('Product')} size="medium" label="Product" sx={{ backgroundColor: 'transparent', border: 'none', }}/>
+
+            <Chip onClick={() => handleClick('Design')} size="medium" label="Design" sx={{ backgroundColor: 'transparent', border: 'none', }}/>
+
+            <Chip onClick={() => handleClick('Engineering')} size="medium" label="Engineering" sx={{ backgroundColor: 'transparent', border: 'none', }}/>
         </Box>
         <Box
           sx={{
@@ -277,7 +224,29 @@ export default function MainContent() {
             overflow: 'auto',
           }}
         >
-          <Search />
+          {/* <Search /> */}
+          <FormControl sx={{ width: { xs: '100%', md: '25ch' } }} variant="outlined">
+            <OutlinedInput
+                size="small"
+                id="search"
+                // value={quickFilterText}
+                // onChange={onQuickFilterChange}
+                defaultValue={queryParams.name}
+                label="Task Name"
+                onBlur={(e) => searchFieldChanged("name", e.target.value)}
+                onKeyDown={(e) => onKeyDown("name", e)}
+                placeholder="Search…"
+                sx={{ flexGrow: 1 }}
+                startAdornment={
+                <InputAdornment position="start" sx={{ color: 'text.primary' }}>
+                    <SearchRoundedIcon fontSize="small" />
+                </InputAdornment>
+                }
+                inputProps={{
+                'aria-label': 'search',
+                }}
+            />
+        </FormControl>
           <IconButton size="small" aria-label="RSS feed">
             <RssFeedRoundedIcon />
           </IconButton>
@@ -490,3 +459,64 @@ export default function MainContent() {
     </Box>
   );
 }
+
+
+function BlogGrid({ blogs }){
+    const firstFiveBlogs = blogs.slice(0, 5);
+
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+        {/* First two large cards */}
+        {firstFiveBlogs.slice(0, 2).map((blog, index) => (
+          <div key={blog.id} className="md:col-span-6">
+            <Card className="h-full">
+              <img
+                src={blog.image}
+                alt={blog.title}
+                className="w-full aspect-video object-cover border-b border-gray-200"
+              />
+              <CardContent className="p-4">
+                <div className="text-sm text-gray-500 mb-2">{blog.category}</div>
+                <h2 className="text-xl font-semibold mb-2">{blog.title}</h2>
+                <p className="text-gray-600 mb-4">{blog.description}</p>
+                <div className="flex items-center gap-2">
+                  <img
+                    src={blog.author.avatar}
+                    alt={blog.author.name}
+                    className="w-8 h-8 rounded-full"
+                  />
+                  <span className="text-sm">{blog.author.name}</span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        ))}
+
+        {/* Last three cards in a row */}
+        {firstFiveBlogs.slice(2, 5).map((blog, index) => (
+          <div key={blog.id} className="md:col-span-4">
+            <Card className="h-full">
+              <img
+                src={blog.image}
+                alt={blog.title}
+                className="w-full aspect-video md:h-48 object-cover border-b border-gray-200"
+              />
+              <CardContent className="p-4">
+                <div className="text-sm text-gray-500 mb-2">{blog.category}</div>
+                <h2 className="text-xl font-semibold mb-2">{blog.title}</h2>
+                <p className="text-gray-600 mb-4">{blog.description}</p>
+                <div className="flex items-center gap-2">
+                  <img
+                    src={blog.author.avatar}
+                    alt={blog.author.name}
+                    className="w-8 h-8 rounded-full"
+                  />
+                  <span className="text-sm">{blog.author.name}</span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        ))}
+      </div>
+    );
+};

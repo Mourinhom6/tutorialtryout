@@ -6,3 +6,8 @@ export default function isMobileFunction() {
 
   return {isMobile};
 }
+
+export function useIsSuperTiny() {
+    const isSuperTiny = useMediaQuery('(max-width:450px)');
+    return {isSuperTiny};
+}

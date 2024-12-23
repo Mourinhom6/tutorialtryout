@@ -149,7 +149,8 @@
 import React, { useMemo, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import { Link, router } from "@inertiajs/react";
-import Pagination from "@/Components/Pagination";
+import CustomPagination from "@/Components/Pagination";
+
 import "ag-grid-community/styles/ag-grid.css"; // Core grid CSS
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Theme CSS
 import { LICENSE_STATUS_CLASS_MAP, LICENSE_STATUS_TEXT_MAP, AG_GRID_LOCALE_PT} from "@/constants";
@@ -268,6 +269,12 @@ export default function LicensesTable({ licenses, success, queryParams = null })
                 domLayout="autoHeight"
             />
         </div>
+
+            {/* <Pagination count={10} boundaryCount={isSuperTiny ? 1 : 2} variant="outlined" shape="rounded" /> */}
+
+            {/* {licenses.meta && licenses.meta.links && (
+  <CustomPagination links={licenses.meta.links} />
+)} */}
 
         {/* Pagination */}
         {licenses.meta && licenses.meta.links && (

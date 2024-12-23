@@ -9,6 +9,9 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 
+import useIsSuperTiny  from "@/MediaQuery";
+
+
 const articleInfo = [
   {
     tag: 'Engineering',
@@ -189,6 +192,9 @@ export default function Latest() {
     setFocusedCardIndex(null);
   };
 
+  const {isSuperTiny} = useIsSuperTiny();
+    console.log("isSuperTiny", isSuperTiny);
+
   return (
     <div>
       <Typography variant="h2" gutterBottom>
@@ -232,8 +238,12 @@ export default function Latest() {
           </Grid>
         ))}
       </Grid>
-      <Box sx={{ display: 'flex', flexDirection: 'row', pt: 4 }}>
-        <Pagination hidePrevButton hideNextButton count={10} boundaryCount={10} />
+      <Box sx={{ display: 'flex', flexDirection: 'row', pt: 4, justifyContent: 'center', alignItems: 'center' }}>
+        {/* <Pagination hidePrevButton hideNextButton count={10} boundaryCount={10} /> */}
+        <Pagination count={10} boundaryCount={isSuperTiny ? 1 : 2} variant="outlined" shape="rounded" />
+
+        {/* <Pagination count={10} boundaryCount={1} variant="outlined" shape="rounded" /> */}
+        {/* <Pagination count={11} defaultPage={6} boundaryCount={2} /> */}
       </Box>
     </div>
   );

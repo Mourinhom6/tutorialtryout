@@ -95,6 +95,7 @@ import { DashboardLayout, ThemeSwitcher } from '@toolpad/core/DashboardLayout';
 import { PageContainer, PageContainerToolbar } from '@toolpad/core/PageContainer';
 import {useRoute} from "&/ziggy"
 import Error from "@/Components/Error";
+// import AppThemeDashBoard from '@/Components/AppTheme';
 
 import { CustomRouter } from '@/Components/DashBoard/CustomRouter';
 import Breadcums from "@/Components/DashBoard/Breadcums";
@@ -105,6 +106,7 @@ import isMobileFunction from "@/MediaQuery"
 
 import Badge, { badgeClasses } from '@mui/material/Badge';
 
+// import CssBaseline from '@mui/material/CssBaseline';
 
 
 const route = useRoute();
@@ -203,8 +205,13 @@ const NAVIGATION = [
 
 
 const demoTheme = createTheme({
+    // cssVariables: {
+    //   colorSchemeSelector: 'data-toolpad-color-scheme',
+    //   cssVarPrefix: 'template',
+    // },
     cssVariables: {
-      colorSchemeSelector: 'data-toolpad-color-scheme',
+        colorSchemeSelector: 'data-mui-color-scheme',
+        cssVarPrefix: 'template',
     },
     colorSchemes: {
       light: {
@@ -283,7 +290,8 @@ function ToolbarActionsSearch() {
           sx={{ width: '100%', alignItems: 'center', justifyContent: 'space-between' }}
         >
             {/* Left Section: Breadcrumbs */}
-            <Breadcums />
+            {isMobile ? null : (<><Breadcums /></>) }
+            {/* <Breadcums /> */}
 
             {/* Right Section: Search and Theme Switcher */}
             <Stack direction="row" spacing={2} alignItems="center">
@@ -396,7 +404,8 @@ export default function WorkSpace({children}) {
         };
     }, [pageProps]);
 
-        console.log('demoTheme:', demoTheme);
+        // console.log('demoTheme:', demoTheme);
+        // console.log('apptheme:', AppThemeDashBoard);
 
         console.log("authentication1fisrt", authentication);
 
@@ -407,6 +416,8 @@ export default function WorkSpace({children}) {
     // };
 
   return (
+    // <AppThemeDashBoard disableCustomTheme={true}>
+
     <AppProvider
         navigation={NAVIGATION}
         //   session={session}
@@ -414,15 +425,20 @@ export default function WorkSpace({children}) {
         session={isMobile ? null : session}
         authentication={isMobile ? null : authentication}
         branding={BRANDING}
+        // theme={AppThemeDashBoard}
         theme={demoTheme}
         router={routerCust}
     >
         {/* <AppNavbar /> */}
-        <DashboardLayout  defaultSidebarCollapsed={true} hideNavigation={isMobile} slots={{ toolbarActions: ToolbarActionsSearch, sidebarFooter: SidebarFooter }} slotProps={{ toolbarAccount: {localeText: {signInLabel: 'Entrar', signOutLabel: 'Sair'} }  }}>
-            {/* <PageContainer>{props.children}</PageContainer> */}
-            <PageContainer>{children}</PageContainer>
-            {/* <PageContainer>{props}</PageContainer> */}
-        </DashboardLayout>
+            <DashboardLayout  defaultSidebarCollapsed={true} hideNavigation={isMobile} slots={{ toolbarActions: ToolbarActionsSearch, sidebarFooter: SidebarFooter }} slotProps={{ toolbarAccount: {localeText: {signInLabel: 'Entrar', signOutLabel: 'Sair'} }  }}>
+                {/* <PageContainer>{props.children}</PageContainer> */}
+                      {/* <CssBaseline enableColorScheme /> */}
+
+                <PageContainer>{children}</PageContainer>
+                {/* <PageContainer>{props}</PageContainer> */}
+            </DashboardLayout>
     </AppProvider>
+    // </AppThemeDashBoard>
+
   );
 }

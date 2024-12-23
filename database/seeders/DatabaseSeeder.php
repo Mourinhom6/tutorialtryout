@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\License;
+use App\Models\Blog;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -38,6 +40,10 @@ class DatabaseSeeder extends Seeder
 
         License::factory()
         ->count(200)
+        ->create();
+
+        Blog::factory()
+        ->count(10)
         ->create();
     }
 }
