@@ -1569,7 +1569,7 @@ const surfacesCustomizations = {
 //StagePoint
 
 
-export default function AppThemeClient({ children, disableCustomTheme, themeComponents, locale}) {
+export function AppThemeClient({ children, disableCustomTheme, themeComponents, locale}) {
   const theme = React.useMemo(() => {
     return disableCustomTheme
       ? {}
@@ -1603,7 +1603,9 @@ export default function AppThemeClient({ children, disableCustomTheme, themeComp
       {children}
     </ThemeProvider>
   );
-}
+} 
+
+
 
 
 // export default function AppThemeClient({ children, disableCustomTheme, themeComponents, locale }) {
@@ -1711,3 +1713,46 @@ export default function AppThemeClient({ children, disableCustomTheme, themeComp
 //       </ThemeProvider>
 //     );
 //   }
+
+
+export function ClientTheme(disableCustomTheme = false, themeComponents = {}){
+    const theme2 = React.useMemo(() => {
+      if (disableCustomTheme) {
+        return {};
+      }
+  
+      return createTheme({
+        cssVariables: {
+          colorSchemeSelector: 'data-mui-color-scheme',
+          cssVarPrefix: 'template',
+        },
+        colorSchemes,
+        typography,
+        shadows,
+        shape,
+        components: {
+          ...inputsCustomizations,
+          ...dataDisplayCustomizations,
+          ...feedbackCustomizations,
+          ...navigationCustomizations,
+          ...surfacesCustomizations,
+          ...themeComponents,
+        },
+      });
+    }, [disableCustomTheme, themeComponents]);
+  
+    return theme2;
+  };
+
+//   const theme = createTheme({
+//     components: {
+//       // Name of the component
+//       MuiButtonBase: {
+//         defaultProps: {
+//           // The props to change the default for.
+//           disableRipple: true, // No more ripple, on the whole application 💣!
+//         },
+//       },
+//     },
+//   });
+  

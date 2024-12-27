@@ -14,6 +14,7 @@ class Blog extends Model
         'tag',
         'title',
         'description',
+        'state',
         'authors_name',
         'date',
 

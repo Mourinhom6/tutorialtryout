@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
         ->create();
 
         Blog::factory()
-        ->count(10)
+        ->count(200)
         ->create();
     }
 }

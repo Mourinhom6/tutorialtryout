@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Avatar from '@mui/material/Avatar';
-import AvatarGroup from '@mui/material/AvatarGroup';
+// import Avatar from '@mui/material/Avatar';
+// import AvatarGroup from '@mui/material/AvatarGroup';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -16,6 +16,10 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import { styled } from '@mui/material/styles';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import RssFeedRoundedIcon from '@mui/icons-material/RssFeedRounded';
+import { Link, router } from "@inertiajs/react";
+
+import {useRoute} from "&/ziggy"
+const route = useRoute();
 
 const SyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',
@@ -33,6 +37,29 @@ const SyledCard = styled(Card)(({ theme }) => ({
     outlineOffset: '2px',
   },
 }));
+// const SyledCard = styled(Card)(({ theme }) => {
+//     console.log('SyledCard theme:', theme);
+//     console.log('SyledCard theme.palette:', theme.palette);
+//     console.log('SyledCard theme.vars:', theme.vars);
+
+//     return {
+//       display: 'flex',
+//       flexDirection: 'column',
+//       padding: 0,
+//       height: '100%',
+//       backgroundColor: (theme.vars || theme).palette.background.paper,
+//       '&:hover': {
+//         backgroundColor: 'transparent',
+//         cursor: 'pointer',
+//       },
+//       '&:focus-visible': {
+//         outline: '3px solid',
+//         outlineColor: 'hsla(210, 98%, 48%, 0.5)',
+//         outlineOffset: '2px',
+//       },
+//     };
+//   });
+
 
 const SyledCardContent = styled(CardContent)({
   display: 'flex',
@@ -53,83 +80,294 @@ const StyledTypography = styled(Typography)({
   textOverflow: 'ellipsis',
 });
 
-function Author({ authors }) {
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        gap: 2,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '16px',
-      }}
-    >
-      <Box
-        sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}
-      >
-        <AvatarGroup max={3}>
-          {authors.map((author, index) => (
-            <Avatar
-              key={index}
-              alt={author.name}
-              src={author.avatar}
-              sx={{ width: 24, height: 24 }}
-            />
-          ))}
-        </AvatarGroup>
-        <Typography variant="caption">
-          {authors.map((author) => author.name).join(', ')}
-        </Typography>
-      </Box>
-      <Typography variant="caption">July 14, 2021</Typography>
-    </Box>
-  );
-}
+// function Author({ authors }) {
+//   return (
+//     <Box
+//       sx={{
+//         display: 'flex',
+//         flexDirection: 'row',
+//         gap: 2,
+//         alignItems: 'center',
+//         justifyContent: 'space-between',
+//         padding: '16px',
+//       }}
+//     >
+//       <Box
+//         sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}
+//       >
+//         <AvatarGroup max={3}>
+//           {authors.map((author, index) => (
+//             <Avatar
+//               key={index}
+//               alt={author_name}
+//               src={author.avatar}
+//               sx={{ width: 24, height: 24 }}
+//             />
+//           ))}
+//         </AvatarGroup>
+//         <Typography variant="caption">
+//           {authors.map((author) => author_name).join(', ')}
+//         </Typography>
+//       </Box>
+//       <Typography variant="caption">July 14, 2021</Typography>
+//     </Box>
+//   );
+// }
 
-Author.propTypes = {
-  authors: PropTypes.arrayOf(
-    PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-};
+// Author.propTypes = {
+//   authors: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       avatar: PropTypes.string.isRequired,
+//       name: PropTypes.string.isRequired,
+//     }),
+//   ).isRequired,
+// };
 
-export default function MainContent({
-        blogs,
-        queryParams = null,
-}) {
-    const [selectedTag, setSelectedTag] = React.useState("All");
-    const [quickFilterText, setQuickFilterText] = React.useState("");
+// <Grid container spacing={2} columns={12}>
+//             {blogsRepresentive.map((card, index) => (
+//                 <Grid item  size={{ xs: 12, md: 6 }} key={index}>
+//                     <SyledCard
+//                         variant="outlined"
+//                         onFocus={() => handleFocus(index)}
+//                         onBlur={handleBlur}
+//                         tabIndex={0}
+//                         // className={focusedCardIndex === index ? 'Mui-focused' : ''}
+//                     >
+//                         <CardMedia
+//                         component="img"
+//                         alt={card.title}
+//                         image={card.img}
+//                         sx={{
+//                             aspectRatio: '16 / 9',
+//                             borderBottom: '1px solid',
+//                             borderColor: 'divider',
+//                         }}
+//                         />
+//                         <SyledCardContent>
+//                         <Typography gutterBottom variant="caption" component="div">
+//                             {card.tag}
+//                         </Typography>
+//                         <Typography gutterBottom variant="h6" component="div">
+//                             {card.title}
+//                         </Typography>
+//                         <StyledTypography variant="body2" color="text.secondary" gutterBottom>
+//                             {card.description}
+//                         </StyledTypography>
+//                         </SyledCardContent>
+//                         {/* <Author authors={card.authors} /> */}
+//                     </SyledCard>
+//                 </Grid>
+//             ))}
 
-    const searchFieldChanged = (name, value) => {
-      if (value) {
-        queryParams[name] = value;
-      } else {
-        delete queryParams[name];
-      }
-      router.get(route("blog.index"), queryParams); // Use the correct blog route
-    };
+//         </Grid>
 
-    const onKeyDown = (name, e) => {
-      if (e.key !== "Enter") return;
-      searchFieldChanged(name, e.target.value);
-    };
 
-    const handleClick = (tag) => {
-      setSelectedTag(tag);
-      if (tag === "All") {
-        delete queryParams.tags; // Remove the tag filter if 'All' is selected
-      } else {
-        queryParams.tags = tag;
-      }
-      router.get(route("blog.index"), queryParams); // Use the correct blog route
-    };
+
+
+// export default function MainContent({ blogs, queryParams = null}) {
+
+//     const TAG_KEY = "tag";
+//     const [selectedTag, setSelectedTag] = React.useState("All");
+//     const [quickFilterText, setQuickFilterText] = React.useState("");
+//     const [localQueryParams, setLocalQueryParams] = React.useState(queryParams);
+
+//     const blogsRepresentive = blogs.blogs.data;
+
+//     console.log("blogsRepresentive",blogsRepresentive);
+
+//     const searchFieldChanged = (name, value) => {
+//         const newQueryParams = { ...queryParams };
+//         if (value && name) {
+//           newQueryParams[name] = value;
+//         } else {
+//           delete newQueryParams[name];
+//         }
+//         router.get(route("blog"), newQueryParams);
+//     };
+
+//     const onKeyDown = (name, e) => {
+//       if (e.key !== "Enter") return;
+//       searchFieldChanged(name, e.target.value);
+//     };
+
+//      const tagChanged = (tag) => {
+//     console.log("Selected Tag:", tag);
+
+//     setSelectedTag(tag); // Update state
+//   };
+
+//   React.useEffect(() => {
+//     const newQueryParams = { ...localQueryParams };
+//     if (selectedTag === "All") {
+//       delete newQueryParams[TAG_KEY];
+//     } else {
+//       newQueryParams[TAG_KEY] = selectedTag;
+//     }
+//     setLocalQueryParams(newQueryParams); // Update local state
+//     router.get(route("blog"), newQueryParams);
+// }, [selectedTag]);
+
+
+
+
+
+// const searchFieldChanged = (name, value) => {
+    //     if (value && name) {
+    //       queryParams[name] = value;
+    //     } else {
+    //       delete queryParams[name];
+    //     }
+    //     router.get(route("blog"), queryParams);
+    // };
+
+// React.useEffect(() => {
+//     console.log("Updated SelectedTag:", selectedTag);
+//     const newQueryParams = { ...queryParams };
+
+//     if (selectedTag === "All") {
+//       delete newQueryParams[TAG_KEY];
+//     } else {
+//       newQueryParams[TAG_KEY] = selectedTag;
+//     }
+
+//     console.log("Sended to the back-end:", newQueryParams);
+//     router.get(route("blog"), newQueryParams); // Sends a request
+// }, [selectedTag]);
+
+
+// React.useEffect(() => {
+//     const newQueryParams = { ...localQueryParams };
+//     if (selectedTag === "All") {
+//       delete newQueryParams[TAG_KEY];
+//     } else {
+//       newQueryParams[TAG_KEY] = selectedTag;
+//     }
+//     setLocalQueryParams(newQueryParams); // Update local state
+//     router.get(route("blog"), newQueryParams);
+// }, [selectedTag]);
+
+  // Effect to update the backend when selectedTag changes
+//     React.useEffect(() => {
+//     console.log("Updated SelectedTag:", selectedTag);
+
+//     // Create a copy of queryParams to avoid directly mutating the prop
+//     const newQueryParams = { ...queryParams };
+
+//     if (selectedTag === "All") {
+//       delete newQueryParams[TAG_KEY]; // Remove the tag filter if "All" is selected
+//     } else {
+//       newQueryParams[TAG_KEY] = selectedTag; // Set the tag filter
+//     }
+
+//     console.log("Sended to the back-end:", newQueryParams);
+//     router.get(route("blog"), newQueryParams); // Send updated queryParams to the backend
+//   }, [selectedTag]); // Only re-run when selectedTag changes
+
+    // React.useEffect(() => {
+    //     console.log("Updated SelectedTag:2", selectedTag);
+    //      // This will log after the state updates
+    //      if (selectedTag === "All") {
+    //         delete queryParams[tag]; // Remove the tag filter if 'All' is selected
+    //       } else {
+    //         queryParams[tag] = selectedTag; // Use `tag` (singular) instead of `tags`
+    //       }
+    //        console.log("Sended to the back-end 2:");
+    //       router.get(route("blog"), queryParams);
+    //   }, [selectedTag]);
+
+    // Other functions
+
 
     // const onQuickFilterChange = (event) => {
     //   setQuickFilterText(event.target.value);
     // };
+
+
+export default function MainContent({ blogs, queryParams = null}) {
+
+    const TAG_KEY = "tag";
+
+    // const searchFieldChanged = (name, value) => {
+    // if (value) {
+    //     queryParams[name] = value;
+    // } else {
+    //     delete queryParams[name];
+    // }
+    // router.get(route("blog"), queryParams);
+    // };
+
+//     const searchFieldChanged = (name, value) => {
+//         const newQueryParams = { ...queryParams }; // Clone the current queryParams
+
+//         if (value) {
+//           newQueryParams[name] = value;
+//         } else {
+//           delete newQueryParams[name];
+//         }
+
+//         // Trigger a new GET request with updated queryParams
+//         router.get(route("blog"), newQueryParams);
+//       };
+
+//     const onKeyDown = (name, e) => {
+//     if (e.key !== "Enter") return;
+//     searchFieldChanged(name, e.target.value);
+//     };
+
+//     const tagChanged = (tag) => {
+//         const newQueryParams = { ...queryParams }; // Create a copy
+
+//         if (tag === "All") {
+//           delete newQueryParams[TAG_KEY];
+//         } else {
+//           newQueryParams[TAG_KEY] = tag;
+//         }
+
+//         router.get(route("blog"), newQueryParams);
+//       };
+
+
+const searchFieldChanged = (name, value) => {
+    const newQueryParams = { ...queryParams }; // Clone the current queryParams
+
+    if (value) {
+      newQueryParams[name] = value; // Add or update the 'name' filter
+    } else {
+      delete newQueryParams[name]; // Remove the 'name' filter if the value is empty
+    }
+
+    // Make sure we also pass the tag filter if it exists
+    if (queryParams[TAG_KEY]) {
+        newQueryParams[TAG_KEY] = queryParams[TAG_KEY];
+    }
+
+    // Trigger a new GET request with updated queryParams
+    router.get(route("blog"), newQueryParams);
+};
+
+const onKeyDown = (name, e) => {
+    if (e.key !== "Enter") return;
+    searchFieldChanged(name, e.target.value);
+};
+
+const tagChanged = (tag) => {
+    const newQueryParams = { ...queryParams }; // Clone the current queryParams
+
+    if (tag === "All") {
+        delete newQueryParams[TAG_KEY]; // Remove the tag filter if "All" is selected
+    } else {
+        newQueryParams[TAG_KEY] = tag; // Add or update the tag filter
+    }
+
+    // Make sure we also pass the name filter if it exists
+    if (queryParams["name"]) {
+        newQueryParams["name"] = queryParams["name"];
+    }
+
+    // Trigger a new GET request with updated queryParams
+    router.get(route("blog"), newQueryParams);
+};
+
 
   const handleFocus = (index) => {
     setFocusedCardIndex(index);
@@ -139,153 +377,187 @@ export default function MainContent({
     setFocusedCardIndex(null);
   };
 
-
+  console.log("QueryParams:", queryParams);
 
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-      <div>
-        <Typography variant="h1" gutterBottom>
-          Blog
-        </Typography>
-        <Typography>Stay in the loop with the latest about our products</Typography>
-      </div>
-      <Box
-        sx={{
-          display: { xs: 'flex', sm: 'none' },
-          flexDirection: 'row',
-          gap: 1,
-          width: { xs: '100%', md: 'fit-content' },
-          overflow: 'auto',
-        }}
-      >
-        {/* <Search /> */}
-        <FormControl sx={{ width: { xs: '100%', md: '25ch' } }} variant="outlined">
-            <OutlinedInput
-                size="small"
-                id="search"
-                // value={quickFilterText}
-                // onChange={onQuickFilterChange}
-                defaultValue={queryParams.name}
-                label="Task Name"
-                onBlur={(e) => searchFieldChanged("name", e.target.value)}
-                onKeyDown={(e) => onKeyDown("name", e)}
-                placeholder="Search…"
-                sx={{ flexGrow: 1 }}
-                startAdornment={
-                <InputAdornment position="start" sx={{ color: 'text.primary' }}>
-                    <SearchRoundedIcon fontSize="small" />
-                </InputAdornment>
-                }
-                inputProps={{
-                'aria-label': 'search',
-                }}
-            />
-        </FormControl>
-        <IconButton size="small" aria-label="RSS feed">
-          <RssFeedRoundedIcon />
-        </IconButton>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: { xs: 'column-reverse', md: 'row' },
-          width: '100%',
-          justifyContent: 'space-between',
-          alignItems: { xs: 'start', md: 'center' },
-          gap: 4,
-          overflow: 'auto',
-        }}
-      >
+        <div>
+            <Typography variant="h1" gutterBottom>Blog</Typography>
+            <Typography>Stay in the loop with the latest about our products</Typography>
+        </div>
         <Box
-          sx={{
-            display: 'inline-flex',
-            flexDirection: 'row',
-            gap: 3,
-            overflow: 'auto',
-          }}
-        >
-            <Chip onClick={() => handleClick('All')} size="medium" label="All categories" />
-
-            <Chip onClick={() => handleClick('Company')} size="medium" label="Company" sx={{ backgroundColor: 'transparent', border: 'none', }}/>
-
-            <Chip onClick={() => handleClick('Product')} size="medium" label="Product" sx={{ backgroundColor: 'transparent', border: 'none', }}/>
-
-            <Chip onClick={() => handleClick('Design')} size="medium" label="Design" sx={{ backgroundColor: 'transparent', border: 'none', }}/>
-
-            <Chip onClick={() => handleClick('Engineering')} size="medium" label="Engineering" sx={{ backgroundColor: 'transparent', border: 'none', }}/>
-        </Box>
-        <Box
-          sx={{
-            display: { xs: 'none', sm: 'flex' },
+            sx={{
+            display: { xs: 'flex', sm: 'none' },
             flexDirection: 'row',
             gap: 1,
             width: { xs: '100%', md: 'fit-content' },
             overflow: 'auto',
-          }}
+            }}
         >
-          {/* <Search /> */}
-          <FormControl sx={{ width: { xs: '100%', md: '25ch' } }} variant="outlined">
+            {/* <Search /> */}
+            <FormControl sx={{ width: { xs: '100%', md: '25ch' } }} variant="outlined">
             <OutlinedInput
                 size="small"
                 id="search"
-                // value={quickFilterText}
-                // onChange={onQuickFilterChange}
-                defaultValue={queryParams.name}
+                defaultValue=""
                 label="Task Name"
                 onBlur={(e) => searchFieldChanged("name", e.target.value)}
                 onKeyDown={(e) => onKeyDown("name", e)}
                 placeholder="Search…"
                 sx={{ flexGrow: 1 }}
                 startAdornment={
-                <InputAdornment position="start" sx={{ color: 'text.primary' }}>
+                    <InputAdornment position="start" sx={{ color: 'text.primary' }}>
                     <SearchRoundedIcon fontSize="small" />
-                </InputAdornment>
+                    </InputAdornment>
                 }
                 inputProps={{
-                'aria-label': 'search',
+                    'aria-label': 'search',
                 }}
             />
-        </FormControl>
-          <IconButton size="small" aria-label="RSS feed">
+
+            </FormControl>
+            <IconButton size="small" aria-label="RSS feed">
             <RssFeedRoundedIcon />
-          </IconButton>
+            </IconButton>
         </Box>
-      </Box>
-      <Grid container spacing={2} columns={12}>
-        <Grid size={{ xs: 12, md: 6 }}>
-          <SyledCard
-            variant="outlined"
-            onFocus={() => handleFocus(0)}
-            onBlur={handleBlur}
-            tabIndex={0}
-            className={focusedCardIndex === 0 ? 'Mui-focused' : ''}
-          >
-            <CardMedia
-              component="img"
-              alt="green iguana"
-              image={cardData[0].img}
-              sx={{
-                aspectRatio: '16 / 9',
-                borderBottom: '1px solid',
-                borderColor: 'divider',
-              }}
-            />
-            <SyledCardContent>
-              <Typography gutterBottom variant="caption" component="div">
-                {cardData[0].tag}
-              </Typography>
-              <Typography gutterBottom variant="h6" component="div">
-                {cardData[0].title}
-              </Typography>
-              <StyledTypography variant="body2" color="text.secondary" gutterBottom>
-                {cardData[0].description}
-              </StyledTypography>
-            </SyledCardContent>
-            <Author authors={cardData[0].authors} />
-          </SyledCard>
-        </Grid>
-        <Grid size={{ xs: 12, md: 6 }}>
+        <Box
+            sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column-reverse', md: 'row' },
+            width: '100%',
+            justifyContent: 'space-between',
+            alignItems: { xs: 'start', md: 'center' },
+            gap: 4,
+            overflow: 'auto',
+            }}
+        >
+            <Box
+            sx={{
+                display: 'inline-flex',
+                flexDirection: 'row',
+                gap: 3,
+                overflow: 'auto',
+            }}
+            >
+                <Chip onClick={() => tagChanged('All')} size="medium" label="All categories" />
+
+                <Chip onClick={() => tagChanged('Company')} size="medium" label="Company" sx={{ backgroundColor: 'transparent', border: 'none', }}/>
+
+                <Chip onClick={() => tagChanged('Product')} size="medium" label="Product" sx={{ backgroundColor: 'transparent', border: 'none', }}/>
+
+                <Chip onClick={() => tagChanged('Design')} size="medium" label="Design" sx={{ backgroundColor: 'transparent', border: 'none', }}/>
+
+                <Chip onClick={() => tagChanged('Engineering')} size="medium" label="Engineering" sx={{ backgroundColor: 'transparent', border: 'none', }}/>
+            </Box>
+            <Box
+                sx={{
+                    display: { xs: 'none', sm: 'flex' },
+                    flexDirection: 'row',
+                    gap: 1,
+                    width: { xs: '100%', md: 'fit-content' },
+                    overflow: 'auto',
+            }}
+            >
+                <FormControl sx={{ width: { xs: '100%', md: '25ch' } }} variant="outlined">
+                    <OutlinedInput
+                    size="small"
+                    id="search"
+                    defaultValue=""
+                    // defaultValue={queryParams[name]}
+                    // defaultValue= " "
+                    label="Task Name"
+                    onBlur={(e) => searchFieldChanged("name", e.target.value)}
+                    onKeyDown={(e) => onKeyDown("name", e)}
+                    placeholder="Search…"
+                    sx={{ flexGrow: 1 }}
+                    startAdornment={
+                        <InputAdornment position="start" sx={{ color: 'text.primary' }}>
+                        <SearchRoundedIcon fontSize="small" />
+                        </InputAdornment>
+                    }
+                    inputProps={{ 'aria-label': 'search' }}
+                    />
+                </FormControl>
+                <IconButton size="small" aria-label="RSS feed">
+                    <RssFeedRoundedIcon />
+                </IconButton>
+            </Box>
+        </Box>
+        <BlogGrid blogs={blogs} />
+    </Box>
+  );
+}
+function BlogGrid({ blogs }){
+    console.log("blogs",blogs.blogs);  // Check what 'blogs' looks like when it's received
+    const blogsRepresentive = blogs.blogs.data;
+    console.log("blogs.blogs.data",blogs.blogs.data);
+
+    const firstFiveBlogs = blogsRepresentive.slice(0, 5);
+
+    return (
+        <Grid container spacing={2} columns={12}>
+        {/* First two large cards */}
+        {firstFiveBlogs.slice(0, 2).map((blog, index) => (
+            <Grid item size={{ xs: 12, md: 6 }} key={blog.id}>
+                <SyledCard variant="outlined">
+                    <CardMedia
+                        component="img"
+                        alt={blog.title}
+                        image={blog.img}
+                        sx={{
+                            aspectRatio: '16 / 9',
+                            borderBottom: '1px solid',
+                            borderColor: 'divider',
+                        }}
+                    />
+                    <SyledCardContent>
+                        <Typography gutterBottom variant="caption" component="div">
+                            {blog.tag}
+                        </Typography>
+                        <Typography gutterBottom variant="h6" component="div">
+                            {blog.title}
+                        </Typography>
+                        <StyledTypography variant="body2" color="text.secondary" gutterBottom>
+                            {blog.description}
+                        </StyledTypography>
+                    </SyledCardContent>
+                </SyledCard>
+            </Grid>
+    ))}
+        {/* Last three cards in a row */}
+        {firstFiveBlogs.slice(2, 5).map((blog, index) => (
+            <Grid item  size={{ xs: 12, md: 4 }} key={blog.id}>
+                <SyledCard variant="outlined">
+                    <CardMedia
+                        component="img"
+                        alt={blog.title}
+                        image={blog.img}
+                        sx={{
+                            aspectRatio: '16 / 9',
+                            borderBottom: '1px solid',
+                            borderColor: 'divider',
+                        }}
+                    />
+                    <SyledCardContent>
+                        <Typography gutterBottom variant="caption" component="div">
+                            {blog.tag}
+                        </Typography>
+                        <Typography gutterBottom variant="h6" component="div">
+                            {blog.title}
+                        </Typography>
+                        <StyledTypography variant="body2" color="text.secondary" gutterBottom>
+                            {blog.description}
+                        </StyledTypography>
+                    </SyledCardContent>
+                </SyledCard>
+            </Grid>
+        ))}
+      </Grid>
+    );
+};
+
+      {/*   <Grid size={{ xs: 12, md: 6 }}>
           <SyledCard
             variant="outlined"
             onFocus={() => handleFocus(1)}
@@ -456,67 +728,7 @@ export default function MainContent({
           </SyledCard>
         </Grid>
       </Grid>
-    </Box>
-  );
-}
+    </Box> */}
 
 
-function BlogGrid({ blogs }){
-    const firstFiveBlogs = blogs.slice(0, 5);
 
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-        {/* First two large cards */}
-        {firstFiveBlogs.slice(0, 2).map((blog, index) => (
-          <div key={blog.id} className="md:col-span-6">
-            <Card className="h-full">
-              <img
-                src={blog.image}
-                alt={blog.title}
-                className="w-full aspect-video object-cover border-b border-gray-200"
-              />
-              <CardContent className="p-4">
-                <div className="text-sm text-gray-500 mb-2">{blog.category}</div>
-                <h2 className="text-xl font-semibold mb-2">{blog.title}</h2>
-                <p className="text-gray-600 mb-4">{blog.description}</p>
-                <div className="flex items-center gap-2">
-                  <img
-                    src={blog.author.avatar}
-                    alt={blog.author.name}
-                    className="w-8 h-8 rounded-full"
-                  />
-                  <span className="text-sm">{blog.author.name}</span>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        ))}
-
-        {/* Last three cards in a row */}
-        {firstFiveBlogs.slice(2, 5).map((blog, index) => (
-          <div key={blog.id} className="md:col-span-4">
-            <Card className="h-full">
-              <img
-                src={blog.image}
-                alt={blog.title}
-                className="w-full aspect-video md:h-48 object-cover border-b border-gray-200"
-              />
-              <CardContent className="p-4">
-                <div className="text-sm text-gray-500 mb-2">{blog.category}</div>
-                <h2 className="text-xl font-semibold mb-2">{blog.title}</h2>
-                <p className="text-gray-600 mb-4">{blog.description}</p>
-                <div className="flex items-center gap-2">
-                  <img
-                    src={blog.author.avatar}
-                    alt={blog.author.name}
-                    className="w-8 h-8 rounded-full"
-                  />
-                  <span className="text-sm">{blog.author.name}</span>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        ))}
-      </div>
-    );
-};

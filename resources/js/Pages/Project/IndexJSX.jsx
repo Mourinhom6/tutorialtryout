@@ -2,15 +2,295 @@ import Pagination from "@/Components/Pagination";
 import SelectInput from "@/Components/SelectInput";
 import MenuItem from '@mui/material/MenuItem';
 import TextInput from "@/Components/TextInput";
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import * as React from 'react';
+
+import Grid from '@mui/material/Grid2';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+// import Popover from '@mui/material/Popover';
+
+import {ClientTheme} from '@/Components/AppTheme';
+import { ThemeProvider } from '@mui/material/styles';
+
+
 import WorkSpace  from "@/Layouts/WorkSpace";
 import {
   PROJECT_STATUS_CLASS_MAP,
   PROJECT_STATUS_TEXT_MAP,
 } from "@/constants.jsx";
-import { Head, Link, router } from "@inertiajs/react";
+import { Head, Link, router, usePage } from "@inertiajs/react";
 import TableHeading from "@/Components/TableHeading";
+import ViewModeSelector from "@/Components/DashBoard/ViewSwitch";
 
-export default function Index({ auth, projects, queryParams = null, success, breadcum}) {
+import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
+import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
+import GridViewIcon from '@mui/icons-material/GridView';
+import ViewListIcon from '@mui/icons-material/ViewList';
+import TableRowsIcon from '@mui/icons-material/TableRows';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+
+import { styled } from '@mui/material/styles';
+
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import SpeedDial from '@mui/material/SpeedDial';
+import SpeedDialIcon from '@mui/material/SpeedDialIcon';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
+import SaveIcon from '@mui/icons-material/Save';
+import PrintIcon from '@mui/icons-material/Print';
+import ShareIcon from '@mui/icons-material/Share';
+// import { useTheme } from '@mui/material/styles';
+// const theme = useTheme();
+// console.log('theme3:', theme);
+
+// console.log('ClientTheme:', ClientTheme);
+
+// const SyledCard = styled(Card)(({ theme }) => {
+//     console.log('SyledCard theme2:', theme);
+//     console.log('SyledCard theme.palette2:', theme.palette);
+//     console.log('SyledCard theme.vars2:', theme.vars);
+
+//     return {
+//       display: 'flex',
+//       flexDirection: 'column',
+//       padding: 0,
+//       height: '100%',
+//       backgroundColor: (theme.vars || theme).palette.background.paper,
+//       '&:hover': {
+//         backgroundColor: 'transparent',
+//         cursor: 'pointer',
+//       },
+//       '&:focus-visible': {
+//         outline: '3px solid',
+//         outlineColor: 'hsla(210, 98%, 48%, 0.5)',
+//         outlineOffset: '2px',
+//       },
+//     };
+//   });
+
+const SyledCard = styled(Card)(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 0,
+    height: '100%',
+    backgroundColor: (theme.vars || theme).palette.background.paper,
+    '&:hover': {
+      backgroundColor: 'transparent',
+      cursor: 'pointer',
+    },
+    '&:focus-visible': {
+      outline: '3px solid',
+      outlineColor: 'hsla(210, 98%, 48%, 0.5)',
+      outlineOffset: '2px',
+    },
+  }));
+
+  const SyledCardContent = styled(CardContent)({
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 4,
+    padding: 16,
+    flexGrow: 1,
+    '&:last-child': {
+      paddingBottom: 16,
+    },
+  });
+
+  const StyledTypography = styled(Typography)({
+    display: '-webkit-box',
+    WebkitBoxOrient: 'vertical',
+    WebkitLineClamp: 2,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  });
+
+
+
+const viewModes = [
+    { icon: <FullscreenIcon />, value: 'Solo', label: 'Grid View', multiplier: 12 },
+    { icon: <GridViewIcon />, value: 'Duo', label: 'List View', multiplier: 6 },
+    { icon: <TableRowsIcon />, value: 'grid', label: 'Compact View', multiplier: 4 },
+    { icon: <ViewListIcon />, value: 'Tabela', label: 'Expanded View', multiplier: 0 },
+  ];
+
+
+
+
+
+// function Posts({mdsize, blogs, queryParams}){
+
+function Postsoffice({mdsize, blogs}){
+
+    // console.log('ClientTheme5:', ClientTheme);
+    const theme2 = ClientTheme();
+
+
+    // const clientTheme = ClientTheme();
+
+    console.log('mdsize:', mdsize);
+
+
+    console.log('blogs5:', blogs);
+
+
+    const handleAction = (key, id_project) => {
+        console.log('key:', key);
+        console.log('id_project:', id_project);
+
+        switch (key) {
+            case 'Visibility':
+                put(route("project.upvisibility", id_project));
+                // router.visit(route('project.show', { id: id_project }));
+                break;
+            case 'Edit':
+                router.visit(route('project.edit', { id: id_project }));
+                break;
+            case 'Delete':
+                router.delete(route('project.destroy', { id: id_project }), {
+                    onSuccess: () => {
+                        router.reload({ only: ['projects'] });
+                    },
+                });
+                break;
+            case 'Save':
+                router.delete(route('project.destroy', { id: id_project }), {
+                    onSuccess: () => {
+                        router.reload({ only: ['projects'] });
+                    },
+                });
+                break;
+        }
+        if (e.key !== "Enter") return;
+        searchFieldChanged(name, e.target.value);
+    };
+
+
+
+    return(
+        <ThemeProvider theme={theme2} >
+
+            <Grid container spacing={2} columns={12}>
+                {/* First two large cards */}
+                {/* {projects.slice(0, 2).map((edits, index) => ( */}
+                {blogs.map((projects) => (
+                    <Grid item size={{ xs: 12, md: mdsize }} key={projects.id}>
+                        <SyledCard variant="outlined" sx={{ position: 'relative' }}>
+                            <CardMedia
+                                component="img"
+                                alt={projects.title}
+                                image={projects.img}
+                                sx={{
+                                    aspectRatio: '16 / 9',
+                                    borderBottom: '1px solid',
+                                    borderColor: 'divider',
+                                }}
+                            />
+                            <SyledCardContent>
+                                <Typography gutterBottom variant="caption" component="div">
+                                    {projects.tag}
+                                </Typography>
+                                <Typography gutterBottom variant="h6" component="div">
+                                    {projects.title}
+                                </Typography>
+                                <StyledTypography variant="body2" color="text.secondary" gutterBottom>
+                                    {projects.description}
+                                </StyledTypography>
+
+                            </SyledCardContent>
+                            <SpeedDial
+                                ariaLabel="SpeedDial basic example"
+                                sx={{
+                                    position: 'absolute',
+                                    bottom: 16,
+                                    right: 16,
+                                }}
+                                icon={<SpeedDialIcon />}
+                                >
+                                <SpeedDialAction
+                                    key="Visibility"
+                                    icon={projects.state == 'Visiable' ? <RemoveRedEyeRoundedIcon /> : <VisibilityOffRoundedIcon />}
+                                    tooltipTitle={projects.state == 'Visiable' ? 'Esconder' : 'Mostra'}
+                                    onClick={() => { handleAction('Visibility', projects.id)} }
+
+                                />
+                                <SpeedDialAction
+                                    key="Save"
+                                    icon={<SaveIcon />}
+                                    tooltipTitle="Save"
+                                    onClick={() => { handleAction('Save', projects.id)} }
+                                />
+                                <SpeedDialAction
+                                    key="Delete"
+                                    icon={<DeleteRoundedIcon />}
+                                    tooltipTitle="Delete"
+                                    onClick={() => { handleAction('Delete', projects.id)} }
+                                />
+                                <SpeedDialAction
+                                    key="Edit"
+                                    icon={<EditRoundedIcon />}
+                                    tooltipTitle="Edit"
+                                    onClick={() => { handleAction('Edit', projects.id)} }
+                                />
+
+{/* const actions = [
+    {icon: projects.state == 'Visable' ? <RemoveRedEyeRoundedIcon /> : <VisibilityOffRoundedIcon />, name: projects.state == 'Visable' ? 'Esconder' : 'Mostra'},
+    { icon: <SaveIcon />, name: 'Save' },
+    { icon: <PrintIcon />, name: 'Print' },
+    { icon: <EditRoundedIcon />, name: 'Edit' },
+  ]; */}
+                                </SpeedDial>
+                        </SyledCard>
+                    </Grid>
+                ))}
+            </Grid>
+        </ThemeProvider>
+    )
+}
+
+// function BasicSpeedDial() {
+//     return (
+//       <Box sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1 }}>
+//         <SpeedDial
+//           ariaLabel="SpeedDial basic example"
+//           sx={{ position: 'absolute', bottom: 16, right: 16 }}
+//           icon={<SpeedDialIcon />}
+//         >
+//           {actions.map((action) => (
+//             <SpeedDialAction
+//               key={action.name}
+//               icon={action.icon}
+//               tooltipTitle={action.name}
+//             />
+//           ))}
+//         </SpeedDial>
+//       </Box>
+//     );
+//   }
+
+
+export default function Index({ auth, projects, queryParams = null, success, breadcum,}) {
+    const [multiplier, setMultiplier] = React.useState(4); // Replace initialValue with your default value
+
+
+    // var multiplier = 4;
+
+    const handleViewModeChange = (selectedOption) => {
+        console.log('Selected Option:', selectedOption);
+        console.log('Selected Multiplier:', selectedOption.multiplier);
+        setMultiplier(selectedOption.multiplier);
+        console.log('Updated multiplier:', selectedOption.multiplier);
+      };
+
+
+    const { props: dataproj } = usePage();
+    // const { dataproj } = usePage();
+    console.log("dataproj", dataproj);
+
+
   queryParams = queryParams || {};
 
   console.log("Received breadcrumbs:", breadcum);
@@ -72,6 +352,17 @@ export default function Index({ auth, projects, queryParams = null, success, bre
     >
       <Head title="Projects" />
 
+      <div className="flex justify-between items-center">
+          <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            Projects
+          </h2>
+          <Link
+            href={route("project.create")}
+            className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600"
+          >
+            Add new
+          </Link>
+        </div>
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           {success && (
@@ -235,10 +526,24 @@ export default function Index({ auth, projects, queryParams = null, success, bre
                 </table>
               </div>
               <Pagination links={projects.meta.links} />
+
             </div>
           </div>
         </div>
       </div>
+        <Box component="section" sx={{ pb: 4, display: "flex", justifyContent: "flex-end" }}>
+            <ViewModeSelector
+            options={viewModes}
+            defaultValue="grid"
+            onChange={handleViewModeChange}
+            />
+        </Box>
+
+
+
+      <Postsoffice mdsize={multiplier} blogs={dataproj.blogs2.data} /> {/* queryParams={queryParams} */}
+
     </WorkSpace>
   );
 }
+

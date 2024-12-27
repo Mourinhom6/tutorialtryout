@@ -192,20 +192,20 @@ import { usePage, router } from '@inertiajs/react';
 
 export function CustomRouter() {
   const page = usePage(); // Access the current Inertia page context
-  console.log('CustomRouter: Current Inertia page context:', page);
+//   console.log('CustomRouter: Current Inertia page context:', page);
 
   const routercustum = useMemo(() => {
     const pathname = page.url || '/';
-    console.log('CustomRouter: Current pathname:', pathname);
+    // console.log('CustomRouter: Current pathname:', pathname);
 
     const searchParams = new URLSearchParams(window.location.search); // Use current search parameters
-    console.log('CustomRouter: Current search parameters:', searchParams.toString());
+    // console.log('CustomRouter: Current search parameters:', searchParams.toString());
 
     const navigate = (routeName, parameters = {}, options = { method: 'get' }) => {
-      console.log('CustomRouter: Navigation requested');
-      console.log('CustomRouter: routeName:', routeName);
-      console.log('CustomRouter: parameters:', parameters);
-      console.log('CustomRouter: options:', options);
+    //   console.log('CustomRouter: Navigation requested');
+    //   console.log('CustomRouter: routeName:', routeName);
+    //   console.log('CustomRouter: parameters:', parameters);
+    //   console.log('CustomRouter: options:', options);
 
       try {
         // const url = route(routeName, parameters); // Generate the full URL
@@ -218,7 +218,7 @@ export function CustomRouter() {
       }
     };
 
-    console.log('CustomRouter: Router initialized with pathname and searchParams');
+    // console.log('CustomRouter: Router initialized with pathname and searchParams');
 
     return {
       pathname,
@@ -227,7 +227,7 @@ export function CustomRouter() {
     };
   }, [page.url]);
 
-  console.log('CustomRouter: Returning router object:', routercustum);
+//   console.log('CustomRouter: Returning router object:', routercustum);
 
   return routercustum;
 }

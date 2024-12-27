@@ -5,7 +5,9 @@ use App\Http\Controllers\DashBoard\DashboardController;
 use App\Http\Controllers\DashBoard\ProfileController;
 use App\Http\Controllers\DashBoard\ProjectController;
 use App\Http\Controllers\DashBoard\TaskController;
+use App\Http\Controllers\DashBoard\EditsController;
 use App\Http\Controllers\DashBoard\UserController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoutingController;
@@ -22,6 +24,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('task', TaskController::class);
     Route::resource('license', LicenseController::class);
     Route::resource('user', UserController::class);
+    Route::resource('edits', EditsController::class);
+
 
     // Route::get('{any}', [RoutingController::class, 'handle'])->where('any', '.*');
 });

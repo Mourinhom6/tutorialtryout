@@ -24,7 +24,9 @@ class TaskFactory extends Factory
                 ->randomElement(['pending', 'in_progress', 'completed']),
             'priority' => fake()
                 ->randomElement(['low', 'medium', 'high']),
-            'image_path' => fake()->imageUrl(),
+            'image_path' => fake()
+            ->randomElement(['https://picsum.photos/800/450?random=5', 'https://picsum.photos/800/450?random=6', 'https://picsum.photos/800/450?random=7', 'https://picsum.photos/800/450?random=8']),
+
             'assigned_user_id' => fake()->randomElement([1, 2]),
             'created_by' => 1,
             'updated_by' => 1,

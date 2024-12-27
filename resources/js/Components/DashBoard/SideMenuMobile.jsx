@@ -31,6 +31,7 @@ import LayersIcon from '@mui/icons-material/Layers';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
+import EditNoteRoundedIcon from '@mui/icons-material/EditNoteRounded';
 
 import {useRoute} from "&/ziggy"
 const route = useRoute();
@@ -46,6 +47,7 @@ const mainListItems = [
 const secondaryListItems = [
   { text: 'Profile', icon: <BarChartIcon />, navigate: route('dashboard') },
   { text: 'License', icon: <LayersIcon />, navigate: route('license.index') },
+  { text: 'Edits', icon: <EditNoteRoundedIcon />, navigate: route('edits.index') },
 ];
 
 // function MenuContent() {

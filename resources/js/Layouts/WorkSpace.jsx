@@ -80,6 +80,7 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
+import EditNoteRoundedIcon from '@mui/icons-material/EditNoteRounded';
 
 import DescriptionIcon from '@mui/icons-material/Description';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
@@ -126,7 +127,7 @@ function MenuButton({ showBadge = false, ...props }) {
 }
 
 const NAVIGATION = [
-// export const NAVIGATION: Navigation = [
+// Later on It's probably not that hard to use this navigation fot the sideMenuMobile
   {
     kind: 'header',
     title: 'Main items',
@@ -195,9 +196,18 @@ const NAVIGATION = [
     ],
   },
   {
+    kind: 'page',
     segment: 'license',
+    pattern: '/license',
     title: 'License',
     icon: <LayersIcon />,
+  },
+  {
+    kind: 'page',
+    title: 'Edits',
+    icon: <EditNoteRoundedIcon />,
+    pattern: '/edits',
+    segment: 'edits',
   },
 ];
 
@@ -279,8 +289,8 @@ function ToolbarActionsSearch() {
 
     const { isMobile } = isMobileFunction();
 
-    console.log("isMobile",isMobile);
-    console.log("toggleDrawer",toggleDrawer);
+    // console.log("isMobile",isMobile);
+    // console.log("toggleDrawer",toggleDrawer);
     // console.log("isMobile",isMobile);
 
     return (
@@ -365,14 +375,14 @@ export default function WorkSpace({children}) {
     const { isMobile } = isMobileFunction();
     const { props: pageProps } = usePage();
     const routerCust = CustomRouter();
-    console.log("CustomRouter:", routerCust);
+    // console.log("CustomRouter:", routerCust);
     const { error } = usePage().props;
     if (error) {
         return <Error status={error} />;
     }
-    console.log("ERROR:", error);
+    // console.log("ERROR:", error);
     console.log("Props:", pageProps);
-    console.log("Props_authUser:", pageProps.authUser.name);
+    // console.log("Props_authUser:", pageProps.authUser.name);
     // console.log("Props_auth:", pageProps.auth.user.email);
     const [session, setSession] = React.useState({
         user: {
@@ -407,7 +417,7 @@ export default function WorkSpace({children}) {
         // console.log('demoTheme:', demoTheme);
         // console.log('apptheme:', AppThemeDashBoard);
 
-        console.log("authentication1fisrt", authentication);
+        // console.log("authentication1fisrt", authentication);
 
     // const [open, setOpen] = React.useState(false);
 

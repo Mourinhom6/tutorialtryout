@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('tag');
             $table->string('title');
             $table->longText('description');
+            $table->string('state');
             $table->string('authors_name');
             $table->date('date');
             $table->timestamps();

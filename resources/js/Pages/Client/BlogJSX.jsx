@@ -9,7 +9,7 @@ import ClientLayout from '@/Layouts/ClientLayout';
 
 // import AppTheme from '../shared-theme/AppTheme';
 
-export default function Blog(props) {
+export default function Blog( blogs, queryParams = null,) {
   return (
     // <AppTheme {...props}>
 
@@ -21,7 +21,7 @@ export default function Blog(props) {
         component="main"
         sx={{ display: 'flex', flexDirection: 'column', my: 16, gap: 4 }}
       >
-        <MainContent />
+        <MainContent blogs={blogs} queryParams={queryParams} />
         <Latest />
       </Container>
       {/* <Footer /> */}

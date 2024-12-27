@@ -2,7 +2,7 @@ import { Link } from "@inertiajs/react";
 import NativeSelectInput from "@mui/material/NativeSelect/NativeSelectInput";
 import AppAppBar from '@/Components/Client/AppAppBar';
 import Footer from '@/Components/Client/Footer';
-import AppThemeClient from '@/Components/AppTheme';
+import {AppThemeClient} from '@/Components/AppTheme';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
 

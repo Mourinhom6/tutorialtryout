@@ -6,45 +6,82 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Http\Resources\BlogResource;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class LandingController extends Controller
 {
     public function blog()
 {
-    // Initialize the query builder
-    $query = Blog::query();
+    // $query = Blog::query();
 
-    // Sorting parameters
-    // $sortField = request("sort_field", "created_at");
+    // $sortField = request("sort_field", 'created_at');
     // $sortDirection = request("sort_direction", "desc");
 
-    // Filter by name
+    // // Filter by name
+    // if ($name = request("name")) {
+    //     $query->where("title", "like", "%{$name}%");
+    // }
+
+    // if ($tag = request("tag")) { // Notice: singular 'tag' matches the column name
+    //     $query->where("tag", $tag); // Match the 'tag' column in the database
+    // }
+
+    // $blogs = $query->orderBy($sortField, $sortDirection)->paginate(5);
+
+    // return inertia("Client/BlogJSX", [
+    //     // "blogs" => $blogs,
+    //     "blogs" => BlogResource::collection($blogs),
+    //     "queryParams" => request()->query() ?: null,
+    // ]);
+
+    $query = Blog::query();
+
     if (request("name")) {
-        $query->where("title", "like", "%" . request("name") . "%"); // Assuming the blog's searchable name is 'title'
+        $query->where("title", "like", "%" . request("name") . "%");
+
+        logger()->info("Filtering by name:", ['name' => request("name")]);
     }
 
-    // Filter by tags
-    if (request("tags")) {
-        $tags = request("tags"); // Tags passed as a comma-separated string
-        $query->whereHas("tags", function ($q) use ($tags) {
-            $q->whereIn("name", explode(",", $tags));
-        });
+    if ($tag = request("tag")) { // Notice: singular 'tag' matches the column name
+        $query->where("tag", $tag); // Match the 'tag' column in the database
     }
 
-    // Fetch and paginate blogs
-    // $blogs = $query->orderBy($sortField, $sortDirection);
-    $blogs = $query->get()->mapInto(BlogResource::class);
+    // Default sorting: Most recent blogs first
+    $blogs = $query->orderBy('created_at', 'desc')
+        ->paginate(5) // 5 items per page
+        ->onEachSide(1);
 
-
-
-    // Return the data to the frontend
     return inertia("Client/BlogJSX", [
-        "blogs" => $blogs, //BlogResource::collection($blogs),
-        "queryParams" => request()->query() ?: null,
+        "blogs" => BlogResource::collection($blogs),
+        'queryParams' => request()->query() ?: null, // Name filter state
     ]);
+
 }
+    // Filter by tags
+//     if ($tags = request("tags")) {
+//         $tagsArray = explode(",", $tags);
+//         $query->whereHas("tags", function ($q) use ($tagsArray) {
+//             $q->whereIn("name", $tagsArray);
+//         });
+//     }
+
+
+
+//     // Paginate blogs (5 per page)
+//     dd($blogs, request()->query());
+
+
+//     dd($query->toSql(), $query->getBindings(), $blogs, request()->query() ?: []);
+
+
+//     // Return data to the front-end
+//     return inertia("Client/BlogJSX", [
+//         "blogs" => $blogs,
+//         "queryParams" => request()->query() ?: [],
+//     ]);
+// }
 
     public function marketing()
     {

@@ -10,8 +10,8 @@ import {Link, usePage} from "@inertiajs/react"
 export default function Breadcums() {
     const {props: MegaBread } = usePage();
     const { breadcum } = MegaBread;
-    console.log("Bread1:", MegaBread);
-    console.log("Bread2:", breadcum);
+    // console.log("Bread1:", MegaBread);
+    // console.log("Bread2:", breadcum);
 
   return (
     <Stack spacing={2}>

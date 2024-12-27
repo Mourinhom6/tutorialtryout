@@ -23,6 +23,7 @@ class BlogFactory extends Factory
             ->randomElement(['Engineering', 'Product', 'Design', 'Company']),
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(),
+            'state' => fake()->randomElement(['Visiable', 'Hidden']),
             'authors_name' => fake()->name(),
             'date' => fake()->dateTimeBetween('now', '+1 year'),
 
