@@ -1,11 +1,13 @@
-import * as React from 'react';
+import React from 'react';
+import Skeleton from '@mui/material/Skeleton';
 import PropTypes from 'prop-types';
-// import Avatar from '@mui/material/Avatar';
+import Avatar from '@mui/material/Avatar';
 // import AvatarGroup from '@mui/material/AvatarGroup';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import Stack from "@mui/material/Stack";
 import Chip from '@mui/material/Chip';
 import Grid from '@mui/material/Grid2';
 import IconButton from '@mui/material/IconButton';
@@ -17,9 +19,14 @@ import { styled } from '@mui/material/styles';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import RssFeedRoundedIcon from '@mui/icons-material/RssFeedRounded';
 import { Link, router } from "@inertiajs/react";
+// import useLoading from '@/components/Loading';
+
+
+// import CircularSke from '@/components/Skeletons';
+
 
 import {useRoute} from "&/ziggy"
-const route = useRoute();
+const routing = useRoute();
 
 const SyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',
@@ -80,39 +87,46 @@ const StyledTypography = styled(Typography)({
   textOverflow: 'ellipsis',
 });
 
-// function Author({ authors }) {
-//   return (
-//     <Box
-//       sx={{
-//         display: 'flex',
-//         flexDirection: 'row',
-//         gap: 2,
-//         alignItems: 'center',
-//         justifyContent: 'space-between',
-//         padding: '16px',
-//       }}
-//     >
-//       <Box
-//         sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}
-//       >
-//         <AvatarGroup max={3}>
-//           {authors.map((author, index) => (
-//             <Avatar
-//               key={index}
-//               alt={author_name}
-//               src={author.avatar}
-//               sx={{ width: 24, height: 24 }}
-//             />
-//           ))}
-//         </AvatarGroup>
-//         <Typography variant="caption">
-//           {authors.map((author) => author_name).join(', ')}
-//         </Typography>
-//       </Box>
-//       <Typography variant="caption">July 14, 2021</Typography>
-//     </Box>
-//   );
-// }
+function Author({ date, authors }) {
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        gap: 2,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '16px',
+      }}
+    >
+      <Box
+        sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}
+      >
+        <Avatar
+            key={authors.id}
+            alt={authors.name}
+            src= "https://picsum.photos/200/200?random"
+            sx={{ width: 24, height: 24 }}
+        />
+        {/* <AvatarGroup max={3}>
+          {authors.map((author, index) => (
+            <Avatar
+              key={index}
+              alt={author_name}
+              src={author.avatar}
+              sx={{ width: 24, height: 24 }}
+            />
+          ))}
+        </AvatarGroup> */}
+        <Typography variant="caption">
+          {/* {authors.map((author) => author_name).join(', ')} */}
+          {authors.name}
+        </Typography>
+      </Box>
+      <Typography variant="caption">{date}</Typography>
+    </Box>
+  );
+}
 
 // Author.propTypes = {
 //   authors: PropTypes.arrayOf(
@@ -282,11 +296,6 @@ const StyledTypography = styled(Typography)({
     //   setQuickFilterText(event.target.value);
     // };
 
-
-export default function MainContent({ blogs, queryParams = null}) {
-
-    const TAG_KEY = "tag";
-
     // const searchFieldChanged = (name, value) => {
     // if (value) {
     //     queryParams[name] = value;
@@ -325,48 +334,111 @@ export default function MainContent({ blogs, queryParams = null}) {
 
 //         router.get(route("blog"), newQueryParams);
 //       };
+export default function MainContent({ blogs, queryParams = null}) {
+
+    // const { isLoading, startLoading, stopLoading } = useLoading();
+    // console.log("isLoading",isLoading);
+    // console.log("startLoading",startLoading);
+    // console.log("stopLoading",stopLoading);
+
+    // React.useEffect(() => {
+    //     startLoading();
+    //     // Simula uma operação assíncrona
+    //     setTimeout(() => {
+    //       stopLoading();
+    //     }, 2000);
+    //   }, []);
 
 
-const searchFieldChanged = (name, value) => {
-    const newQueryParams = { ...queryParams }; // Clone the current queryParams
 
-    if (value) {
-      newQueryParams[name] = value; // Add or update the 'name' filter
+    console.log("mainfirstblogs",blogs);
+
+//     const TAG_KEY = "tag";
+
+const [titleFilter, setTitleFilter] = React.useState(queryParams?.title || '');
+const [selectedTags, setSelectedTags] = React.useState(queryParams?.tags ? queryParams.tags.split(',') : []);
+
+console.log("selectedTags",selectedTags);
+
+const handleTitleChange = (value) => {
+    setTitleFilter(value);
+    applyFilters(value, selectedTags);
+};
+
+
+const handleTagChange = (tagId) => {
+    let newTags;
+    if (tagId === 'all') {
+        newTags = [];
     } else {
-      delete newQueryParams[name]; // Remove the 'name' filter if the value is empty
+        newTags = selectedTags.includes(tagId)
+            ? selectedTags.filter(id => id !== tagId)
+            : [...selectedTags, tagId];
     }
+    setSelectedTags(newTags);
+    applyFilters(titleFilter, newTags);
+};
 
-    // Make sure we also pass the tag filter if it exists
-    if (queryParams[TAG_KEY]) {
-        newQueryParams[TAG_KEY] = queryParams[TAG_KEY];
-    }
-
-    // Trigger a new GET request with updated queryParams
+// const applyFilters = (title, tags) => {
+//     const newQueryParams = {};
+//     if (title) newQueryParams.title = title;
+//     if (tags.length > 0) newQueryParams.tags = tags.join(',');
+//     router.get(route("blog"), newQueryParams);
+// };
+const applyFilters = (title, tags) => {
+    const newQueryParams = {};
+    if (title) newQueryParams.title = title;
+    if (tags.length > 0) newQueryParams.tags = tags.join(',');
+    console.log('Sending query params:', newQueryParams);
     router.get(route("blog"), newQueryParams);
 };
 
-const onKeyDown = (name, e) => {
-    if (e.key !== "Enter") return;
-    searchFieldChanged(name, e.target.value);
-};
 
-const tagChanged = (tag) => {
-    const newQueryParams = { ...queryParams }; // Clone the current queryParams
 
-    if (tag === "All") {
-        delete newQueryParams[TAG_KEY]; // Remove the tag filter if "All" is selected
-    } else {
-        newQueryParams[TAG_KEY] = tag; // Add or update the tag filter
-    }
 
-    // Make sure we also pass the name filter if it exists
-    if (queryParams["name"]) {
-        newQueryParams["name"] = queryParams["name"];
-    }
 
-    // Trigger a new GET request with updated queryParams
-    router.get(route("blog"), newQueryParams);
-};
+
+
+// const searchFieldChanged = (name, value) => {
+//     const newQueryParams = { ...queryParams }; // Clone the current queryParams
+
+//     if (value) {
+//       newQueryParams[name] = value; // Add or update the 'name' filter
+//     } else {
+//       delete newQueryParams[name]; // Remove the 'name' filter if the value is empty
+//     }
+
+//     // Make sure we also pass the tag filter if it exists
+//     if (queryParams[TAG_KEY]) {
+//         newQueryParams[TAG_KEY] = queryParams[TAG_KEY];
+//     }
+
+//     // Trigger a new GET request with updated queryParams
+//     router.get(route("blog"), newQueryParams);
+// };
+
+// const onKeyDown = (name, e) => {
+//     if (e.key !== "Enter") return;
+//     searchFieldChanged(name, e.target.value);
+// };
+
+// const tagChanged = (tag) => {
+//     const newQueryParams = { ...queryParams }; // Clone the current queryParams
+
+//     if (tag === "All") {
+//         delete newQueryParams[TAG_KEY]; // Remove the tag filter if "All" is selected
+//     } else {
+//         newQueryParams[TAG_KEY] = tag; // Add or update the tag filter
+//     }
+
+//     // Make sure we also pass the name filter if it exists
+//     if (queryParams["name"]) {
+//         newQueryParams["name"] = queryParams["name"];
+//     }
+
+//     // Trigger a new GET request with updated queryParams
+//     router.get(route("blog"), newQueryParams);
+// };
 
 
   const handleFocus = (index) => {
@@ -379,6 +451,11 @@ const tagChanged = (tag) => {
 
   console.log("QueryParams:", queryParams);
 
+console.log("selectedTags:", selectedTags);
+// if (isLoading) {
+//     return
+//     <BlogSkeletonPage/>
+// }
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
@@ -402,8 +479,11 @@ const tagChanged = (tag) => {
                 id="search"
                 defaultValue=""
                 label="Task Name"
-                onBlur={(e) => searchFieldChanged("name", e.target.value)}
-                onKeyDown={(e) => onKeyDown("name", e)}
+                // onBlur={(e) => searchFieldChanged("name", e.target.value)}
+                // onKeyDown={(e) => onKeyDown("name", e)}
+                value={titleFilter}
+                onChange={(e) => handleTitleChange(e.target.value)}
+                // onKeyDown={(e) => e.key === 'Enter' && applyFilters()}
                 placeholder="Search…"
                 sx={{ flexGrow: 1 }}
                 startAdornment={
@@ -440,7 +520,7 @@ const tagChanged = (tag) => {
                 overflow: 'auto',
             }}
             >
-                <Chip onClick={() => tagChanged('All')} size="medium" label="All categories" />
+                {/* <Chip onClick={() => tagChanged('All')} size="medium" label="All categories" />
 
                 <Chip onClick={() => tagChanged('Company')} size="medium" label="Company" sx={{ backgroundColor: 'transparent', border: 'none', }}/>
 
@@ -448,7 +528,25 @@ const tagChanged = (tag) => {
 
                 <Chip onClick={() => tagChanged('Design')} size="medium" label="Design" sx={{ backgroundColor: 'transparent', border: 'none', }}/>
 
-                <Chip onClick={() => tagChanged('Engineering')} size="medium" label="Engineering" sx={{ backgroundColor: 'transparent', border: 'none', }}/>
+                <Chip onClick={() => tagChanged('Engineering')} size="medium" label="Engineering" sx={{ backgroundColor: 'transparent', border: 'none', }}/> */}
+
+                <Chip
+                    onClick={() => handleTagChange('all')}
+                    size="medium"
+                    label="All categories"
+                    color={selectedTags.length === 0 ? "primary" : "default"}
+                />
+
+                {['Eventos', 'Aquisições & Concursos', 'Sustentabilidade', 'Avisos Gerais'].map(tag => (
+                     <Chip
+                        key={tag}
+                        onClick={() => handleTagChange(tag)}
+                        size="medium"
+                        label={tag}
+                        color={selectedTags.includes(tag) ? "primary" : "default"}
+                        sx={{ backgroundColor: 'transparent', border: 'none' }}
+                    />
+                ))}
             </Box>
             <Box
                 sx={{
@@ -467,8 +565,11 @@ const tagChanged = (tag) => {
                     // defaultValue={queryParams[name]}
                     // defaultValue= " "
                     label="Task Name"
-                    onBlur={(e) => searchFieldChanged("name", e.target.value)}
-                    onKeyDown={(e) => onKeyDown("name", e)}
+                    // onBlur={(e) => searchFieldChanged("name", e.target.value)}
+                    // onKeyDown={(e) => onKeyDown("name", e)}
+                    value={titleFilter}
+                    onChange={(e) => handleTitleChange(e.target.value)}
+                    // onKeyDown={(e) => e.key === 'Enter' && applyFilters()}
                     placeholder="Search…"
                     sx={{ flexGrow: 1 }}
                     startAdornment={
@@ -488,23 +589,33 @@ const tagChanged = (tag) => {
     </Box>
   );
 }
+
+
 function BlogGrid({ blogs }){
-    console.log("blogs",blogs.blogs);  // Check what 'blogs' looks like when it's received
-    const blogsRepresentive = blogs.blogs.data;
-    console.log("blogs.blogs.data",blogs.blogs.data);
+    console.log("blogs6",blogs);  // Check what 'blogs' looks like when it's received
+    const blogsRepresentive = blogs.data;
+    console.log("blogs.data",blogs.data);
+
+    // const routing = useRoute();
+
 
     const firstFiveBlogs = blogsRepresentive.slice(0, 5);
 
     return (
         <Grid container spacing={2} columns={12}>
         {/* First two large cards */}
-        {firstFiveBlogs.slice(0, 2).map((blog, index) => (
-            <Grid item size={{ xs: 12, md: 6 }} key={blog.id}>
+        {firstFiveBlogs.slice(0, 2).map((blog) => (
+            <Grid item size={{ xs: 12, md: 6 }} key={blog.id}
+                onClick={() => {
+                    console.log('Clicked blog ID:', blog.id);
+                    router.get(routing('blogshow', blog.id));
+                }}
+            >
                 <SyledCard variant="outlined">
                     <CardMedia
                         component="img"
                         alt={blog.title}
-                        image={blog.img}
+                        image={blog.img_main}
                         sx={{
                             aspectRatio: '16 / 9',
                             borderBottom: '1px solid',
@@ -512,27 +623,35 @@ function BlogGrid({ blogs }){
                         }}
                     />
                     <SyledCardContent>
-                        <Typography gutterBottom variant="caption" component="div">
-                            {blog.tag}
-                        </Typography>
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 1 }}>
+                            {blog.tags.map((tag) => (
+                                <Chip key={tag.id} label={tag.name} variant="outlined" />
+                            ))}
+                        </Box>
                         <Typography gutterBottom variant="h6" component="div">
                             {blog.title}
                         </Typography>
                         <StyledTypography variant="body2" color="text.secondary" gutterBottom>
-                            {blog.description}
+                            {blog.subtitle}
                         </StyledTypography>
                     </SyledCardContent>
+                    <Author date={blog.date} authors={blog.createdBy} />
                 </SyledCard>
             </Grid>
     ))}
         {/* Last three cards in a row */}
-        {firstFiveBlogs.slice(2, 5).map((blog, index) => (
-            <Grid item  size={{ xs: 12, md: 4 }} key={blog.id}>
+        {firstFiveBlogs.slice(2, 5).map((blog) => (
+            <Grid item  size={{ xs: 12, md: 4 }} key={blog.id}
+                onClick={() => {
+                    console.log('Clicked blog ID:', blog.id);
+                    router.get(routing('blogshow', blog.id));
+                }}
+            >
                 <SyledCard variant="outlined">
                     <CardMedia
                         component="img"
                         alt={blog.title}
-                        image={blog.img}
+                        image={blog.img_main}
                         sx={{
                             aspectRatio: '16 / 9',
                             borderBottom: '1px solid',
@@ -540,16 +659,19 @@ function BlogGrid({ blogs }){
                         }}
                     />
                     <SyledCardContent>
-                        <Typography gutterBottom variant="caption" component="div">
-                            {blog.tag}
-                        </Typography>
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 1 }}>
+                            {blog.tags.map((tag) => (
+                                <Chip key={tag.id} label={tag.name} variant="outlined" />
+                            ))}
+                        </Box>
                         <Typography gutterBottom variant="h6" component="div">
                             {blog.title}
                         </Typography>
                         <StyledTypography variant="body2" color="text.secondary" gutterBottom>
-                            {blog.description}
+                            {blog.subtitle}
                         </StyledTypography>
                     </SyledCardContent>
+                    <Author date={blog.date} authors={blog.createdBy} />
                 </SyledCard>
             </Grid>
         ))}
@@ -732,3 +854,53 @@ function BlogGrid({ blogs }){
 
 
 
+    const BlogSkeletonPage = () => {
+        return (
+          <Box sx={{ padding: 3 }}>
+            {/* Blog Title and Subtitle */}
+            <Stack spacing={2} sx={{ marginBottom: 3 }}>
+              <Skeleton variant="text" width={200} height={40} />
+              <Skeleton variant="text" width={300} height={20} />
+            </Stack>
+
+            {/* Categories Buttons */}
+            <Stack direction="row" spacing={2} sx={{ marginBottom: 3, flexWrap: 'wrap' }}>
+              {Array(5).fill("").map((_, index) => (
+                <Skeleton key={index} variant="rectangular" width={100} height={40} sx={{ marginBottom: 1 }} />
+              ))}
+            </Stack>
+
+            {/* Search Bar */}
+            <Box sx={{ marginBottom: 3 }}>
+              <Skeleton variant="rectangular" width={300} height={40} />
+            </Box>
+
+            {/* Blog Cards */}
+            <Grid container spacing={3}>
+              {Array(4).fill("").map((_, index) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                  <Stack spacing={2}>
+                    {/* Image */}
+                    <Skeleton variant="rectangular" width="100%" height={200} />
+                    {/* Tags */}
+                    <Skeleton variant="text" width="60%" height={20} />
+                    {/* Title */}
+                    <Skeleton variant="text" width="80%" height={30} />
+                    {/* Description */}
+                    <Skeleton variant="text" width="90%" height={20} />
+                    <Skeleton variant="text" width="90%" height={20} />
+                    {/* Author and Date */}
+                    <Stack direction="row" spacing={2} alignItems="center">
+                      <Skeleton variant="circular" width={40} height={40} />
+                      <Stack spacing={1} sx={{ flexGrow: 1 }}>
+                        <Skeleton variant="text" width="40%" height={20} />
+                        <Skeleton variant="text" width="30%" height={20} />
+                      </Stack>
+                    </Stack>
+                  </Stack>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        );
+      };

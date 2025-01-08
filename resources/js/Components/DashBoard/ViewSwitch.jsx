@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Popover from '@mui/material/Popover';
@@ -6,6 +7,9 @@ import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 
 
+import isMobileFunction from "@/MediaQuery"
+import useIsSuperTiny from "@/MediaQuery"
+import isBigScreen from "@/MediaQuery"
 
 
     const SelectorContainer = styled(Box)(({ theme }) => ({
@@ -51,17 +55,47 @@ import Typography from '@mui/material/Typography';
 
 
 
-    export default function ViewModeSelector({ options, onChange, defaultValue }) {
-        const [selected, setSelected] = useState(defaultValue);
-        const [anchorEl, setAnchorEl] = useState(null);
-        const [hoveredOption, setHoveredOption] = useState(null);
+    export default function ViewModeSelector({ options, onChange, defaultValue, openSnackbar }) {
+        const [selected, setSelected] = React.useState(defaultValue);
+        const [anchorEl, setAnchorEl] = React.useState(null);
+        const [hoveredOption, setHoveredOption] = React.useState(null);
+
+            const { isMobile } = isMobileFunction();
+            const {isSuperTiny} = useIsSuperTiny();
+            const {isDesktop} = isBigScreen();
+
+
+        // const handleSelection = (value) => {
+        //   setSelected(value);
+        //   if (onChange) {
+        //     const selectedOption = options.find((option) => option.value === value);
+        //     onChange(selectedOption);
+        //   }
+        // };
 
         const handleSelection = (value) => {
-          setSelected(value);
-          if (onChange) {
             const selectedOption = options.find((option) => option.value === value);
-            onChange(selectedOption);
-          }
+
+            if (selectedOption) {
+                let isAllowed = false;
+
+                if (selectedOption.support > 2) {
+                    isAllowed = true;
+                } else if (selectedOption.support > 1) {
+                    isAllowed = !isSuperTiny;
+                } else {
+                    isAllowed = isDesktop;
+                }
+
+                if (isAllowed) {
+                    setSelected(value);
+                    if (onChange) {
+                        onChange(selectedOption);
+                    }
+                } else {
+                    openSnackbar("The view mode you selected is not available for your device");
+                }
+            }
         };
 
         const handlePopoverOpen = (event, option) => {
@@ -74,44 +108,46 @@ import Typography from '@mui/material/Typography';
           setHoveredOption(null);
         };
 
+
+
         const open = Boolean(anchorEl);
 
         return (
-          <SelectorContainer>
-            {options.map((option) => (
-              <OptionButton
-                key={option.value}
-                active={selected === option.value ? 1 : 0}
-                onClick={() => handleSelection(option.value)}
-                onMouseEnter={(event) => handlePopoverOpen(event, option)}
-                onMouseLeave={handlePopoverClose}
-              >
-                <OptionContent style={{ fontSize: `${option.multiplier * 8}px` }}>
-                  {option.icon}
-                </OptionContent>
-              </OptionButton>
-            ))}
-            <Popover
-              id="hover-popover"
-              sx={{ pointerEvents: 'none' }}
-              open={open}
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'center',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'center',
-              }}
-              disableRestoreFocus
-            >
-              {hoveredOption && (
-                <Typography sx={{ p: 1 }}>
-                  {hoveredOption.label}
-                </Typography>
-              )}
-            </Popover>
-          </SelectorContainer>
-        );
-      }
+            <SelectorContainer>
+                {options.map((option) => (
+                    <OptionButton
+                        key={option.value}
+                        active={selected === option.value ? 1 : 0}
+                        onClick={() => handleSelection(option.value)}
+                        onMouseEnter={(event) => handlePopoverOpen(event, option)}
+                        onMouseLeave={handlePopoverClose}
+                    >
+                        <OptionContent style={{ fontSize: `${option.multiplier * 8}px` }}>
+                        {option.icon}
+                        </OptionContent>
+                    </OptionButton>
+                ))}
+                <Popover
+                id="hover-popover"
+                sx={{ pointerEvents: 'none' }}
+                open={open}
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                }}
+                disableRestoreFocus
+                >
+                {hoveredOption && (
+                    <Typography sx={{ p: 1 }}>
+                    {hoveredOption.label}
+                    </Typography>
+                )}
+                </Popover>
+            </SelectorContainer>
+        )
+    };

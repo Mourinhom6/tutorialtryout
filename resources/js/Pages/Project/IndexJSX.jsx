@@ -21,7 +21,7 @@ import {
   PROJECT_STATUS_CLASS_MAP,
   PROJECT_STATUS_TEXT_MAP,
 } from "@/constants.jsx";
-import { Head, Link, router, usePage } from "@inertiajs/react";
+import { Head, Link, router, usePage, useForm } from "@inertiajs/react";
 import TableHeading from "@/Components/TableHeading";
 import ViewModeSelector from "@/Components/DashBoard/ViewSwitch";
 
@@ -43,6 +43,16 @@ import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import PrintIcon from '@mui/icons-material/Print';
 import ShareIcon from '@mui/icons-material/Share';
+
+import Snackbar from '@mui/material/Snackbar';
+
+import isMobileFunction from "@/MediaQuery"
+import useIsSuperTiny from "@/MediaQuery"
+
+
+// import {useRoute} from "&/ziggy"
+// const route = useRoute();
+
 // import { useTheme } from '@mui/material/styles';
 // const theme = useTheme();
 // console.log('theme3:', theme);
@@ -111,22 +121,30 @@ const SyledCard = styled(Card)(({ theme }) => ({
 
 
 const viewModes = [
-    { icon: <FullscreenIcon />, value: 'Solo', label: 'Grid View', multiplier: 12 },
-    { icon: <GridViewIcon />, value: 'Duo', label: 'List View', multiplier: 6 },
-    { icon: <TableRowsIcon />, value: 'grid', label: 'Compact View', multiplier: 4 },
-    { icon: <ViewListIcon />, value: 'Tabela', label: 'Expanded View', multiplier: 0 },
+    { icon: <FullscreenIcon />, value: 'Solo', label: 'Grid View', multiplier: 12, support: 4 },
+    { icon: <GridViewIcon />, value: 'Duo', label: 'List View', multiplier: 6, support: 2 },
+    { icon: <TableRowsIcon />, value: 'grid', label: 'Compact View', multiplier: 4, support: 1 },
+    { icon: <ViewListIcon />, value: 'Tabela', label: 'Expanded View', multiplier: 0, support: 4 },
   ];
-
-
-
-
 
 // function Posts({mdsize, blogs, queryParams}){
 
 function Postsoffice({mdsize, blogs}){
 
+    // const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
+    //     name: user.name,
+    //     email: user.email,
+    // });
+
+    // const submit = (e) => {
+    //     e.preventDefault();
+
+    //     patch(route('profile.update'));
+    // };
+
     // console.log('ClientTheme5:', ClientTheme);
     const theme2 = ClientTheme();
+
 
 
     // const clientTheme = ClientTheme();
@@ -137,36 +155,61 @@ function Postsoffice({mdsize, blogs}){
     console.log('blogs5:', blogs);
 
 
+    const visibilityForm = useForm({
+        // We don't need to initialize with any data
+    });
+    // console.log('xiggy useRoute():', useRoute());
+
+    // if (e.key !== "Enter") return;
+    //     searchFieldChanged(name, e.target.value);
+
     const handleAction = (key, id_project) => {
         console.log('key:', key);
         console.log('id_project:', id_project);
 
         switch (key) {
             case 'Visibility':
-                put(route("project.upvisibility", id_project));
-                // router.visit(route('project.show', { id: id_project }));
+                console.log(' Entrou Visibility');
+                visibilityForm.put(route("project.visibility", id_project), {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        // Handle success (e.g., show a success message or update local state)
+                        console.log('Visibility updated successfully');
+                    },
+                    onError: (errors) => {
+                        // Handle errors
+                        console.error('Error updating visibility:', errors);
+                    },
+                });
                 break;
             case 'Edit':
-                router.visit(route('project.edit', { id: id_project }));
+                console.log(' Entrou Edit');
+                router.visit(route('project.edit', id_project));
                 break;
             case 'Delete':
-                router.delete(route('project.destroy', { id: id_project }), {
+                console.log(' Entrou Delete');
+                router.delete(route('project.destroy',{ project: id_project }), {
                     onSuccess: () => {
+
                         router.reload({ only: ['projects'] });
                     },
                 });
                 break;
             case 'Save':
-                router.delete(route('project.destroy', { id: id_project }), {
-                    onSuccess: () => {
-                        router.reload({ only: ['projects'] });
-                    },
-                });
+                console.log(' Entrou Save');
+                router.get(route('project.show', { project: id_project }));
+                // router.get(route("project.show.with.blog",{ blog: project.id } ,{ project: project.id }))
+                // router.visit(route('project.show', id_project));
+                //  {
+                //     onSuccess: () => {
+                //         router.reload({ only: ['projects'] });
+                //     },
+                // });
                 break;
         }
-        if (e.key !== "Enter") return;
-        searchFieldChanged(name, e.target.value);
+
     };
+
 
 
 
@@ -177,7 +220,7 @@ function Postsoffice({mdsize, blogs}){
                 {/* First two large cards */}
                 {/* {projects.slice(0, 2).map((edits, index) => ( */}
                 {blogs.map((projects) => (
-                    <Grid item size={{ xs: 12, md: mdsize }} key={projects.id}>
+                    <Grid item size={{ xs: 12, sm: mdsize }} key={projects.id}>
                         <SyledCard variant="outlined" sx={{ position: 'relative' }}>
                             <CardMedia
                                 component="img"
@@ -217,12 +260,14 @@ function Postsoffice({mdsize, blogs}){
                                     onClick={() => { handleAction('Visibility', projects.id)} }
 
                                 />
+                                {/* <Link href={route('project.show', projects.id)}> */}
                                 <SpeedDialAction
                                     key="Save"
                                     icon={<SaveIcon />}
                                     tooltipTitle="Save"
                                     onClick={() => { handleAction('Save', projects.id)} }
                                 />
+                                {/* </Link> */}
                                 <SpeedDialAction
                                     key="Delete"
                                     icon={<DeleteRoundedIcon />}
@@ -272,17 +317,50 @@ function Postsoffice({mdsize, blogs}){
 //   }
 
 
-export default function Index({ auth, projects, queryParams = null, success, breadcum,}) {
+export default function Index({ auth, projects, queryParams = null, success, breadcum, blogs2,}) {
     const [multiplier, setMultiplier] = React.useState(4); // Replace initialValue with your default value
+
+    console.log("blogs2", blogs2);
 
 
     // var multiplier = 4;
+    const { isMobile } = isMobileFunction();
+    const {isSuperTiny} = useIsSuperTiny();
+
+    const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+    const [snackbarMessage, setSnackbarMessage] = React.useState('');
+
+    const openSnackbar = (message) => {
+        setSnackbarMessage(message);
+        setSnackbarOpen(true);
+    };
+
+    const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+        return;
+    }
+    setSnackbarOpen(false);
+    };
 
     const handleViewModeChange = (selectedOption) => {
         console.log('Selected Option:', selectedOption);
         console.log('Selected Multiplier:', selectedOption.multiplier);
         setMultiplier(selectedOption.multiplier);
         console.log('Updated multiplier:', selectedOption.multiplier);
+      };
+
+    //   const getDefaultViewMode = () => {
+    //     if (isMobile && isSuperTiny) return 'Solo';
+    //     if ((!(isMobile)) && (!(isSuperTiny))) return 'grid';
+    //     if (isMobile && (!(isSuperTiny))) return 'Duo';
+    //   };
+
+    const getDefaultViewMode = () => {
+        console.log("isSuperTiny:", isSuperTiny, "isMobile:", isMobile);
+
+        if (isSuperTiny) return 'Solo';
+        if (isMobile) return 'Duo';
+        return 'grid';
       };
 
 
@@ -485,7 +563,9 @@ export default function Index({ auth, projects, queryParams = null, success, bre
                           <img src={project.image_path} style={{ width: 60 }} />
                         </td>
                         <th className="px-3 py-2 text-gray-100 text-nowrap hover:underline">
-                          <Link href={route("project.show", project.id)}>
+                          <Link href={route("project.show", project.id)}  onClick={() => console.log(`Clicked on project: ${project.id}`)}>
+                          {/* <Link href={route("project.show.with.blog",{ blog: project.id } ,{ project: project.id })}  onClick={() => console.log(`Clicked on project: ${project.id}`)}> */}
+
                             {project.name}
                           </Link>
                         </th>
@@ -534,14 +614,26 @@ export default function Index({ auth, projects, queryParams = null, success, bre
         <Box component="section" sx={{ pb: 4, display: "flex", justifyContent: "flex-end" }}>
             <ViewModeSelector
             options={viewModes}
-            defaultValue="grid"
+            // defaultValue="grid"
+            defaultValue={getDefaultViewMode()}
             onChange={handleViewModeChange}
+            openSnackbar={openSnackbar}
             />
         </Box>
 
 
 
       <Postsoffice mdsize={multiplier} blogs={dataproj.blogs2.data} /> {/* queryParams={queryParams} */}
+        <Snackbar
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center',
+            }}
+            open={snackbarOpen}
+            autoHideDuration={6000}
+            onClose={handleCloseSnackbar}
+            message={snackbarMessage}
+        />
 
     </WorkSpace>
   );

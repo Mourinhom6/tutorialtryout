@@ -19,6 +19,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('project', ProjectController::class);
+    // Route::patch('/edits/upvisibility', [ProjectController::class, 'visibility'])->name('edits.visibility');
     Route::get('/task/my-tasks', [TaskController::class, 'myTasks'])->name('task.myTasks');
     Route::get('/license/export', [LicenseController::class, 'export'])->name('license.export');
     Route::resource('task', TaskController::class);

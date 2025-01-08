@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Helpers\Breadcrumbs;
+use Illuminate\Support\Facades\Log;
 
 
 use App\Models\Blog;
@@ -93,10 +94,14 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show(Project $project, Blog $blog)
+    // public function show(Project $project )
+
     {
         $breadcrumbs = Breadcrumbs::generate();
+
         $query = $project->tasks();
+
 
         $sortField = request("sort_field", 'created_at');
         $sortDirection = request("sort_direction", "desc");
@@ -111,14 +116,58 @@ class ProjectController extends Controller
         $tasks = $query->orderBy($sortField, $sortDirection)
             ->paginate(10)
             ->onEachSide(1);
+        // Log::info('Blog ID: ' . $blog->id);
+        // Log::debug($blog->toArray());
+
+        // dd($blog);
+
+            // dd(new BlogResource($blog));
         return inertia('Project/ShowJSX', [
             'project' => new ProjectResource($project),
+            'blog' => new BlogResource($blog),
             "tasks" => TaskResource::collection($tasks),
             'queryParams' => request()->query() ?: null,
             'success' => session('success'),
             'breadcum' => $breadcrumbs,
         ]);
     }
+
+    // public function showstuff(Blog $blog, Project $project )
+
+    // {
+    //     $breadcrumbs = Breadcrumbs::generate();
+
+    //     $query = $project->tasks();
+
+
+    //     $sortField = request("sort_field", 'created_at');
+    //     $sortDirection = request("sort_direction", "desc");
+
+    //     if (request("name")) {
+    //         $query->where("name", "like", "%" . request("name") . "%");
+    //     }
+    //     if (request("status")) {
+    //         $query->where("status", request("status"));
+    //     }
+
+    //     $tasks = $query->orderBy($sortField, $sortDirection)
+    //         ->paginate(10)
+    //         ->onEachSide(1);
+    //     // Log::info('Blog ID: ' . $blog->id);
+    //     // Log::debug($blog->toArray());
+
+    //     // dd($blog);
+
+    //         // dd(new BlogResource($blog));
+    //     return inertia('Project/ShowJSX', [
+    //         'project' => new ProjectResource($project),
+    //         'blog' => new BlogResource($blog),
+    //         "tasks" => TaskResource::collection($tasks),
+    //         'queryParams' => request()->query() ?: null,
+    //         'success' => session('success'),
+    //         'breadcum' => $breadcrumbs,
+    //     ]);
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -152,22 +201,90 @@ class ProjectController extends Controller
             ->with('success', "Project \"$project->name\" was updated");
     }
 
-    public function visibility(UpdateBlogRequest $request, Blog $project)
+    public function visibility(UpdateBlogRequest $request, Blog $blog)
     {
         $data = $request->validated();
         $image = $data['image'] ?? null;
-        $data['updated_by'] = Auth::id();
+        $eyes= $data['state'];
+        if($eyes == "Visiable"){
+            $data['state'] = "Hidden";
+        }else{
+            $data['state'] = "Visiable";
+        }
+
+        // $data['updated_by'] = Auth::id();
         if ($image) {
-            if ($project->image_path) {
-                Storage::disk('public')->deleteDirectory(dirname($project->image_path));
+            if ($blog->image_path) {
+                Storage::disk('public')->deleteDirectory(dirname($blog->image_path));
             }
             $data['image_path'] = $image->store('project/' . Str::random(), 'public');
         }
-        $project->update($data);
+
+        $blog->update($data);
 
         return to_route('project.index')
-            ->with('success', "Project \"$project->name\" was updated");
+            ->with('success', "Project \"$blog->name\" was updated");
     }
+
+
+    // public function showblog(Blog $blog)
+    // {
+    //     $breadcrumbs = Breadcrumbs::generate();
+    //     $query = $blog->tasks();
+
+    //     $sortField = request("sort_field", 'created_at');
+    //     $sortDirection = request("sort_direction", "desc");
+
+    //     if (request("name")) {
+    //         $query->where("name", "like", "%" . request("name") . "%");
+    //     }
+    //     if (request("status")) {
+    //         $query->where("status", request("status"));
+    //     }
+
+    //     $tasks = $query->orderBy($sortField, $sortDirection)
+    //         ->paginate(10)
+    //         ->onEachSide(1);
+    //     return inertia('Project/ShowJSX', [
+    //         'blogshow' => new BlogResource($blog),
+    //         "tasks" => TaskResource::collection($tasks),
+    //         'queryParams' => request()->query() ?: null,
+    //         'success' => session('success'),
+    //         'breadcum' => $breadcrumbs,
+    //     ]);
+    // }
+
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  */
+    // public function editblog(Blog $blog)
+    // {
+    //     $breadcrumbs = Breadcrumbs::generate();
+    //     return inertia('Project/EditJSX', [
+    //         'blogedit' => new BlogResource($blog),
+    //         'breadcum' => $breadcrumbs,
+    //     ]);
+    // }
+
+    // /**
+    //  * Update the specified resource in storage.
+    //  */
+    // public function updateblog(UpdateBlogRequest $request, Blog $blog)
+    // {
+    //     $data = $request->validated();
+    //     $image = $data['image'] ?? null;
+    //     $data['updated_by'] = Auth::id();
+    //     if ($image) {
+    //         if ($blog->image_path) {
+    //             Storage::disk('public')->deleteDirectory(dirname($blog->image_path));
+    //         }
+    //         $data['image_path'] = $image->store('project/' . Str::random(), 'public');
+    //     }
+    //     $blog->update($data);
+
+    //     return to_route('project.index')
+    //         ->with('success', "Project \"$blog->name\" was updated");
+    // }
 
     /**
      * Remove the specified resource from storage.

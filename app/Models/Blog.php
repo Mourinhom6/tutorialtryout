@@ -10,15 +10,43 @@ class Blog extends Model
     use HasFactory;
 
     protected $fillable = [
-        'img',
-        'tag',
+        'img_main',
+        'importance',
         'title',
-        'description',
+        'subtitle',
+        'size',
+        'intro',
+        'text1',
+        'text2',
         'state',
-        'authors_name',
+        'created_by',
+        'updated_by',
         'date',
 
     ];
+
+    protected $casts = [
+        'date' => 'date',
+    ];
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+    public function images()
+    {
+        return $this->hasMany(BlogImage::class);
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 
     // public function project()
     // {

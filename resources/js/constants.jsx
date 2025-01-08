@@ -8,6 +8,16 @@ export const PROJECT_STATUS_TEXT_MAP = {
   in_progress: "In Progress",
   completed: "Completed",
 };
+
+export const BLOG_STATUS_CLASS_MAP = {
+    archived: 'bg-amber-500',
+    published:'bg-green-500',
+  };
+  export const BLOG_STATUS_TEXT_MAP = {
+    archived: 'Oculto',
+    published:'Visível',
+  };
+
 export const LICENSE_STATUS_CLASS_MAP = {
   DESATIVADO: "bg-red-500",
   ACTIVO: "bg-green-500",

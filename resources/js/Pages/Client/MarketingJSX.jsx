@@ -29,7 +29,7 @@ export default function Marketing(props) {
         <Divider />
         <Highlights />
         <Divider />
-        <Pricing />
+        {/* <Pricing /> */}
         <Divider />
         <FAQ />
         <Divider />

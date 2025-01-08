@@ -9,7 +9,8 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import FacebookIcon from '@mui/icons-material/GitHub';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/X';
 // import SitemarkIcon from './SitemarkIcon';
@@ -19,7 +20,7 @@ function Copyright() {
     <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
       {'Copyright © '}
       <Link color="text.secondary" href="https://mui.com/">
-        Sitemark
+        Auto Viação Feirense
       </Link>
       &nbsp;
       {new Date().getFullYear()}
@@ -187,40 +188,52 @@ export default function Footer() {
             </Link>
             <Copyright />
           </div>
-          <Stack
-            direction="row"
-            spacing={1}
-            useFlexGap
-            sx={{ justifyContent: 'left', color: 'text.secondary' }}
-          >
-            <IconButton
-              color="inherit"
-              size="small"
-              href="https://github.com/mui"
-              aria-label="GitHub"
-              sx={{ alignSelf: 'center' }}
+            <Stack
+                direction="row"
+                spacing={1}
+                useFlexGap
+                sx={{ justifyContent: 'left', color: 'text.secondary' }}
             >
-              <FacebookIcon />
-            </IconButton>
-            <IconButton
-              color="inherit"
-              size="small"
-              href="https://x.com/MaterialUI"
-              aria-label="X"
-              sx={{ alignSelf: 'center' }}
-            >
-              <TwitterIcon />
-            </IconButton>
-            <IconButton
-              color="inherit"
-              size="small"
-              href="https://www.linkedin.com/company/mui/"
-              aria-label="LinkedIn"
-              sx={{ alignSelf: 'center' }}
-            >
-              <LinkedInIcon />
-            </IconButton>
-          </Stack>
+                <IconButton
+                color="inherit"
+                size="large"
+                href="https://github.com/Mourinhom6"
+                aria-label="GitHub"
+                sx={{ alignSelf: 'center' }}
+                >
+                <GitHubIcon />
+                </IconButton>
+
+                <IconButton
+                color="inherit"
+                size="large"
+                href="https://www.facebook.com/AutoViacaoFeirense"
+                aria-label="FaceBool"
+                sx={{ alignSelf: 'center' }}
+                >
+                <FacebookIcon />
+                </IconButton>
+
+                <IconButton
+                color="inherit"
+                size="large"
+                href="https://x.com/avf_poseur"
+                aria-label="X"
+                sx={{ alignSelf: 'center' }}
+                >
+                <TwitterIcon />
+                </IconButton>
+
+                <IconButton
+                color="inherit"
+                size="large"
+                href="https://pt.linkedin.com/company/autoviacaofeirense"
+                aria-label="LinkedIn"
+                sx={{ alignSelf: 'center' }}
+                >
+                <LinkedInIcon />
+                </IconButton>
+            </Stack>
         </Box>
       </Container>
     </React.Fragment>

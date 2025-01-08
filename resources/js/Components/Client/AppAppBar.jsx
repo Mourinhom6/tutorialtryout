@@ -37,6 +37,8 @@ import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings';
 import Menu from '@mui/material/Menu';
 
 import { ThemeSwitcher } from '@toolpad/core/DashboardLayout';
+import { router } from "@inertiajs/react";
+import {useRoute} from "&/ziggy"
 
 
 import TablePagination from '@mui/material/TablePagination';
@@ -44,6 +46,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 import TextField from '@mui/material/TextField';
 import * as locales from '@mui/material/locale';
+import { Grid } from '@mui/system';
 
 
 function ColorModeIconDropdown(props) {
@@ -212,6 +215,9 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 }));
 
 export default function AppAppBar() {
+
+    const routing = useRoute();
+
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
@@ -279,8 +285,11 @@ export default function AppAppBar() {
                         variant="square"
                         src="/storage/ShortLogo.png"
                         sx={{ width: 80, height: 35 }}
-                    />
-                    <Typography variant="h6" component="h1" sx={{ color: 'text.primary' }}>Auto viação Feirense</Typography>
+                        onClick={() => { router.get('/')}}
+                    ></Avatar>
+                    <Typography variant="h6" component="h1" sx={{ color: 'text.primary' }} onClick={() => { router.get('/')}}>
+                        Auto viação Feirense
+                    </Typography>
                 {/* </Box> */}
 
                 {/* logo: <img src="/storage/ShortLogo.png" alt="MUI logo" />,
@@ -288,22 +297,22 @@ export default function AppAppBar() {
 
 
                 <Box sx={{ display: { xs: 'none', md: 'flex' }, pl: 2}} >
-                    <Button variant="text" color="info" size="small" href={route("marketing")}>
-                        Features
+                    {/* <Button variant="text" color="info" size="small" href={routing("jobshow")}>
+                    Carreer
+                    </Button> */}
+                    <Button variant="text" color="info" size="small" href={routing("job")}>
+                        Job
                     </Button>
-                    <Button variant="text" color="info" size="small" href={route("marketing")}>
-                        Testimonials
+                    <Button variant="text" color="info" size="small" href={routing("marketing")}>
+                        Marketing
                     </Button>
-                    <Button variant="text" color="info" size="small" href={route("marketing")}>
-                        Highlights
-                    </Button>
-                    <Button variant="text" color="info" size="small" href={route("marketing")}>
+                    <Button variant="text" color="info" size="small" href={routing("marketing")}>
                         Pricing
                     </Button>
-                    <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }} href={route("marketing")}>
-                        FAQ
+                    <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }} href={routing("terms")}>
+                        Terms
                     </Button>
-                    <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }} href={route("blog")}>
+                    <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }} href={routing("blog")}>
                         Blog
                     </Button>
                 </Box>
@@ -315,7 +324,7 @@ export default function AppAppBar() {
                 alignItems: 'center',
                 }}
             >
-                <Button color="primary" variant="text" size="small" href={route("login")} target="_blank" >
+                <Button color="primary" variant="text" size="small" href={routing("login")} target="_blank" >
                 Sign in
                 </Button>
                 {/* <Button color="primary" variant="contained" size="small"><DisplaySettingsIcon /></Button> */}
@@ -339,30 +348,65 @@ export default function AppAppBar() {
                     }}
                 >
                     <Box sx={{ p: 2, backgroundColor: 'background.default' }}>
-                        <Box
+                        {/* <Box
                             sx={{
                                 display: 'flex',
                                 justifyContent: 'flex-end',
                             }}
                         >
-                            <IconButton onClick={toggleDrawer(false)}>
-                                <CloseRoundedIcon />
-                            </IconButton>
+                            <Grid spacing={2}>
+                                <Grid item>
+                                    <ColorModeIconDropdown />
+                                </Grid>
+                                <Grid item>
+                                    <IconButton onClick={toggleDrawer(false)}>
+                                        <CloseRoundedIcon />
+                                    </IconButton>
+                                </Grid>
+                            </Grid>
+                        </Box> */}
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                            }}
+                            >
+                            <Grid container spacing={2} justifyContent="flex-end" alignItems="center">
+                                <Grid item>
+                                <ColorModeIconDropdown />
+                                </Grid>
+                                <Grid item>
+                                <IconButton onClick={toggleDrawer(false)}>
+                                    <CloseRoundedIcon />
+                                </IconButton>
+                                </Grid>
+                            </Grid>
                         </Box>
-                        <MenuItem>Features</MenuItem>
-                        <MenuItem>Testimonials</MenuItem>
-                        <MenuItem>Highlights</MenuItem>
-                        <MenuItem>Pricing</MenuItem>
-                        <MenuItem>FAQ</MenuItem>
-                        <MenuItem>Blog</MenuItem>
-
+                        {/* <MenuItem>
+                            <Button variant="text" color="info" size="small" href={routing("jobshow")}>Carreer</Button>
+                        </MenuItem> */}
+                        <MenuItem>
+                            <Button variant="text" color="info" size="small" href={routing("job")}>Job</Button>
+                        </MenuItem>
+                        <MenuItem>
+                            <Button variant="text" color="info" size="small" href={routing("marketing")}>Marketing</Button>
+                        </MenuItem>
+                        <MenuItem>
+                            <Button variant="text" color="info" size="small" href={routing("marketing")}>Pricing</Button>
+                        </MenuItem>
+                        <MenuItem>
+                            <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }} href={routing("terms")}>Terms</Button>
+                        </MenuItem>
+                        <MenuItem>
+                            <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }} href={routing("blog")}>Blog</Button>
+                        </MenuItem>
                         <Divider sx={{ my: 3 }} />
 
                         <MenuItem>
                             <Button  onClick={handleClickOpenDialog} color="primary" fullWidth variant="contained" size="small"><DisplaySettingsIcon /></Button>
                         </MenuItem>
                         <MenuItem>
-                            <Button color="primary" href={route("login")} variant="outlined" fullWidth target="_blank" >
+                            <Button color="primary" href={routing("login")} variant="outlined" fullWidth target="_blank" >
                                 Sign in
                             </Button>
                         </MenuItem>

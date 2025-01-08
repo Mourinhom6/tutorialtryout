@@ -1,6 +1,8 @@
 import { Link } from "@inertiajs/react";
 import Pagination from '@mui/material/Pagination';
 
+
+
 export default function CustomPagination({ links }) {
   return (
     <nav className="text-center mt-4">
@@ -52,3 +54,8 @@ export default function CustomPagination({ links }) {
 //     />
 //   );
 // }
+
+
+
+
+

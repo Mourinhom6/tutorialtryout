@@ -19,10 +19,14 @@ Route::middleware('guest')->group(function () {
     Route::redirect('/', '/blog');
 
     Route::get('blog', [LandingController::class, 'blog'])->name('blog');
+    // Route::get('blogshow', [LandingController::class, 'blogshow'])->name('blogshow');
+    Route::get('/blog/{id}', [LandingController::class, 'blogshow'])->name('blogshow');
+
     Route::get('marketing', [LandingController::class, 'marketing'])->name('marketing');
     Route::get('terms', [LandingController::class, 'terms'])->name('terms');
-    Route::get('carreer', [LandingController::class, 'carreer'])->name('carreer');
     Route::get('job', [LandingController::class, 'job'])->name('job');
+    Route::get('/job/{id}', [LandingController::class, 'jobshow'])->name('jobshow');
+
 
 
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');

@@ -23,15 +23,20 @@ class StoreBlogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "img" => ['nullable', 'image'],
-            "tag" => ['required', 'string'],
-            //Add rule for the tag after project finish
-            "title" => ['required', 'max:255'],
-            "description" => ['nullable', 'string'],
-            "state" => ['required', Rule::in(['Visiable', 'Hidden'])],
-            "authors_name" => ['nullable', 'max:255'],
-            "date" => ['nullable', 'date'],
-            
+            'img_main' => ['required', 'string'],
+            'title' => ['required', 'string', 'max:255'],
+            'importance' => ['required', 'integer', 'min:1', 'max:5'],
+            'subtitle' => ['required', 'string', 'max:255'],
+            'size' => ['required', 'integer', 'min:1', 'max:5'],
+            'intro' => ['required', 'string'],
+            'text1' => ['required', 'string'],
+            'text2' => ['required', 'string'],
+            'state' => ['required', Rule::in(['published', 'archived'])],
+            'created_by' => ['required', 'exists:users,id'],
+            'updated_by' => ['required', 'exists:users,id'],
+            'date' => ['required', 'date'],
+            'tags' => ['nullable', 'array'],
+            'tags.*' => ['exists:tags,id'],
         ];
     }
 }
