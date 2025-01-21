@@ -93,7 +93,7 @@ class ChapaImport implements ToCollection, WithHeadingRow
     private function convertExcelTimeToHours(float $excelTime): string
     {
         // Total minutes in a day
-        $totalMinutes = $excelTime * 24 * 60
+        $totalMinutes = $excelTime * 24 * 60;
 
         // Calculate hours and minutes
         $hours = floor($totalMinutes / 60);
