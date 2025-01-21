@@ -9,6 +9,9 @@ use App\Models\Blog;
 use App\Models\Tag;
 use App\Models\Opening;
 use App\Models\Prop;
+use App\Models\DataChart;
+use App\Models\StatChart;
+
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -26,6 +29,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Ricardo Mouro',
             'email' => 'ricardomxv10@gmail.com',
             'password' => bcrypt('APsE975@!PnkGqf'),
+            'tipo' => 6,
             'email_verified_at' => now()
         ]);
 
@@ -33,13 +37,23 @@ class DatabaseSeeder extends Seeder
             'name' => 'John Smith',
             'email' => 'john@example.com',
             'password' => bcrypt('123.321A'),
+            'tipo' => 2,
             'email_verified_at' => now()
         ]);
 
         Prop::factory()->count(50)->create();
 
 
+        // DataChart::factory()->count(4)->create();
+
+
+        StatChart::factory()
+            ->count(5)
+            ->hasDataCharts(40)
+            ->create();
+
         Tag::factory()->count(4)->create();
+
 
         Project::factory()
             ->count(200)

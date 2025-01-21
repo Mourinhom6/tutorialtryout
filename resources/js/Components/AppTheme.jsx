@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { ThemeProvider, createTheme, alpha } from '@mui/material/styles';
-import * as locales from '@mui/material/locale';
+// import * as locales from '@mui/material/locale';
+// import { ptPT } from '@mui/material/locale';
+// import { ptPT as dataGridptPT } from '@mui/x-data-grid';
+// import { ptPT as coreptPT } from '@mui/material/locale';
+// import { ptPT as pickerLocaletPT  } from '@mui/x-date-pickers/locales';
 
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 import { svgIconClasses } from '@mui/material/SvgIcon';
@@ -11,16 +15,23 @@ import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { typographyClasses } from '@mui/material/Typography';;
 import { chipClasses } from '@mui/material/Chip';
+import { paperClasses } from '@mui/material/Paper';
+import { listItemIconClasses } from '@mui/material/ListItemIcon';
+import { checkboxClasses } from '@mui/material/Checkbox';
+import { listClasses } from '@mui/material/List';
+import { gridClasses } from '@mui/x-data-grid';
 import { iconButtonClasses } from '@mui/material/IconButton';
 import { buttonBaseClasses } from '@mui/material/ButtonBase';
 import { dividerClasses } from '@mui/material/Divider';
 import { menuItemClasses } from '@mui/material/MenuItem';
 import { selectClasses } from '@mui/material/Select';
 import { tabClasses } from '@mui/material/Tab';
+import { tablePaginationClasses } from '@mui/material/TablePagination';
+
 import UnfoldMoreRoundedIcon from '@mui/icons-material/UnfoldMoreRounded';
 
-
-
+import { pickersYearClasses, pickersMonthClasses, pickersDayClasses, } from '@mui/x-date-pickers';
+import { axisClasses, legendClasses, chartsGridClasses } from '@mui/x-charts';
 
 
 
@@ -1568,6 +1579,572 @@ const surfacesCustomizations = {
 
 //StagePoint
 
+const chartsCustomizations = {
+  MuiChartsAxis: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        [`& .${axisClasses.line}`]: {
+          stroke: gray[300],
+        },
+        [`& .${axisClasses.tick}`]: { stroke: gray[300] },
+        [`& .${axisClasses.tickLabel}`]: {
+          fill: gray[500],
+          fontWeight: 500,
+        },
+        ...theme.applyStyles('dark', {
+          [`& .${axisClasses.line}`]: {
+            stroke: gray[700],
+          },
+          [`& .${axisClasses.tick}`]: { stroke: gray[700] },
+          [`& .${axisClasses.tickLabel}`]: {
+            fill: gray[300],
+            fontWeight: 500,
+          },
+        }),
+      }),
+    },
+  },
+  MuiChartsTooltip: {
+    styleOverrides: {
+      mark: ({ theme }) => ({
+        ry: 6,
+        boxShadow: 'none',
+        border: `1px solid ${(theme.vars || theme).palette.divider}`,
+      }),
+      table: ({ theme }) => ({
+        border: `1px solid ${(theme.vars || theme).palette.divider}`,
+        borderRadius: theme.shape.borderRadius,
+        background: 'hsl(0, 0%, 100%)',
+        ...theme.applyStyles('dark', {
+          background: gray[900],
+        }),
+      }),
+    },
+  },
+  MuiChartsLegend: {
+    styleOverrides: {
+      root: {
+        [`& .${legendClasses.mark}`]: {
+          ry: 6,
+        },
+      },
+    },
+  },
+  MuiChartsGrid: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        [`& .${chartsGridClasses.line}`]: {
+          stroke: gray[200],
+          strokeDasharray: '4 2',
+          strokeWidth: 0.8,
+        },
+        ...theme.applyStyles('dark', {
+          [`& .${chartsGridClasses.line}`]: {
+            stroke: gray[700],
+            strokeDasharray: '4 2',
+            strokeWidth: 0.8,
+          },
+        }),
+      }),
+    },
+  },
+};
+
+
+const dataGridCustomizations = {
+    MuiDataGrid: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          '--DataGrid-overlayHeight': '300px',
+          overflow: 'clip',
+          borderColor: (theme.vars || theme).palette.divider,
+          backgroundColor: (theme.vars || theme).palette.background.default,
+          [`& .${gridClasses.columnHeader}`]: {
+            backgroundColor: (theme.vars || theme).palette.background.paper,
+          },
+          [`& .${gridClasses.footerContainer}`]: {
+            backgroundColor: (theme.vars || theme).palette.background.paper,
+          },
+          [`& .${checkboxClasses.root}`]: {
+            padding: theme.spacing(0.5),
+            '& > svg': {
+              fontSize: '1rem',
+            },
+          },
+          [`& .${tablePaginationClasses.root}`]: {
+            marginRight: theme.spacing(1),
+            '& .MuiIconButton-root': {
+              maxHeight: 32,
+              maxWidth: 32,
+              '& > svg': {
+                fontSize: '1rem',
+              },
+            },
+          },
+        }),
+        cell: ({ theme }) => ({
+          borderTopColor: (theme.vars || theme).palette.divider,
+        }),
+        menu: ({ theme }) => ({
+          borderRadius: theme.shape.borderRadius,
+          backgroundImage: 'none',
+          [`& .${paperClasses.root}`]: {
+            border: `1px solid ${(theme.vars || theme).palette.divider}`,
+          },
+          [`& .${menuItemClasses.root}`]: {
+            margin: '0 4px',
+          },
+          [`& .${listItemIconClasses.root}`]: {
+            marginRight: 0,
+          },
+          [`& .${listClasses.root}`]: {
+            paddingLeft: 0,
+            paddingRight: 0,
+          },
+        }),
+        row: ({ theme }) => ({
+          '&:last-of-type': {
+            borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
+          },
+          '&:hover': {
+            backgroundColor: (theme.vars || theme).palette.action.hover,
+          },
+          '&.Mui-selected': {
+            background: (theme.vars || theme).palette.action.selected,
+            '&:hover': {
+              backgroundColor: (theme.vars || theme).palette.action.hover,
+            },
+          },
+        }),
+        iconButtonContainer: ({ theme }) => ({
+          [`& .${iconButtonClasses.root}`]: {
+            border: 'none',
+            backgroundColor: 'transparent',
+            '&:hover': {
+              backgroundColor: alpha(theme.palette.action.selected, 0.3),
+            },
+            '&:active': {
+              backgroundColor: gray[200],
+            },
+            ...theme.applyStyles('dark', {
+              color: gray[50],
+              '&:hover': {
+                backgroundColor: gray[800],
+              },
+              '&:active': {
+                backgroundColor: gray[900],
+              },
+            }),
+          },
+        }),
+        menuIconButton: ({ theme }) => ({
+          border: 'none',
+          backgroundColor: 'transparent',
+          '&:hover': {
+            backgroundColor: gray[100],
+          },
+          '&:active': {
+            backgroundColor: gray[200],
+          },
+          ...theme.applyStyles('dark', {
+            color: gray[50],
+            '&:hover': {
+              backgroundColor: gray[800],
+            },
+            '&:active': {
+              backgroundColor: gray[900],
+            },
+          }),
+        }),
+        filterForm: ({ theme }) => ({
+          gap: theme.spacing(1),
+          alignItems: 'flex-end',
+        }),
+        columnsManagementHeader: ({ theme }) => ({
+          paddingRight: theme.spacing(3),
+          paddingLeft: theme.spacing(3),
+        }),
+        columnHeaderTitleContainer: {
+          flexGrow: 1,
+          justifyContent: 'space-between',
+        },
+        columnHeaderDraggableContainer: { paddingRight: 2 },
+      },
+    },
+  };
+
+
+  const datePickersCustomizations = {
+    MuiPickersPopper: {
+      styleOverrides: {
+        paper: ({ theme }) => ({
+          marginTop: 4,
+          borderRadius: theme.shape.borderRadius,
+          border: `1px solid ${(theme.vars || theme).palette.divider}`,
+          backgroundImage: 'none',
+          background: 'hsl(0, 0%, 100%)',
+          boxShadow:
+            'hsla(220, 30%, 5%, 0.07) 0px 4px 16px 0px, hsla(220, 25%, 10%, 0.07) 0px 8px 16px -5px',
+          [`& .${menuItemClasses.root}`]: {
+            borderRadius: 6,
+            margin: '0 6px',
+          },
+          ...theme.applyStyles('dark', {
+            background: gray[900],
+            boxShadow:
+              'hsla(220, 30%, 5%, 0.7) 0px 4px 16px 0px, hsla(220, 25%, 10%, 0.8) 0px 8px 16px -5px',
+          }),
+        }),
+      },
+    },
+    MuiPickersArrowSwitcher: {
+      styleOverrides: {
+        spacer: { width: 16 },
+        button: ({ theme }) => ({
+          backgroundColor: 'transparent',
+          color: (theme.vars || theme).palette.grey[500],
+          ...theme.applyStyles('dark', {
+            color: (theme.vars || theme).palette.grey[400],
+          }),
+        }),
+      },
+    },
+    MuiPickersCalendarHeader: {
+      styleOverrides: {
+        switchViewButton: {
+          padding: 0,
+          border: 'none',
+        },
+      },
+    },
+    MuiPickersMonth: {
+      styleOverrides: {
+        monthButton: ({ theme }) => ({
+          fontSize: theme.typography.body1.fontSize,
+          color: (theme.vars || theme).palette.grey[600],
+          padding: theme.spacing(0.5),
+          borderRadius: theme.shape.borderRadius,
+          '&:hover': {
+            backgroundColor: (theme.vars || theme).palette.action.hover,
+          },
+          [`&.${pickersMonthClasses.selected}`]: {
+            backgroundColor: gray[700],
+            fontWeight: theme.typography.fontWeightMedium,
+          },
+          '&:focus': {
+            outline: `3px solid ${alpha(brand[500], 0.5)}`,
+            outlineOffset: '2px',
+            backgroundColor: 'transparent',
+            [`&.${pickersMonthClasses.selected}`]: { backgroundColor: gray[700] },
+          },
+          ...theme.applyStyles('dark', {
+            color: (theme.vars || theme).palette.grey[300],
+            '&:hover': {
+              backgroundColor: (theme.vars || theme).palette.action.hover,
+            },
+            [`&.${pickersMonthClasses.selected}`]: {
+              color: (theme.vars || theme).palette.common.black,
+              fontWeight: theme.typography.fontWeightMedium,
+              backgroundColor: gray[300],
+            },
+            '&:focus': {
+              outline: `3px solid ${alpha(brand[500], 0.5)}`,
+              outlineOffset: '2px',
+              backgroundColor: 'transparent',
+              [`&.${pickersMonthClasses.selected}`]: { backgroundColor: gray[300] },
+            },
+          }),
+        }),
+      },
+    },
+    MuiPickersYear: {
+      styleOverrides: {
+        yearButton: ({ theme }) => ({
+          fontSize: theme.typography.body1.fontSize,
+          color: (theme.vars || theme).palette.grey[600],
+          padding: theme.spacing(0.5),
+          borderRadius: theme.shape.borderRadius,
+          height: 'fit-content',
+          '&:hover': {
+            backgroundColor: (theme.vars || theme).palette.action.hover,
+          },
+          [`&.${pickersYearClasses.selected}`]: {
+            backgroundColor: gray[700],
+            fontWeight: theme.typography.fontWeightMedium,
+          },
+          '&:focus': {
+            outline: `3px solid ${alpha(brand[500], 0.5)}`,
+            outlineOffset: '2px',
+            backgroundColor: 'transparent',
+            [`&.${pickersYearClasses.selected}`]: { backgroundColor: gray[700] },
+          },
+          ...theme.applyStyles('dark', {
+            color: (theme.vars || theme).palette.grey[300],
+            '&:hover': {
+              backgroundColor: (theme.vars || theme).palette.action.hover,
+            },
+            [`&.${pickersYearClasses.selected}`]: {
+              color: (theme.vars || theme).palette.common.black,
+              fontWeight: theme.typography.fontWeightMedium,
+              backgroundColor: gray[300],
+            },
+            '&:focus': {
+              outline: `3px solid ${alpha(brand[500], 0.5)}`,
+              outlineOffset: '2px',
+              backgroundColor: 'transparent',
+              [`&.${pickersYearClasses.selected}`]: { backgroundColor: gray[300] },
+            },
+          }),
+        }),
+      },
+    },
+    MuiPickersDay: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          fontSize: theme.typography.body1.fontSize,
+          color: (theme.vars || theme).palette.grey[600],
+          padding: theme.spacing(0.5),
+          borderRadius: theme.shape.borderRadius,
+          '&:hover': {
+            backgroundColor: (theme.vars || theme).palette.action.hover,
+          },
+          [`&.${pickersDayClasses.selected}`]: {
+            backgroundColor: gray[700],
+            fontWeight: theme.typography.fontWeightMedium,
+          },
+          '&:focus': {
+            outline: `3px solid ${alpha(brand[500], 0.5)}`,
+            outlineOffset: '2px',
+            backgroundColor: 'transparent',
+            [`&.${pickersDayClasses.selected}`]: { backgroundColor: gray[700] },
+          },
+          ...theme.applyStyles('dark', {
+            color: (theme.vars || theme).palette.grey[300],
+            '&:hover': {
+              backgroundColor: (theme.vars || theme).palette.action.hover,
+            },
+            [`&.${pickersDayClasses.selected}`]: {
+              color: (theme.vars || theme).palette.common.black,
+              fontWeight: theme.typography.fontWeightMedium,
+              backgroundColor: gray[300],
+            },
+            '&:focus': {
+              outline: `3px solid ${alpha(brand[500], 0.5)}`,
+              outlineOffset: '2px',
+              backgroundColor: 'transparent',
+              [`&.${pickersDayClasses.selected}`]: { backgroundColor: gray[300] },
+            },
+          }),
+        }),
+      },
+    },
+  };
+
+
+  const treeViewCustomizations = {
+    MuiTreeItem2: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          position: 'relative',
+          boxSizing: 'border-box',
+          padding: theme.spacing(0, 1),
+          '& .groupTransition': {
+            marginLeft: theme.spacing(2),
+            padding: theme.spacing(0),
+            borderLeft: '1px solid',
+            borderColor: (theme.vars || theme).palette.divider,
+          },
+          '&:focus-visible .focused': {
+            outline: `3px solid ${alpha(brand[500], 0.5)}`,
+            outlineOffset: '2px',
+            '&:hover': {
+              backgroundColor: alpha(gray[300], 0.2),
+              outline: `3px solid ${alpha(brand[500], 0.5)}`,
+              outlineOffset: '2px',
+            },
+          },
+        }),
+        content: ({ theme }) => ({
+          marginTop: theme.spacing(1),
+          padding: theme.spacing(0.5, 1),
+          overflow: 'clip',
+          '&:hover': {
+            backgroundColor: alpha(gray[300], 0.2),
+          },
+          '&.selected': {
+            backgroundColor: alpha(gray[300], 0.4),
+            '&:hover': {
+              backgroundColor: alpha(gray[300], 0.6),
+            },
+          },
+          ...theme.applyStyles('dark', {
+            '&:hover': {
+              backgroundColor: alpha(gray[500], 0.2),
+            },
+            '&:focus-visible': {
+              '&:hover': {
+                backgroundColor: alpha(gray[500], 0.2),
+              },
+            },
+            '&.selected': {
+              backgroundColor: alpha(gray[500], 0.4),
+              '&:hover': {
+                backgroundColor: alpha(gray[500], 0.6),
+              },
+            },
+          }),
+        }),
+      },
+    },
+  };
+
+
+//StagePoint
+
+
+// const differentCustomizations = {
+//     MuiInputBase: {
+//         styleOverrides: {
+//           root: {
+//             border: 'none',
+//           },
+//           input: {
+//             '&::placeholder': {
+//               opacity: 0.7,
+//               color: gray[500],
+//             },
+//           },
+//         },
+//       },
+//       MuiOutlinedInput: {
+//         styleOverrides: {
+//           input: {
+//             padding: 0,
+//           },
+//           root: ({ theme }) => ({
+//             padding: '8px 12px',
+//             color: (theme.vars || theme).palette.text.primary,
+//             borderRadius: (theme.vars || theme).shape.borderRadius,
+//             border: `1px solid ${(theme.vars || theme).palette.divider}`,
+//             backgroundColor: (theme.vars || theme).palette.background.default,
+//             transition: 'border 120ms ease-in',
+//             '&:hover': {
+//               borderColor: gray[400],
+//             },
+//             [`&.${outlinedInputClasses.focused}`]: {
+//               outline: `3px solid ${alpha(brand[500], 0.5)}`,
+//               borderColor: brand[400],
+//             },
+//             ...theme.applyStyles('dark', {
+//               '&:hover': {
+//                 borderColor: gray[500],
+//               },
+//             }),
+//             variants: [
+//               {
+//                 props: {
+//                   size: 'small',
+//                 },
+//                 style: {
+//                   height: '2.25rem',
+//                 },
+//               },
+//               {
+//                 props: {
+//                   size: 'medium',
+//                 },
+//                 style: {
+//                   height: '2.5rem',
+//                 },
+//               },
+//             ],
+//           }),
+//           notchedOutline: {
+//             border: 'none',
+//           },
+//         },
+//       },
+//       MuiInputAdornment: {
+//         styleOverrides: {
+//           root: ({ theme }) => ({
+//             color: (theme.vars || theme).palette.grey[500],
+//             ...theme.applyStyles('dark', {
+//               color: (theme.vars || theme).palette.grey[400],
+//             }),
+//           }),
+//         },
+//       },
+//       MuiFormLabel: {
+//         styleOverrides: {
+//           root: ({ theme }) => ({
+//             typography: theme.typography.caption,
+//             marginBottom: 8,
+//           }),
+//         },
+//       },
+//     }
+
+
+//   JoyModalDialog: {
+//     defaultProps: { layout: 'top' },
+//     styleOverrides: {
+//       root: ({ theme }) => ({
+//         ...(theme.layout === 'top' && {
+//           top: '12vh',
+//           left: '50%',
+//           transform: 'translateX(-50%)',
+//         }),
+//       }),
+//     },
+//   },
+  // MuiDateCalendar: {
+  //   styleOverrides: {
+  //     root: {
+  //       color: '#bbdefb',
+  //       borderRadius: '16px',
+  //       borderWidth: '1px',
+  //       borderColor: '#2196f3',
+  //       border: '1px solid',
+  //       backgroundColor: '#0d47a1',
+  //     }
+  //   }
+  // },
+  // MuiPickersToolbar: {
+  //   styleOverrides: {
+  //     root: {
+  //       color: '#bbdefb',
+  //       borderRadius: '16px',
+  //       borderWidth: '1px',
+  //       borderColor: '#2196f3',
+  //       border: '1px solid',
+  //       backgroundColor: '#0d47a1',
+  //     }
+  //   }
+  // },
+  // MuiPickersCalendarHeader: {
+  //   styleOverrides: {
+  //     root: {
+  //       color: '#bbdefb',
+  //       borderRadius: '4px',
+  //       borderWidth: '2px',
+  //       borderColor: '#2196f3',
+  //       border: '2px solid',
+  //       backgroundColor: '#0d47a1',
+  //     }
+  //   }
+  // }
+// }
+// Add the other Mui Pickers Later https://mui.com/x/react-date-pickers/date-picker/#customization
+
+
+
+
+
+
+
+
+//StagePoint
+
 
 export function AppThemeClient({ children, disableCustomTheme, themeComponents, locale}) {
   const theme = React.useMemo(() => {
@@ -1590,8 +2167,19 @@ export function AppThemeClient({ children, disableCustomTheme, themeComponents, 
             ...navigationCustomizations,
             ...surfacesCustomizations,
             ...themeComponents,
+            ...chartsCustomizations,
+            ...dataGridCustomizations,
+            ...datePickersCustomizations,
+            ...treeViewCustomizations,
+            // ...differentCustomizations,
+
           },
-        });
+        },
+        // ptPT,
+        // dataGridptPT,
+        // coreptPT,
+        // pickerLocaletPT,
+      );
   }, [disableCustomTheme, themeComponents]);
 
   if (disableCustomTheme) {
@@ -1603,7 +2191,7 @@ export function AppThemeClient({ children, disableCustomTheme, themeComponents, 
       {children}
     </ThemeProvider>
   );
-} 
+}
 
 
 
@@ -1720,7 +2308,7 @@ export function ClientTheme(disableCustomTheme = false, themeComponents = {}){
       if (disableCustomTheme) {
         return {};
       }
-  
+
       return createTheme({
         cssVariables: {
           colorSchemeSelector: 'data-mui-color-scheme',
@@ -1737,10 +2325,20 @@ export function ClientTheme(disableCustomTheme = false, themeComponents = {}){
           ...navigationCustomizations,
           ...surfacesCustomizations,
           ...themeComponents,
+          ...chartsCustomizations,
+         ...dataGridCustomizations,
+         ...datePickersCustomizations,
+         ...treeViewCustomizations,
+        //   ...differentCustomizations,
         },
-      });
+      },
+      // ptPT,
+      // dataGridptPT,
+      // coreptPT,
+      // pickerLocaletPT,
+      );
     }, [disableCustomTheme, themeComponents]);
-  
+
     return theme2;
   };
 
@@ -1755,4 +2353,3 @@ export function ClientTheme(disableCustomTheme = false, themeComponents = {}){
 //       },
 //     },
 //   });
-  

@@ -23,54 +23,55 @@ class EditsController extends Controller
     public function index()
     {
         $breadcrumbs = Breadcrumbs::generate();
-        // $query = Blog::query();
-        $query = Blog::with(['tags', 'images', 'createdBy', 'updatedBy']);
+        // // $query = Blog::query();
+        // $query = Blog::with(['tags', 'images', 'createdBy', 'updatedBy']);
 
-        if (request("name")) {
-            $query->where("title", "like", "%" . request("name") . "%");
+        // if (request("name")) {
+        //     $query->where("title", "like", "%" . request("name") . "%");
 
-            logger()->info("Filtering by name:", ['name' => request("name")]);
-        }
+        //     logger()->info("Filtering by name:", ['name' => request("name")]);
+        // }
 
-        if ($tag = request("tag")) { // Notice: singular 'tag' matches the column name
-            $query->whereHas('tags', function ($q) use ($tag) {
-                $q->where('tags.id', $tag);
-            });
-        }
+        // if ($tag = request("tag")) { // Notice: singular 'tag' matches the column name
+        //     $query->whereHas('tags', function ($q) use ($tag) {
+        //         $q->where('tags.id', $tag);
+        //     });
+        // }
 
-        // Default sorting: Most recent blogs first
-        $edits = $query->orderBy('created_at', 'desc')
-            ->paginate(12) // 5 items per page
-            ->onEachSide(1);
+        // // Default sorting: Most recent blogs first
+        // $edits = $query->orderBy('created_at', 'desc')
+        //     ->paginate(12) // 5 items per page
+        //     ->onEachSide(1);
 
-        return inertia('Edits/IndexJSX' , [
-            "edits" => BlogResource::collection($edits),
-            'queryParams' => request()->query() ?: null, // Name filter state
-            'success' => session('success'),
+        return inertia('Edits/IndexJSX',  [
+
+        //     "edits" => BlogResource::collection($edits),
+        //     'queryParams' => request()->query() ?: null, // Name filter state
+        //     'success' => session('success'),
             'breadcum' => $breadcrumbs,
         ]);
     }
 
 
 
-    public function show(Blog $blog, string $id)
+    // public function show(Blog $blog, string $id)
     // public function show(Project $project )
 
-    {
-        $breadcrumbs = Breadcrumbs::generate();
+//     {
+//         $breadcrumbs = Breadcrumbs::generate();
 
-        // $blog = Blog::find($id);
-        $blog = Blog::with(['tags', 'images', 'createdBy', 'updatedBy'])->findOrFail($id);
+//         // $blog = Blog::find($id);
+//         $blog = Blog::with(['tags', 'images', 'createdBy', 'updatedBy'])->findOrFail($id);
 
-        // dd($blog);
+//         // dd($blog);
 
-        // $query = $project->tasks();
-    return inertia('Edits/ShowJSX', [
-        'edit' => new BlogResource($blog),
-        'success' => session('success'),
-        'breadcum' => $breadcrumbs,
-    ]);
-}
+//         // $query = $project->tasks();
+//     return inertia('Edits/ShowJSX', [
+//         'edit' => new BlogResource($blog),
+//         'success' => session('success'),
+//         'breadcum' => $breadcrumbs,
+//     ]);
+// }
 
         // $sortField = request("sort_field", 'created_at');
         // $sortDirection = request("sort_direction", "desc");
@@ -101,10 +102,40 @@ class EditsController extends Controller
     //     ]);
     // }
 
+    // public function edit(Blog $blog, string $id)
+    // {
+    //     $blog = Blog::with(['tags', 'images', 'createdBy', 'updatedBy'])->findOrFail($id);
 
-    public function update(UpdateBlogRequest $request, Blog $blog)
-    {
-        $blog = $request->validated();
+    //     $breadcrumbs = Breadcrumbs::generate();
+
+    //     return inertia('Edits/EditJSX', [
+    //         'edit' => new BlogResource($blog),
+    //         'breadcum' => $breadcrumbs,
+    //         'success' => session('success'),
+    //     ]);
+    // }
+
+    // public function update(UpdateBlogRequest $request, Blog $blog)
+    // {
+    //     $data = $request->validated();
+    //     // $image = $data['image'] ?? null;
+    //     $data['updated_by'] = Auth::id();
+    //     // if ($image) {
+    //     //     if ($blog->image_path) {
+    //     //         Storage::disk('public')->deleteDirectory(dirname($blog->image_path));
+    //     //     }
+    //     //     $data['image_path'] = $image->store('blog/' . Str::random(), 'public');
+    //     // }
+    //     $blog->update($data);
+
+    //     return to_route('edit.index')
+    //         ->with('success', "Project \"$blog->title\" was updated");
+    // }
+
+
+    // public function visibilityupdate(UpdateBlogRequest $request, Blog $blog)
+    // {
+    //     $blog = $request->validated();
 
         // dd("update");
 
@@ -117,9 +148,9 @@ class EditsController extends Controller
         //     $data['state'] = "Visiable";
         // }
 
-        $blog->update([
-            'state' => $blog->state === 'published' ? 'archived' : 'published'
-        ]);
+        // $blog->update([
+        //     'state' => $blog->state === 'published' ? 'archived' : 'published'
+        // ]);
 
         // $data['updated_by'] = Auth::id();
         // if ($image) {
@@ -131,9 +162,9 @@ class EditsController extends Controller
 
         // $blog->update($data);
 
-        return to_route('edits.index')
-            ->with('success', "Edit \"$blog->name\" was updated");
-    }
+    //     return to_route('edits.index')
+    //         ->with('success', "Edit \"$blog->name\" was updated");
+    // }
 
 
 

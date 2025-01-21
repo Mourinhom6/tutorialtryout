@@ -83,21 +83,63 @@ class Breadcrumbs
                 $breadcrumbs[] = ['key' => 'users', 'name' => 'Users', 'url' => route('user.index')];
                 $breadcrumbs[] = ['key' => 'edit_user', 'name' => 'Edit', 'url' => route('user.edit', $routeParams)];
                 break;
+            case 'blogs.index':
+                $breadcrumbs[] = ['key' => 'edits', 'name' => 'Edits', 'url' => route('edits.index')];
+                $breadcrumbs[] = ['key' => 'blogs', 'name' => 'Blogs', 'url' => route('blogs.index')];
+                break;
+            case 'blogs.create':
+                $breadcrumbs[] = ['key' => 'edits', 'name' => 'Edits', 'url' => route('edits.index')];
+                $breadcrumbs[] = ['key' => 'blogs', 'name' => 'Blogs', 'url' => route('blogs.index')];
+                $breadcrumbs[] = ['key' => 'create_blog', 'name' => 'Create', 'url' => route('blogs.create')];
+                break;
+            case 'blogs.show':
+                $breadcrumbs[] = ['key' => 'edits', 'name' => 'Edits', 'url' => route('edits.index')];
+                $breadcrumbs[] = ['key' => 'blogs', 'name' => 'Blogs', 'url' => route('blogs.index')];
+                $breadcrumbs[] = ['key' => 'view_blog', 'name' => 'View', 'url' => route('blogs.show', $routeParams)];
+                break;
+            case 'blogs.edit':
+                $breadcrumbs[] = ['key' => 'edits', 'name' => 'Edits', 'url' => route('edits.index')];
+                $breadcrumbs[] = ['key' => 'blogs', 'name' => 'Blogs', 'url' => route('blogs.index')];
+                $breadcrumbs[] = ['key' => 'edit_blog', 'name' => 'Edit', 'url' => route('blogs.edit', $routeParams)];
+                break;
+            case 'jobs.index':
+                $breadcrumbs[] = ['key' => 'edits', 'name' => 'Edits', 'url' => route('edits.index')];
+                $breadcrumbs[] = ['key' => 'jobs', 'name' => 'Jobs', 'url' => route('jobs.index')];
+                break;
+            case 'jobs.create':
+                $breadcrumbs[] = ['key' => 'edits', 'name' => 'Edits', 'url' => route('edits.index')];
+                $breadcrumbs[] = ['key' => 'jobs', 'name' => 'Jobs', 'url' => route('jobs.index')];
+                $breadcrumbs[] = ['key' => 'create_job', 'name' => 'Create', 'url' => route('jobs.create')];
+                break;
+            case 'jobs.show':
+                $breadcrumbs[] = ['key' => 'edits', 'name' => 'Edits', 'url' => route('edits.index')];
+                $breadcrumbs[] = ['key' => 'jobs', 'name' => 'Jobs', 'url' => route('jobs.index')];
+                $breadcrumbs[] = ['key' => 'view_job', 'name' => 'View', 'url' => route('jobs.show', $routeParams)];
+                break;
+            case 'jobs.edit':
+                $breadcrumbs[] = ['key' => 'edits', 'name' => 'Edits', 'url' => route('edits.index')];
+                $breadcrumbs[] = ['key' => 'jobs', 'name' => 'Jobs', 'url' => route('jobs.index')];
+                $breadcrumbs[] = ['key' => 'edit_job', 'name' => 'Edit', 'url' => route('jobs.edit', $routeParams)];
+                break;
             case 'edits.index':
                 $breadcrumbs[] = ['key' => 'edits', 'name' => 'Edits', 'url' => route('edits.index')];
                 break;
-            case 'edits.create':
-                $breadcrumbs[] = ['key' => 'edits', 'name' => 'Edits', 'url' => route('edits.index')];
-                $breadcrumbs[] = ['key' => 'create_edit', 'name' => 'Create', 'url' => route('edits.create')];
-                break;
-            case 'edits.show':
-                $breadcrumbs[] = ['key' => 'edits', 'name' => 'Edits', 'url' => route('edits.index')];
-                $breadcrumbs[] = ['key' => 'view_edit', 'name' => 'View', 'url' => route('edits.show', $routeParams)];
-                break;
-            case 'edits.edit':
-                $breadcrumbs[] = ['key' => 'edits', 'name' => 'Edits', 'url' => route('edits.index')];
-                $breadcrumbs[] = ['key' => 'edit_edit', 'name' => 'Edit', 'url' => route('edits.edit', $routeParams)];
-                break;
+            case 'escala.index':
+                $breadcrumbs[] = ['key' => 'escala', 'name' => 'Escala', 'url' => route('escala.index')];
+                    break;
+
+            // case 'edits.create':
+            //     $breadcrumbs[] = ['key' => 'edits', 'name' => 'Edits', 'url' => route('edits.index')];
+            //     $breadcrumbs[] = ['key' => 'create_edit', 'name' => 'Create', 'url' => route('edits.create')];
+            //     break;
+            // case 'edits.show':
+            //     $breadcrumbs[] = ['key' => 'edits', 'name' => 'Edits', 'url' => route('edits.index')];
+            //     $breadcrumbs[] = ['key' => 'view_edit', 'name' => 'View', 'url' => route('edits.show', $routeParams)];
+            //     break;
+            // case 'edits.edit':
+            //     $breadcrumbs[] = ['key' => 'edits', 'name' => 'Edits', 'url' => route('edits.index')];
+            //     $breadcrumbs[] = ['key' => 'edit_edit', 'name' => 'Edit', 'url' => route('edits.edit', $routeParams)];
+            //     break;
             case 'profile.edit':
                 $breadcrumbs[] = ['key' => 'profile', 'name' => 'Profile', 'url' => route('profile.edit')];
                 break;

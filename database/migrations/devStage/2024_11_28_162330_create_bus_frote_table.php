@@ -12,7 +12,8 @@ return new class extends Migration
     public function up()
 {
     Schema::create('bus_frote', function (Blueprint $table) {
-        $table->id('NU');
+        $table->id();
+        $table->integer('NU')->unique();
         $table->string('EMPRESA', 100)->nullable();
         $table->string('MARCA', 100)->nullable();
         $table->string('MODELO', 100)->nullable();

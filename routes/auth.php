@@ -20,7 +20,12 @@ Route::middleware('guest')->group(function () {
 
     Route::get('blog', [LandingController::class, 'blog'])->name('blog');
     // Route::get('blogshow', [LandingController::class, 'blogshow'])->name('blogshow');
+
     Route::get('/blog/{id}', [LandingController::class, 'blogshow'])->name('blogshow');
+
+    Route::get('aluger', [LandingController::class, 'aluger'])->name('aluger');
+
+    Route::get('advertise', [LandingController::class, 'advertise'])->name('advertise');
 
     Route::get('marketing', [LandingController::class, 'marketing'])->name('marketing');
     Route::get('terms', [LandingController::class, 'terms'])->name('terms');

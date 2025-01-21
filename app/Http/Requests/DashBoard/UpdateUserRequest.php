@@ -36,6 +36,11 @@ class UpdateUserRequest extends FormRequest
                 'confirmed',
                 Password::min(8)->letters()->symbols(),
             ],
+            "tipo" => [
+                'required',
+                'integrer',
+                Rule::in([ 0, 1, 2, 3, 4, 5, 6, 7, 8]),
+            ],
         ];
     }
 }

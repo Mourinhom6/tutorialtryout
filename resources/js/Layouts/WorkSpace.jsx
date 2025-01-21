@@ -208,6 +208,22 @@ const NAVIGATION = [
     icon: <EditNoteRoundedIcon />,
     pattern: '/edits',
     segment: 'edits',
+    children: [
+        {
+          kind: 'page',
+          title: 'Blogs',
+          icon: <DescriptionIcon />,
+          pattern: '/blogs',
+          segment: 'blogs',
+        },
+        {
+          kind: 'page',
+          title: 'Jobs',
+          icon: <DescriptionIcon />,
+          pattern: '/jobs',
+          segment: 'jobs',
+        },
+      ],
   },
 ];
 

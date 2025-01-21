@@ -6,7 +6,12 @@ use App\Http\Controllers\DashBoard\ProfileController;
 use App\Http\Controllers\DashBoard\ProjectController;
 use App\Http\Controllers\DashBoard\TaskController;
 use App\Http\Controllers\DashBoard\EditsController;
+use App\Http\Controllers\DashBoard\BLogsController;
+use App\Http\Controllers\DashBoard\JobsController;
 use App\Http\Controllers\DashBoard\UserController;
+use App\Http\Controllers\DashBoard\EscalaController;
+
+
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +30,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('task', TaskController::class);
     Route::resource('license', LicenseController::class);
     Route::resource('user', UserController::class);
-    Route::resource('edits', EditsController::class);
+    // Route::resource('edits', EditsController::class);
+    Route::get('/edits', [EditsController::class, 'index'])->name('edits.index');
+
+    Route::resource('edits/blogs', BLogsController::class);
+    Route::resource('edits/jobs', JobsController::class);
+
+
+
+    Route::resource('escala', EscalaController::class);
+    Route::post('/escala/import', [EscalaController::class, 'import'])->name('escala.import');
+
 
 
     // Route::get('{any}', [RoutingController::class, 'handle'])->where('any', '.*');

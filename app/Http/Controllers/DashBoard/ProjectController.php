@@ -174,6 +174,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        // dd($project);
         $breadcrumbs = Breadcrumbs::generate();
         return inertia('Project/EditJSX', [
             'project' => new ProjectResource($project),

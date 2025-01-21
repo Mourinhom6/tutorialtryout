@@ -171,6 +171,18 @@ class LandingController extends Controller
         // return inertia('Client/BlogPageJSX');
         return inertia('Client/MarketingJSX');
     }
+
+    public function aluger()
+    {
+        // return inertia('Client/BlogPageJSX');
+        return inertia('Client/AlugerJSX');
+    }
+
+    public function advertise()
+    {
+        // return inertia('Client/BlogPageJSX');
+        return inertia('Client/AdvertiseJSX');
+    }
     public function terms()
     {
         // return inertia('Client/BlogPageJSX');

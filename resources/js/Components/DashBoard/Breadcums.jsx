@@ -21,12 +21,10 @@ export default function Breadcums() {
             >
                 {breadcum.map((crumb, index) => (
                     index === breadcum.length - 1 ? (
-                        // Last item, displayed as text, not a link
                         <Typography key={crumb.key} sx={{ color: 'text.primary' }}>
                             {crumb.name}
                         </Typography>
                     ) : (
-                        // Non-last items should be links
                         <Link
                             key={crumb.key}
                             href={crumb.url}

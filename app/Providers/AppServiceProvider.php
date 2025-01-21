@@ -37,10 +37,27 @@ class AppServiceProvider extends ServiceProvider
                     "name" => "Naomi Holt",
                     "email" => "naomiholt@gmail.com",
                     "photo" => "http://localhost/storage/photos/naomi.jpg",
+                    'tipo' => 2,
                     "created_at" => now(),
                 ];
             },
         ]);
+
+
+        // $migrationsPath = database_path('migrations');
+        // $directories = glob($migrationsPath.'/*', GLOB_ONLYDIR);
+        // $paths = array_merge([$migrationsPath], $directories);
+        // $this->loadMigrationsFrom($paths);
+
+
+        $migrationsPath = database_path('migrations'); // Base migrations directory
+        $directories = [
+            $migrationsPath . '/devStage',  // Add the devStage directory
+            $migrationsPath . '/ready'     // Add the ready directory
+        ];
+        $paths = array_merge([$migrationsPath], $directories);
+        $this->loadMigrationsFrom($paths);
+
 
     }
 }

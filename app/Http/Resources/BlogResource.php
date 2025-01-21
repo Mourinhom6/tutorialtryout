@@ -62,7 +62,7 @@ class BlogResource extends JsonResource
             'state' => $this->state,
             'createdBy' => new UserResource($this->whenLoaded('createdBy')),
             'updatedBy' => new UserResource($this->whenLoaded('updatedBy')),
-            'date' => $this->date->format('Y-m-d'),
+            'date' => (new Carbon($this->date))->format('Y-m-d'),
             'tags' => TagResource::collection($this->whenLoaded('tags')),
             'created_at' => (new Carbon($this->created_at))->format('Y-m-d'),
             'images' => $this->whenLoaded('images', function () {

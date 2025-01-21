@@ -390,7 +390,7 @@ const applyFilters = (title, tags) => {
     if (title) newQueryParams.title = title;
     if (tags.length > 0) newQueryParams.tags = tags.join(',');
     console.log('Sending query params:', newQueryParams);
-    router.get(route("blog"), newQueryParams);
+    router.get(routing("blog"), newQueryParams);
 };
 
 
@@ -482,8 +482,10 @@ console.log("selectedTags:", selectedTags);
                 // onBlur={(e) => searchFieldChanged("name", e.target.value)}
                 // onKeyDown={(e) => onKeyDown("name", e)}
                 value={titleFilter}
-                onChange={(e) => handleTitleChange(e.target.value)}
+                // onChange={(e) => e.key === 'Enter' &&  handleTitleChange(e.target.value)}
                 // onKeyDown={(e) => e.key === 'Enter' && applyFilters()}
+                onKeyDown={(e) => e.key === 'Enter' &&  handleTitleChange(e.target.value)}
+
                 placeholder="Search…"
                 sx={{ flexGrow: 1 }}
                 startAdornment={
@@ -513,12 +515,12 @@ console.log("selectedTags:", selectedTags);
             }}
         >
             <Box
-            sx={{
-                display: 'inline-flex',
-                flexDirection: 'row',
-                gap: 3,
-                overflow: 'auto',
-            }}
+                sx={{
+                    display: 'inline-flex',
+                    flexDirection: 'row',
+                    gap: 3,
+                    overflow: 'auto',
+                }}
             >
                 {/* <Chip onClick={() => tagChanged('All')} size="medium" label="All categories" />
 
@@ -568,7 +570,9 @@ console.log("selectedTags:", selectedTags);
                     // onBlur={(e) => searchFieldChanged("name", e.target.value)}
                     // onKeyDown={(e) => onKeyDown("name", e)}
                     value={titleFilter}
-                    onChange={(e) => handleTitleChange(e.target.value)}
+                    // onChange={(e) => handleTitleChange(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' &&  handleTitleChange(e.target.value)}
+
                     // onKeyDown={(e) => e.key === 'Enter' && applyFilters()}
                     placeholder="Search…"
                     sx={{ flexGrow: 1 }}

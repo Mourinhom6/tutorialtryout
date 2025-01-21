@@ -7,6 +7,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 // import Footer from './components/Footer';
 import ClientLayout from '@/Layouts/ClientLayout';
 
+import useRefComp from '@/components/Client/useRefComp';
+
+
 // import AppTheme from '../shared-theme/AppTheme';
 // import CircularSke from '@/components/Skeletons';
 
@@ -571,7 +574,9 @@ function Connector(trabalhinho){
 
     console.log("trabalhinho", trabalhinho);
 
-    const jobOpeningsRef = React.useRef(null)
+    // const jobOpeningsRef = React.useRef(null)
+        const { ref, scrollToRef } = useRefComp();
+
 
     const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -608,7 +613,8 @@ function Connector(trabalhinho){
                     marginBottom: 4,
                     textTransform: 'none',
                     }}
-                    onClick={() => jobOpeningsRef.current.scrollIntoView({ behavior: 'smooth' })}
+                    // onClick={() => jobOpeningsRef.current.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={scrollToRef}
                 >
                     See job openings →
                 </Button>
@@ -854,7 +860,7 @@ function Connector(trabalhinho){
                             mt: 1,
                             [theme.breakpoints.down('sm')]: { fontSize: '2rem' },
                             }}
-                            ref={jobOpeningsRef}
+                            ref={ref}
                         >
                             Current Job Openings
                         </Typography>

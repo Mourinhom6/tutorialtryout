@@ -15,6 +15,13 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/X';
 // import SitemarkIcon from './SitemarkIcon';
 
+import {useMediaQuery, useTheme } from '@mui/material';
+// import { TreeView, TreeItem } from '@mui/lab';
+import { RichTreeView } from '@mui/x-tree-view/RichTreeView';
+
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
 function Copyright() {
   return (
     <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
@@ -28,7 +35,102 @@ function Copyright() {
   );
 }
 
+
+
+
+
+const renderDesktopFooter = () => (
+    <Box sx={{ display: 'flex', justifyContent: 'space-between'}}>
+      {FooterSections.map((section) => (
+        <Box
+          key={section.id}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 1.5,
+            px:5,
+          }}
+        >
+          <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
+            {section.label}
+          </Typography>
+          {section.children.map((item) => (
+            <Link key={item.id} color="text.secondary" variant="body2" href="#">
+              {item.label}
+            </Link>
+          ))}
+        </Box>
+      ))}
+    </Box>
+  );
+
+
+  const FooterSections = [
+    {
+    id: 'product',
+    label: 'Product',
+    children: [
+        { id: 'features', label: 'Features' },
+        { id: 'testimonials', label: 'Testimonials' },
+        { id: 'highlights', label: 'Highlights' },
+        { id: 'pricing', label: 'Pricing' },
+        { id: 'faqs', label: 'FAQs' },
+    ],
+    },
+    {
+    id: 'company',
+    label: 'Company',
+    children: [
+        { id: 'about-us', label: 'About us' },
+        { id: 'careers', label: 'Careers' },
+        { id: 'press', label: 'Press' },
+    ],
+    },
+    {
+    id: 'legal',
+    label: 'Legal',
+    children: [
+        { id: 'terms', label: 'Terms' },
+        { id: 'privacy', label: 'Privacy' },
+        { id: 'contact', label: 'Contact' },
+    ],
+    },
+];
+
+
+  const renderMobileFooter = () => (
+    <RichTreeView items={FooterSections} />
+);
+
+    // <TreeView
+    //   defaultCollapseIcon={<ExpandMoreIcon />}
+    //   defaultExpandIcon={<ChevronRightIcon />}
+    // >
+    //   {FooterSections.map((section) => (
+    //     <TreeItem key={section.title} nodeId={section.title} label={section.title}>
+    //       {section.items.map((item) => (
+    //         <TreeItem
+    //           key={item}
+    //           nodeId={`${section.title}-${item}`}
+    //           label={
+    //             <Link color="text.secondary" variant="body2" href="#">
+    //               {item}
+    //             </Link>
+    //           }
+    //         />
+    //       ))}
+    //     </TreeItem>
+    //   ))}
+    // </TreeView>
+//   );
+
+
+
 export default function Footer() {
+
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
     <React.Fragment>
       <Divider />
@@ -99,7 +201,7 @@ export default function Footer() {
               </Stack>
             </Box>
           </Box>
-          <Box
+          {/* <Box
             sx={{
               display: { xs: 'none', sm: 'flex' },
               flexDirection: 'column',
@@ -164,7 +266,10 @@ export default function Footer() {
             <Link color="text.secondary" variant="body2" href="#">
               Contact
             </Link>
-          </Box>
+          </Box> */}
+
+        {isMobile ? renderMobileFooter() : renderDesktopFooter()}
+
         </Box>
         <Box
           sx={{

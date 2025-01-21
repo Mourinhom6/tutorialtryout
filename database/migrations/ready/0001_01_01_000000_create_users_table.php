@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('photo')->default('naomi.jpg');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->tinyInteger('tipo');
             $table->rememberToken();
             $table->timestamps();
         });

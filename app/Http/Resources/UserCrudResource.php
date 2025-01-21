@@ -22,6 +22,7 @@ class UserCrudResource extends JsonResource
             "name" => $this->name,
             "email" => $this->email,
             'photo' => $this->photo ? asset('storage/photos/' . $this->photo) : asset('storage/photos/naomi.jpg'),
+            'tipo' => $this->tipo,
             'created_at' => (new Carbon($this->created_at))->format('Y-m-d H:i:s'),
         ];
     }

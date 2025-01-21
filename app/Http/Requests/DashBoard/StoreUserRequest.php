@@ -4,6 +4,7 @@ namespace App\Http\Requests\DashBoard;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
 {
@@ -29,6 +30,11 @@ class StoreUserRequest extends FormRequest
                 "required",
                 'confirmed',
                 Password::min(8)->letters()->symbols(),
+            ],
+            "tipo" => [
+                'required',
+                'integrer',
+                Rule::in([ 0, 1, 2, 3, 4, 5, 6, 7, 8]),
             ],
         ];
     }
