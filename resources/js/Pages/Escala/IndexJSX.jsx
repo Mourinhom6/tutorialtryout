@@ -532,7 +532,7 @@ const VisuallyHiddenInput = styled('input')({
 dayjs.extend(customParseFormat); // Extend Day.js with the plugin
 
 
-export default function Indexad(props) {
+export default function Index(props) {
 
     console.log("propertiesEscala",props);
 
@@ -565,26 +565,38 @@ export default function Indexad(props) {
         ficheiro: null,
     })
 
-    function submit(e) {
-        e.preventDefault();
+//     function submit(e) {
+//         e.preventDefault();
+//         post(routing("escala.import"), data);
+// }
 
-        // Log the current data before sending
-        console.log("Submitting data to backend:", data);
-
-        // Log the specific file info for debugging
-        if (!data.ficheiro) {
-          console.error("No file selected to upload.");
-        } else {
-          console.log("File being uploaded:");
-          console.log("Name666:", data.ficheiro.name);
-          console.log("Size:", data.ficheiro.size);
-          console.log("Type:", data.ficheiro.type);
+function submit(e) {
+    e.preventDefault();
+    post(routing("escala.import"), data, {
+        preserveState: true,
+        preserveScroll: true,
+        onSuccess: (response) => {
+            console.log("response_message",response.message);
+            console.log("response_chapas",response.chapas);
+        },
+        onError: (errors) => {
+            console.error(errors);
         }
+    });
+}
 
-        // Perform the POST request
-        // post(routing("escala.import"))
+        // console.log("Submitting data to backend:", data);
 
-        post(routing("escala.import"), data);
+
+        // if (!data.ficheiro) {
+        //   console.error("No file selected to upload.");
+        // } else {
+        //   console.log("File being uploaded:");
+        //   console.log("Name666:", data.ficheiro.name);
+        //   console.log("Size:", data.ficheiro.size);
+        //   console.log("Type:", data.ficheiro.type);
+        // }
+
         //     forceFormData: true,
         //     preserveState: true,
         //     preserveScroll: true,
@@ -595,7 +607,7 @@ export default function Indexad(props) {
         //   .catch((error) => {
         //     console.error("Error sending data to the backend:", error);
         //   });
-      }
+    //   }
 
 
     return (

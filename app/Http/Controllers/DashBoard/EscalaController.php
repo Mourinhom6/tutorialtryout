@@ -4,7 +4,7 @@ namespace App\Http\Controllers\DashBoard;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Inertia\Inertia;
 use App\Models\Blog;
 use App\Http\Resources\BlogResource;
 use Illuminate\Support\Facades\Auth;
@@ -12,11 +12,14 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\Breadcrumbs;
 use App\Http\Requests\DashBoard\ImportFileRequest;
+use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Log;
 
 use App\Imports\EscalaImport;
 use App\Imports\ChapaImport;
+use App\Services\DatabaseOperations;
+use App\Constants;
 
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -55,9 +58,9 @@ class EscalaController extends Controller
         ]);
     }
 
+
     public function import(ImportFileRequest $request)
     {
-
         $file = $request->file('ficheiro');
         // dd($file);
 
@@ -68,10 +71,49 @@ class EscalaController extends Controller
         // $path = $file->store('/uploads/escalas');
         // Excel::import(new EscalaImport, storage_path('app/private/' . $path));
 
+        $databaseOps = new DatabaseOperations();
+        $databaseOps->truncateTables();
 
         $path = $file->store('/uploads/chapas');
-        Excel::import(new ChapaImport, storage_path('app/private/' . $path));
+        $import = new ChapaImport();
+        Excel::import($import, storage_path('app/private/' . $path));
 
+        // $processedChapas = $import->getChapas();
+
+        // $dbstuff = $import->importData($processedChapas);
+
+        // $databaseOps->truncateTables();
+
+
+        $import->calculations();
+        // dd($processedChapas);
+
+
+
+
+        // $nightStartOldV1 = Constants::NIGHT_SHIFT_START['old_v1']; // '20:00:00'
+
+
+
+
+        // Excel::import(new ChapaImport, storage_path('app/private/' . $path));
+        // return response()->json([
+        //     'message' => 'Import successful!',
+        //     'chapas' => $processedChapas
+        // ]);
+        // return Inertia::render('Escala/IndexJSX', [
+        //     'message' => 'Import successful!',
+        //     // 'chapas' => $processedChapas
+        // ]);
+        return redirect()->back()->with('message', 'Import successful!');
+
+
+
+
+        // return redirect()->back()->with([
+        //     'message' => 'Import successful!',
+        //     'chapas' => $processedChapas
+        // ]);
 
         // $path = $request->file('ficheiro')->store('uploads/escalas');
         // $file = $request->file('file');
@@ -82,7 +124,7 @@ class EscalaController extends Controller
 
         // dd($file);
 
-        return response()->json(['message' => 'Import successful!']);
+        // return response()->json(['message' => 'Import successful!']);
 
 
         // $now = Carbon::now();

@@ -27,6 +27,13 @@
       0 => 'Laravel\\Sail\\SailServiceProvider',
     ),
   ),
+  'laravel/sanctum' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Sanctum\\SanctumServiceProvider',
+    ),
+  ),
   'laravel/scout' => 
   array (
     'providers' => 
@@ -78,6 +85,17 @@
     'providers' => 
     array (
       0 => 'Pest\\Laravel\\PestServiceProvider',
+    ),
+  ),
+  'ryangjchandler/laravel-cloudflare-turnstile' => 
+  array (
+    'aliases' => 
+    array (
+      'LaravelCloudflareTurnstile' => 'RyanChandler\\LaravelCloudflareTurnstile\\Facades\\LaravelCloudflareTurnstile',
+    ),
+    'providers' => 
+    array (
+      0 => 'RyanChandler\\LaravelCloudflareTurnstile\\LaravelCloudflareTurnstileServiceProvider',
     ),
   ),
   'tightenco/ziggy' => 

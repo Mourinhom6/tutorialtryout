@@ -536,7 +536,15 @@ console.log("selectedTags:", selectedTags);
                     onClick={() => handleTagChange('all')}
                     size="medium"
                     label="All categories"
-                    color={selectedTags.length === 0 ? "primary" : "default"}
+                    // color={selectedTags.length === 0 ? "primary" : "default"}
+                    sx={(theme) => ({
+                        backgroundColor: 'transparent',
+                        border: 'none',
+                        color: selectedTags.length === 0 ? "#ff0e0e" : "default",
+                        ...theme.applyStyles('dark', {
+                            color: selectedTags.length === 0 ? "#cb0404" : "default"
+                        }),
+                    })}
                 />
 
                 {['Eventos', 'Aquisições & Concursos', 'Sustentabilidade', 'Avisos Gerais'].map(tag => (
@@ -545,8 +553,15 @@ console.log("selectedTags:", selectedTags);
                         onClick={() => handleTagChange(tag)}
                         size="medium"
                         label={tag}
-                        color={selectedTags.includes(tag) ? "primary" : "default"}
-                        sx={{ backgroundColor: 'transparent', border: 'none' }}
+                        // color={selectedTags.includes(tag) ? "primary" : "default"}
+                        sx={(theme) => ({
+                            backgroundColor: 'transparent',
+                            border: 'none',
+                            color: selectedTags.includes(tag) ? "#ff0e0e" : "default",
+                            ...theme.applyStyles('dark', {
+                                color: selectedTags.includes(tag) ? "#cb0404" : "default"
+                            }),
+                        })}
                     />
                 ))}
             </Box>

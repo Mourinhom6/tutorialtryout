@@ -14,14 +14,14 @@ return new class extends Migration
     Schema::create('chapas', function (Blueprint $table) {
         $table->id();
         $table->string('chapa', 20);
-        $table->time('amplitude');
-        $table->time('tmp_driving');
-        $table->time('tmp_pausa');
-        $table->integer('KMS');
+        $table->time('amplitude')->nullable();
+        $table->time('tmp_driving')->nullable();
+        $table->time('tmp_pausa')->nullable();
+        $table->decimal('KMS', 14, 4)->nullable();
         $table->string('escalador', 100)->nullable();
-        $table->integer('extra_hours'); // Predefined extra hours
-        $table->integer('night_hours'); // Predefined night hours
-        $table->string('color'); // Admin color code
+        $table->time('extra_hours')->nullable();
+        $table->time('night_hours')->nullable();
+        $table->string('color')->nullable();
         $table->timestamps();
     });
 
@@ -29,15 +29,30 @@ return new class extends Migration
         $table->id(); // Primary Key
         $table->foreignId('chapa_id')->constrained('chapas')->onDelete('cascade'); // Links to chapas
         $table->integer('linha');
+        $table->string('type', 20);
         $table->string('local_chegada', 70);
         $table->string('local_ida', 70);
         $table->time('hora_ida');
         $table->time('hora_chegada');
-        $table->time('conducao');
-        $table->time('pausa');
-        $table->time('kilometers');
+        $table->time('conducao')->nullable();
+        $table->decimal('kilometers', 14, 4);
         $table->timestamps(); // Created at, updated at
     });
+
+    // Schema::create('linhas', function (Blueprint $table) {
+    //     $table->id(); // Primary Key
+    //     $table->foreignId('chapa_id')->constrained('chapas')->onDelete('cascade'); // Links to chapas
+    //     $table->integer('linha');
+    //     $table->string('local_chegada', 70);
+    //     $table->string('local_ida', 70);
+    //     $table->time('hora_ida');
+    //     $table->time('hora_chegada');
+    //     $table->time('conducao');
+    //     $table->time('pausa');
+    //     $table->time('kilometers');
+    //     $table->timestamps(); // Created at, updated at
+    // });
+
 }
 
 

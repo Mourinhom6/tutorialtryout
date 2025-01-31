@@ -78,19 +78,22 @@ export default function Hero() {
               fontSize: 'clamp(3rem, 10vw, 3.5rem)',
             }}
           >
-            Our&nbsp;latest&nbsp;
+            Nossas&nbsp;Últimas&nbsp;
             <Typography
               component="span"
               variant="h1"
               sx={(theme) => ({
                 fontSize: 'inherit',
-                color: 'primary.main',
+                // color: 'primary.main',
+                    color: '#ff0e0e',
+
                 ...theme.applyStyles('dark', {
-                  color: 'primary.light',
+                //   color: 'primary.light',
+                  color: '#cb0404'
                 }),
               })}
             >
-              products
+              Novidades
             </Typography>
           </Typography>
           <Typography
@@ -100,9 +103,8 @@ export default function Hero() {
               width: { sm: '100%', md: '80%' },
             }}
           >
-            Explore our cutting-edge dashboard, delivering high-quality solutions
-            tailored to your needs. Elevate your experience with top-tier features
-            and services.
+            Subscreva as nossas atualizações para receber notificações sobre as
+            últimas notícias e avisos importantes, incluindo mudanças de horários e eventos.
           </Typography>
           <Stack
             direction={{ xs: 'column', sm: 'row' }}
@@ -119,7 +121,7 @@ export default function Hero() {
               size="small"
               variant="outlined"
               aria-label="Enter your email address"
-              placeholder="Your email address"
+              placeholder="Seu email"
               fullWidth
               slotProps={{
                 htmlInput: {
@@ -134,7 +136,7 @@ export default function Hero() {
               size="small"
               sx={{ minWidth: 'fit-content' }}
             >
-              Start now
+              Subscrever agora
             </Button>
           </Stack>
           <Typography

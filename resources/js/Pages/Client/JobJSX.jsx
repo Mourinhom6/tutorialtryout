@@ -594,14 +594,14 @@ function Connector(trabalhinho){
                 }}
             >
                 <Typography variant="h4" fontWeight="bold" gutterBottom>
-                    Work with us
+                    Trabalhe Comnosco
                 </Typography>
                 <Typography
                     variant="body1"
                     color="text.secondary"
                     sx={{ marginBottom: 3 }}
                 >
-                    Work hard with highly motivated team of talented people and great teammates to launch perfectly crafted products you will love.
+                    Trabalhe com uma equipa motivada e talentosa para oferecer soluções inovadoras que os nossos clientes vão adorar.
                 </Typography>
 
                 {/* Call to Action Button */}
@@ -847,10 +847,18 @@ function Connector(trabalhinho){
                     <Box textAlign="center" mb={6}>
                         <Typography
                             variant="overline"
-                            color="primary"
-                            sx={{ fontWeight: 600, letterSpacing: 1.2 }}
+                            // color="primary"
+                            sx={(theme) => ({
+                                fontWeight: 600,
+                                letterSpacing: 1.2,
+                                color: '#ff0e0e',
+                                ...theme.applyStyles('dark', {
+                                    color: '#cb0404'
+                                }),
+                            })}
+
                         >
-                            OPEN POSITIONS
+                            OFERTAS DE TRABALHO
                         </Typography>
                         <Typography
                             variant="h3"
@@ -862,7 +870,7 @@ function Connector(trabalhinho){
                             }}
                             ref={ref}
                         >
-                            Current Job Openings
+                            Vagas de Emprego Atuais
                         </Typography>
                     </Box>
                     <Grid container spacing={{  xs: 3, sm: 1, md: 3}} mb={6} justifyContent="center">

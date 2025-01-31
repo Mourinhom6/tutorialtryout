@@ -27,7 +27,7 @@ class ImportFileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ficheiro' => ['required', 'file', 'mimes:csv,xlsx' ,'max:20480'],
+            'ficheiro' => ['required', 'file', 'mimes:csv,xlsx' ,'max:1200000'],
         ];
     }
 }

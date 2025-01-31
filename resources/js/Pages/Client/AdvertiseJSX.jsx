@@ -85,7 +85,8 @@ const CenteredMasonry = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                minHeight: '100vh',
+                // minHeight: '100vh',
+                paddingY: 4,
                 overflow: 'hidden',
             }}
         >
@@ -102,6 +103,15 @@ const CenteredMasonry = () => {
                         item
                         size={{ xs: 12, sm: 4, md: 3, lg: 2}}
                         key={index}
+                        sx={{
+                            borderRadius: '8px',
+                            overflow: 'hidden',
+                            transition: 'all 0.3s',
+                            '&:hover': {
+                                boxShadow: theme.shadows[4],
+                                transform: 'translateY(-7px)',
+                            },
+                        }}
                     >
                         <img
                             src={image.url}
@@ -110,8 +120,8 @@ const CenteredMasonry = () => {
                                 width: '100%', // Ensure the image takes up the full width of its container
                                 height: `${image.height}px`, // Keep different heights
                                 objectFit: 'cover',
-                                borderRadius: '8px', // Optional: Rounded corners
-                                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)', // Optional: Add shadows
+                                // borderRadius: '8px', // Optional: Rounded corners
+                                // boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)', // Optional: Add shadows
                             }}
                         />
                     </Grid>
@@ -165,11 +175,11 @@ export default function Advertising(props) {
                         component="span"
                         variant="h1"
                         sx={(theme) => ({
-                        fontSize: 'inherit',
-                        color: 'primary.main',
-                        ...theme.applyStyles('dark', {
-                            color: 'primary.light',
-                        }),
+                            fontSize: 'inherit',
+                            color: '#ff0e0e',
+                            ...theme.applyStyles('dark', {
+                                color: '#cb0404'
+                            }),
                         })}
                     >
                         Publicidade

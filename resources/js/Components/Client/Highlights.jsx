@@ -5,7 +5,8 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid2';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import AutoFixHighRoundedIcon from '@mui/icons-material/AutoFixHighRounded';
+
+import AutoAwesomeSharpIcon from '@mui/icons-material/AutoAwesomeSharp';
 import ConstructionRoundedIcon from '@mui/icons-material/ConstructionRounded';
 import QueryStatsRoundedIcon from '@mui/icons-material/QueryStatsRounded';
 import SettingsSuggestRoundedIcon from '@mui/icons-material/SettingsSuggestRounded';
@@ -13,30 +14,30 @@ import SupportAgentRoundedIcon from '@mui/icons-material/SupportAgentRounded';
 import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
 
 const items = [
-  {
+    {
     icon: <SettingsSuggestRoundedIcon />,
-    title: 'Adaptable performance',
+    title: 'Conforto e Flexibilidade',
     description:
-      'Our product effortlessly adjusts to your needs, boosting efficiency and simplifying your tasks.',
-  },
-  {
+        'Os nossos serviços adaptam-se às suas necessidades, oferecendo conforto e flexibilidade para garantir a melhor experiência de viagem.',
+    },
+    {
     icon: <ConstructionRoundedIcon />,
-    title: 'Built to last',
+    title: 'Fiabilidade Garantida',
     description:
-      'Experience unmatched durability that goes above and beyond with lasting investment.',
-  },
-  {
+        'Viaje com total tranquilidade graças à durabilidade e segurança dos nossos transportes, projetados para superar expectativas.',
+    },
+    {
     icon: <ThumbUpAltRoundedIcon />,
-    title: 'Great user experience',
+    title: 'Experiência Inigualável',
     description:
-      'Integrate our product into your routine with an intuitive and easy-to-use interface.',
-  },
-  {
-    icon: <AutoFixHighRoundedIcon />,
-    title: 'Innovative functionality',
+        'Integre os nossos serviços na sua rotina com um sistema fácil de utilizar e totalmente orientado para o cliente.',
+    },
+    {
+    icon: <AutoAwesomeSharpIcon />,
+    title: 'Funcionalidade Inovadora',
     description:
-      'Stay ahead with features that set new standards, addressing your evolving needs better than the rest.',
-  },
+        'Mantenha-se à frente com características modernas que redefinem padrões e satisfazem as suas necessidades em constante evolução.',
+    },
   {
     icon: <SupportAgentRoundedIcon />,
     title: 'Reliable support',
