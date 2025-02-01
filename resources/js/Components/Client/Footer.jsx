@@ -27,7 +27,7 @@ function Copyright() {
     <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
       {'Copyright © '}
       <Link color="text.secondary" href="https://mui.com/">
-        Auto Viação Feirense
+        Self Made FleetMan
       </Link>
       &nbsp;
       {new Date().getFullYear()}
@@ -312,7 +312,7 @@ export default function Footer() {
                 <IconButton
                 color="inherit"
                 size="large"
-                href="https://www.facebook.com/AutoViacaoFeirense"
+                href="https://www.facebook.com/SelfMadaFleetMan"
                 aria-label="FaceBool"
                 sx={{ alignSelf: 'center' }}
                 >
@@ -322,7 +322,7 @@ export default function Footer() {
                 <IconButton
                 color="inherit"
                 size="large"
-                href="https://x.com/avf_poseur"
+                href="https://x.com/smfm_poseur"
                 aria-label="X"
                 sx={{ alignSelf: 'center' }}
                 >
@@ -332,7 +332,7 @@ export default function Footer() {
                 <IconButton
                 color="inherit"
                 size="large"
-                href="https://pt.linkedin.com/company/autoviacaofeirense"
+                href="https://pt.linkedin.com/company/SelfMadaFleetMan"
                 aria-label="LinkedIn"
                 sx={{ alignSelf: 'center' }}
                 >

@@ -462,10 +462,10 @@ const demoTheme = createTheme({
     },
   });
 
-// logo: { mini ? <img src="/storage/ShortLogo.png" alt="MUI logo" />, : <img src="/storage/ShortLogo.png" alt="MUI logo" />,
+// logo: { mini ? <img src="https://picsum.photos/50/40?random=1" alt="MUI logo" />, : <img src="https://picsum.photos/50/40?random=1" alt="MUI logo" />,
 
 const BRANDING = {
-    logo: <img src="/storage/ShortLogo.png" alt="MUI logo" />,
+    logo: <img src="https://picsum.photos/50/40?random=1" alt="MUI logo" />,
     title: 'WorkSpace',
   };
 function ToolbarActionsSearch() {
@@ -542,7 +542,7 @@ return (
     variant="caption"
     sx={{ m: 1, whiteSpace: 'nowrap', overflow: 'hidden',  display: 'flex', justifyContent: 'center', alignItems: 'center' }}
     >
-    {mini ? '© AVF' : `© Copyright ${new Date().getFullYear()}  Auto Viação Feirense, Lda`}
+    {mini ? '© SMIM' : `© Copyright ${new Date().getFullYear()}  Self Made FleetMan, Lda`}
     </Typography>
 );
 }

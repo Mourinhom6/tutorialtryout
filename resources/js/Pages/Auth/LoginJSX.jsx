@@ -18,6 +18,14 @@ export default function LoginJSX({ status, canResetPassword }) {
         remember: false,
     });
 
+    const applyDemoCredentials = () => {
+        setData({
+            ...data,
+            email: 'jonhdoejonhdoe@gmail.com',
+            password: 'FreePassword123'
+        });
+    };
+
     useEffect(() => {
         return () => {
             reset("password");
@@ -34,6 +42,36 @@ export default function LoginJSX({ status, canResetPassword }) {
         <Head title="Log In" />
 
           {status && (<Typography variant="body2" color="success.main" marginBottom={2} fontWeight="medium">{status}</Typography>)}
+
+
+          <Box
+                sx={{
+                    backgroundColor: 'action.hover',
+                    borderRadius: 1,
+                    p: 2,
+                    mb: 3,
+                    textAlign: 'center'
+                }}
+            >
+                <Typography variant="body2" gutterBottom>
+                    Demo Account Credentials:
+                </Typography>
+                <Typography variant="caption" component="div">
+                    Email: <strong>demo@example.com</strong>
+                </Typography>
+                <Typography variant="caption" component="div">
+                    Password: <strong>demo-password</strong>
+                </Typography>
+                <Button
+                    variant="contained"
+                    size="small"
+                    onClick={applyDemoCredentials}
+                    sx={{ mt: 1 }}
+                >
+                    Apply Demo Credentials
+                </Button>
+            </Box>
+
             <form onSubmit={submit}>
                 <TextField label="Email" variant="outlined" fullWidth margin="normal" id="email" type="email" name="email" value={data.email} autoComplete="username" autoFocus onChange={(e) => setData("email", e.target.value)} error={!!errors.email} helperText={errors.email}/>
 

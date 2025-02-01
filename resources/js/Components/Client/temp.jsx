@@ -646,18 +646,18 @@ const handleMouseEnter = (buttonId) => (event) => {
                 <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
                     {/* <Box> */}
                         <Avatar
-                            alt="AVF"
+                            alt="SMIM"
                             variant="square"
-                            src="/storage/ShortLogo.png"
+                            src="https://picsum.photos/50/40?random=1"
                             sx={{ width: 80, height: 35 }}
                             onClick={() => { router.get('/')}}
                         ></Avatar>
                         <Typography variant="h6" component="h1" sx={{ color: 'text.primary' }} onClick={() => { router.get('/')}}>
-                            Auto viação Feirense
+                            Auto viação FleetMan
                         </Typography>
                     {/* </Box> */}
 
-                    {/* logo: <img src="/storage/ShortLogo.png" alt="MUI logo" />,
+                    {/* logo: <img src="https://picsum.photos/50/40?random=1" alt="MUI logo" />,
                     title: 'WorkSpace', */}
 
 

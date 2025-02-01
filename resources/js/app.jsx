@@ -49,7 +49,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 
 createInertiaApp({
     title: (title) =>
-        title ? `${title} - Feirense WorkSpace` : "Feirense WorkSpace",
+        title ? `${title} - FleetMan WorkSpace` : "FleetMan WorkSpace",
 
     // Adjust `resolve` to support both `.jsx` and `.tsx` files
     resolve: (name) => {

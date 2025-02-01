@@ -95,7 +95,7 @@
 //           >
 //             <MenuIcon />
 //           </IconButton>
-//           <Typography variant="h6" noWrap component="div">Feirense WorkSpace</Typography>
+//           <Typography variant="h6" noWrap component="div">FleetMan WorkSpace</Typography>
 //         </Toolbar>
 //       </AppBar>
 //       <Drawer variant="permanent" open={open}>

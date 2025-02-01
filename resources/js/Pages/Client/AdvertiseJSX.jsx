@@ -194,7 +194,7 @@ export default function Advertising(props) {
                     >
                         Todos os dias, levamos a sua mensagem a milhares de olhares atentos,
                         transformando os nossos veículos em autênticas montras em movimento.
-                        Imagine o impacto de estar sempre no caminho certo com a Auto Viação Feirense!
+                        Imagine o impacto de estar sempre no caminho certo com a Self Made FleetMan!
 
                     </Typography>
                 </Stack>
@@ -216,10 +216,10 @@ export default function Advertising(props) {
                 <CenteredMasonry/>
                 <Paper   ref={ref} elevation={3} sx={{ p: 4, mt: 4 }}>
                     <Typography variant="h4" gutterBottom>
-                        Com a Auto Viação Feirense, a sua marca nunca para de ser vista!
+                        Com a Self Made FleetMan, a sua marca nunca para de ser vista!
                     </Typography>
                     <Typography variant="body1" paragraph>
-                        A Auto Viação Feirense oferece soluções de publicidade exterior em veículos. Contacte-nos para dar visibilidade à sua marca!
+                        A Self Made FleetMan oferece soluções de publicidade exterior em veículos. Contacte-nos para dar visibilidade à sua marca!
                     </Typography>
                     <form>
                         <SmallForm/>
@@ -235,10 +235,10 @@ export default function Advertising(props) {
             <CenteredMasonry/>
             <Paper   ref={publicityRef} elevation={3} sx={{ p: 4, mt: 4 }}>
                 <Typography variant="h4" gutterBottom>
-                Com a Auto Viação Feirense, a sua marca nunca para de ser vista!
+                Com a Self Made FleetMan, a sua marca nunca para de ser vista!
                 </Typography>
                 <Typography variant="body1" paragraph>
-                A Auto Viação Feirense oferece soluções de publicidade exterior em veículos. Contacte-nos para dar visibilidade à sua marca!
+                A Self Made FleetMan oferece soluções de publicidade exterior em veículos. Contacte-nos para dar visibilidade à sua marca!
                 </Typography>
                 <form> */}
                 {/* <Grid container spacing={3}>
