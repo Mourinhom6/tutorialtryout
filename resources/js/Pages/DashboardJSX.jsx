@@ -185,7 +185,7 @@ export default function Dashboard({
                 columns={12}
                 sx={{ mb: (theme) => theme.spacing(2) }}
             >
-                {statChartsWithData.map((card) => (
+                {/* {statChartsWithData.map((card) => (
                     <Grid key={card.id} size={{ xs: 12, sm: 6, lg: 3 }}>
                         <StatCard {...card} />
                     </Grid>
@@ -195,7 +195,7 @@ export default function Dashboard({
                 </Grid>
                 <Grid size={{ xs: 12, md: 6 }}>
                 <PageViewsBarChart />
-                </Grid>
+                </Grid> */}
             </Grid>
             <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
                 Details
