@@ -82,7 +82,7 @@ function MinHeightTextarea() {
   );
 
   return (
-    <Textarea aria-label="minimum height" fullWidth minRows={2} maxRows={6} placeholder="Escreva-nos uma Mensagem" />
+    <Textarea aria-label="minimum height" fullwidth minRows={2} maxRows={6} placeholder="Escreva-nos uma Mensagem" />
   );
 }
 

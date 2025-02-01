@@ -226,11 +226,6 @@ database/
 └── DatabaseSeeder.php
 
 routes/
-├── web.php
-├── api.php
-└── auth.php
-
-routes/
 ├─ api.php
 ├─ auth.php
 ├─ client.php
