@@ -1,66 +1,307 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌐 Website + Admin Dashboard | React + Laravel + InertiaJS
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Build Status](https://img.shields.io/github/actions/workflow/status/Mourinhom6/tutorialtryout/ci.yml?branch=main)](https://github.com/Mourinhom6/tutorialtryout/actions)
+[![PHP Version](https://img.shields.io/badge/PHP-8.1%2B-8892BF.svg)](https://php.net/)
+[![React Version](https://img.shields.io/badge/React-18%2B-61DAFB.svg)](https://reactjs.org/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Project Status](https://img.shields.io/badge/status-active%20development-orange)](https://github.com/Mourinhom6/tutorialtryout)
 
-## About Laravel
+**A Custom-Built Full-Stack Solution** currently in active development, combining React's flexibility with Laravel's robustness through InertiaJS. Features 100% original frontend design with no template dependencies.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📚 Table of Contents
+- [Introduction](#-introduction)
+- [Core Features](#-core-features)
+- [Planned Features](#-planned-features)
+- [Technologies Used](#-technologies-used)
+- [Prerequisites](#-prerequisites)
+- [Installation](#-installation)
+- [Configuration](#-configuration)
+- [Project Structure](#-project-structure)
+- [Running the Application](#-running-the-application)
+- [Deployment](#-deployment)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Acknowledgments](#-acknowledgments)
+- [FAQs](#-faqs)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🚀 Introduction
+**Work in Progress** - This project is currently under active development with the following goals:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Custom-Backed CMS**: Enable dynamic content management through admin dashboard
+- **Role-Based Workflows**: 
+  - Employees: View assigned tasks/work schedules
+  - Managers: Upload/update organizational worksheets
+  - Admins: Full system control with audit capabilities
+- **Data Pipeline**: Excel/CSV import-export system for operational data
+- **Custom Frontend**: Original UI components with zero template dependencies
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🌟 Core Features (Implemented)
 
-## Laravel Sponsors
+### Public Website
+- ✅ Custom Authentication System
+- ✅ Responsive Mobile-First Design
+- ✅ Contact Forms with Validation
+- ✅ Dynamic Content Rendering
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Admin Dashboard (Current)
+- 📊 Basic Analytics Dashboard
+- 👥 User Management (CRUD)
+- 📁 File Upload System
+- 🛠 Activity Logs
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## 🛣 Planned Features (Roadmap)
 
-## Contributing
+### Phase 1 - Q4 2024
+- 🚧 Role-Based Access Control (RBAC)
+- 🚧 Worksheet Import System
+- 🚧 Employee Task Assignment Module
+- 🚧 Real-time Notifications
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Phase 2 - Q1 2025
+- ◻️ Advanced Data Visualization
+- ◻️ Work Schedule Conflict Detection
+- ◻️ Document Version Control
+- ◻️ API Integration Layer
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🔧 Technologies Used
 
-## Security Vulnerabilities
+| **Category**       | **Technologies**                                                                 |
+|---------------------|---------------------------------------------------------------------------------|
+| **Frontend**        | React, InertiaJS, Tailwind CSS, Axios, Material-UI Data Grid                    |
+| **Backend**         | Laravel, MySQL, Eloquent ORM, Laravel Sanctum, Laravel Excel                    |
+| **Data**            | Chart.js, React DatePicker, XLSX.js                                            |
+| **DevOps**          | Vite, Docker, GitHub Actions                                                    |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 🛠 Installation
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+git clone https://github.com/Mourinhom6/tutorialtryout.git
+cd tutorialtryout
+
+composer install
+npm install
+
+cp .env.example .env
+php artisan key:generate
+
+# Configure your database in .env
+php artisan migrate --seed
+
+npm run dev
+php artisan serve
+
+# Configure database in .env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_db_name
+DB_USERNAME=your_db_user
+DB_PASSWORD=your_db_password
+
+# Run migrations and seed data
+php artisan migrate --seed
+
+# Start the development servers
+npm run dev
+php artisan serve
+
+```
+
+
+⚙️ Configuration
+Environment Variables (.env)
+ini
+
+APP_NAME="Your App Name"
+APP_ENV=local
+APP_KEY=base64:...
+APP_DEBUG=true
+
+# Database
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=homestead
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+
+# Session
+SESSION_DRIVER=database
+
+
+Compiling Assets
+```bash
+
+# Dev mode (hot reload)
+npm run dev
+
+# Production build
+npm run build
+```
+📂 Project Structure
+Frontend (React)
+
+
+## 📂 Project Structure
+
+```bash
+
+
+### Frontend (React)
+
+
+resources/
+├── css/
+│ └── app.css
+└── js/
+├── app.jsx
+├── bootstrap.js
+├── constants.jsx
+├── MediaQuery.jsx
+├── ziggy.js
+├── Components/
+│ ├── ApplicationLogo.jsx
+│ ├── AppTheme.jsx
+│ ├── ChartUserByCountry.jsx
+│ ├── Client/
+│ │ ├── AppAppBar.jsx
+│ │ ├── FAQ.jsx
+│ │ └── Hero.jsx
+│ ├── DashBoard/
+│ │ ├── AppNavbar.jsx
+│ │ └── Breadcums.jsx
+│ └── ... (other components)
+├── Layouts/
+│ ├── ClientLayout.jsx
+│ ├── GuestLayout.jsx
+│ └── WorkSpace.jsx
+├── Pages/
+│ ├── Auth/
+│ │ ├── LoginJSX.jsx
+│ │ └── RegisterJSX.jsx
+│ ├── DashBoard/
+│ │ ├── Blogs/
+│ │ └── Projects/
+│ └── ... (other pages)
+└── views/
+└── app.blade.php
+
+
+Backend (Laravel)
+
+app/
+├── Http/
+│ └── Controllers/
+│ ├── Auth/
+│ │ ├── AuthenticatedSessionController.php
+│ │ └── RegisteredUserController.php
+│ ├── DashBoard/
+│ │ ├── BlogsController.php
+│ │ └── ProjectsController.php
+│ └── ... (other controllers)
+├── Models/
+│ ├── Blog.php
+│ ├── Project.php
+│ └── User.php
+└── Services/
+└── DatabaseOperations.php
+
+database/
+├── migrations/
+│ ├── 2024_02_03_102720_create_projects_table.php
+│ └── 2025_01_10_082956_create_escala_table.php
+└── seeders/
+└── DatabaseSeeder.php
+
+routes/
+├── web.php
+├── api.php
+└── auth.php
+
+routes/
+├─ api.php
+├─ auth.php
+├─ client.php
+├─ console.php
+├─ web.php
+
+```
+
+🖥 Running the Application
+```bash
+
+# Start Laravel backend
+php artisan serve
+
+# Start Vite frontend (hot reload)
+npm run dev
+
+# Run tests
+php artisan test
+npm run test
+
+```
+
+🚀 Deployment
+Production Build:
+
+```bash
+
+npm run build
+php artisan optimize:clear
+```
+
+Server Requirements:
+
+PHP 8.1+, Node.js 16+, MySQL 5.7+
+
+Configure .env for production (set APP_DEBUG=false).
+
+Recommended Hosting:
+
+Laravel Forge, DigitalOcean, AWS EC2.
+
+🤝 Contributing
+Fork the repository.
+
+Create a feature branch: git checkout -b feat/amazing-feature.
+
+Commit changes: git commit -m 'Add amazing feature'.
+
+Push to the branch: git push origin feat/amazing-feature.
+
+Open a Pull Request.
+
+📜 License
+MIT License. See LICENSE for details.
+
+🙏 Acknowledgments
+Special thanks to:
+
+Laravel Community for backend inspiration
+
+React Team for component architecture
+
+InertiaJS Core Team for seamless integration
+
+Tailwind CSS for utility-first freedom
+
+❓ FAQs
+
+<details> <summary><strong>Q: Is this production-ready?</strong></summary> A: Not yet - currently in active development. Not recommended for production use until v1.0 release. </details><details> <summary><strong>Q: How to handle data imports?</strong></summary> A: Current implementation supports Excel files. The configuratiosn are all in App/Imports </details><details> <summary><strong>Q: Where are the frontend templates?</strong></summary> A: There are none! But I used something similar to a BootStarp Library called Mui Componrnts. </details>
+Happy Coding! 👨💻👩💻
+
+
+MIT License. See [LICENSE](LICENSE) for details.
