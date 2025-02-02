@@ -42,7 +42,14 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
-RUN npm install --legacy-peer-deps --production && npm run build -- --mode production
+# RUN npm install --legacy-peer-deps --production && npm run build -- --mode production
+# RUN npm install --legacy-peer-deps && \
+#     npm run build -- --mode production
+
+RUN npm install --legacy-peer-deps && \
+npm run build -- --mode production
+
+
 
 # Fix permissions
 RUN chown -R www-data:www-data /var/www \
