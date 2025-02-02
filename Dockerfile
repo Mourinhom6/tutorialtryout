@@ -1,38 +1,36 @@
-# Use the official PHP image with Apache
-FROM php:8.2-apache
-
-# Set working directory
-WORKDIR /var/www/html
+FROM php:8.3-fpm
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
-    unzip \
-    libzip-dev \
+    curl \
+    libpng-dev \
     libonig-dev \
     libxml2-dev \
-    libpq-dev \
-    nodejs \
-    npm \
-    && docker-php-ext-install pdo pdo_mysql zip mbstring exif pcntl bcmath
+    zip \
+    unzip
 
-# Install Composer
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy Laravel files
-COPY . .
+# Set working directory
+WORKDIR /var/www
 
-# Install PHP dependencies
-RUN composer install --optimize-autoloader --no-dev
+# Copy existing application directory contents
+COPY . /var/www
 
-# Install Node dependencies and build React
-RUN npm install && npm run build
+# Install dependencies
+RUN composer install
 
-# Set permissions for Laravel storage and bootstrap cache
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Change ownership of our applications
+RUN chown -R www-data:www-data /var/www
 
-# Expose port 80
-EXPOSE 80
-
-# Start Apache
-CMD ["apache2-foreground"]
+# Expose port 9000 and start php-fpm server
+EXPOSE 9000
+CMD ["php-fpm"]
