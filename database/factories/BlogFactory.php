@@ -22,7 +22,8 @@ class BlogFactory extends Factory
         return [
 
             'img_main' => fake()
-            ->randomElement(['https://picsum.photos/800/450?random=1', 'https://picsum.photos/800/450?random=2', 'https://picsum.photos/800/450?random=3', 'https://picsum.photos/800/450?random=4']),           'intro' => $this->faker->paragraph(),
+            ->randomElement(['https://picsum.photos/800/450?random=1', 'https://picsum.photos/800/450?random=2', 'https://picsum.photos/800/450?random=3', 'https://picsum.photos/800/450?random=4']),
+            'intro' => fake()->paragraph(),
             'text1' => fake()->paragraphs(3, true),
             'text2' => fake()->paragraphs(3, true),
             'title' => fake()->sentence(),

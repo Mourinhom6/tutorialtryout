@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Inertia\Inertia;
+use Illuminate\Routing\UrlGenerator;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,13 +17,19 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+
+
     }
 
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot(UrlGenerator $url)
     {
+        if (env('APP_ENV') == 'production') {
+            $url->forceScheme('https');
+        }
+
         Inertia::share([
             'authUser' => function () {
                 $user = Auth::user();

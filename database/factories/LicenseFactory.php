@@ -19,7 +19,7 @@ class LicenseFactory extends Factory
 
         $expireDate = fake()->dateTimeBetween('now', '+10 month');
         return [
-            'NUM' => $this->faker->randomNumber,
+            'NUM' =>  fake()->randomNumber,
             'NOME' => fake()->randomElement(['SEGURO_BUS', 'Inspeção Periódica', 'Inspeção Extraórdinária']),
             'TIPO' => fake()->randomElement(['SEGURO', 'INSPEÇÃO', 'LICENSA']),
             'ATRIBUICAO' => fake()->randomElement(['AEROPORTO PORTO', 'AML', 'ASSISTÊNCIA']),
