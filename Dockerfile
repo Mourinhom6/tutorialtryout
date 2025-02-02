@@ -1,6 +1,10 @@
 # FROM php:8.3-fpm
 FROM php:8.3-apache
 
+# Install Node.js (LTS version)
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
+
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -30,6 +34,12 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Set working directory
 WORKDIR /var/www
+
+RUN npm install
+
+RUN npm run build -- --mode production
+
+RUN mv public/build public/js public/css /var/www/public/
 
 # Copy existing application directory contents
 # COPY . /var/www
