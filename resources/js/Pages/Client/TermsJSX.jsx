@@ -4,8 +4,8 @@
 // import CssBaseline from '@mui/material/CssBaseline';
 // import Container from '@mui/material/Container';
 // // import AppAppBar from './components/AppAppBar';
-// import MainContent from '@/components/Client/MainContent';
-// import Latest from '@/components/Client/Latest';
+// import MainContent from '@/Components/Client/MainContent';
+// import Latest from '@/Components/Client/Latest';
 // // import Footer from './components/Footer';
 // import ClientLayout from '@/Layouts/ClientLayout';
 

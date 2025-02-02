@@ -136,7 +136,6 @@ export default function SessionsChart() {
                 5000, 5200, 4800, 5400, 5600, 5900,
                 //  6100, 5000,
                 ],
-              area: true,
             },
           ]}
           height={250}

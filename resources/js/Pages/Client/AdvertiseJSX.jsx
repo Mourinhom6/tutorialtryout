@@ -2,13 +2,13 @@ import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 // import Divider from '@mui/material/Divider';
 // import AppAppBar from './components/AppAppBar';
-// import Hero from '@/components/Client/Hero';
-// import LogoCollection from '@/components/Client/LogoCollection';
-// import Highlights from '@/components/Client/Highlights';
-// import Pricing from '@/components/Client/Pricing';
-// import Features from '@/components/Client/Features';
-// import Testimonials from '@/components/Client/Testimonials';
-// import FAQ from '@/components/Client/FAQ';
+// import Hero from '@/Components/Client/Hero';
+// import LogoCollection from '@/Components/Client/LogoCollection';
+// import Highlights from '@/Components/Client/Highlights';
+// import Pricing from '@/Components/Client/Pricing';
+// import Features from '@/Components/Client/Features';
+// import Testimonials from '@/Components/Client/Testimonials';
+// import FAQ from '@/Components/Client/FAQ';
 
 import {
     Tabs,
@@ -31,9 +31,9 @@ import {
   import Grid from '@mui/material/Grid2';
 
 
-  import useRefComp from '@/components/Client/useRefComp';
+  import useRefComp from '@/Components/Client/useRefComp';
 
-  import SmallForm from '@/components/SmallForm';
+  import SmallForm from '@/Components/SmallForm';
 
 
 

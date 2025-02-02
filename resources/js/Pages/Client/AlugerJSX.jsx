@@ -40,9 +40,9 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { ptPT } from '@mui/x-date-pickers/locales';
 
 
-import SmallForm from '@/components/SmallForm';
+import SmallForm from '@/Components/SmallForm';
 
-import useRefComp from '@/components/Client/useRefComp';
+import useRefComp from '@/Components/Client/useRefComp';
 
 import { Head, Link, useForm } from "@inertiajs/react";
 

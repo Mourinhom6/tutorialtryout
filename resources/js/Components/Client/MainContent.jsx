@@ -19,10 +19,10 @@ import { styled } from '@mui/material/styles';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import RssFeedRoundedIcon from '@mui/icons-material/RssFeedRounded';
 import { Link, router } from "@inertiajs/react";
-// import useLoading from '@/components/Loading';
+// import useLoading from '@/Components/Loading';
 
 
-// import CircularSke from '@/components/Skeletons';
+// import CircularSke from '@/Components/Skeletons';
 
 
 import {useRoute} from "&/ziggy"

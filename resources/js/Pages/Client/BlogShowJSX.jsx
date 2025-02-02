@@ -34,7 +34,7 @@ import {
 import Grid from '@mui/material/Grid2';
 import useIsSuperTiny  from "@/MediaQuery";
 
-import ImageMasonry from '@/components/Mansory';
+import ImageMasonry from '@/Components/Mansory';
 
 
 const StyledCard = styled(Card)(({ theme }) => ({

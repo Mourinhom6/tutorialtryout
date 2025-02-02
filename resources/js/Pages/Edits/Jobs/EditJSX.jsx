@@ -42,7 +42,7 @@ import {
 import Grid from '@mui/material/Grid2';
 import useIsSuperTiny  from "@/MediaQuery";
 
-import ImageMasonry from '@/components/Mansory';
+import ImageMasonry from '@/Components/Mansory';
 
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';

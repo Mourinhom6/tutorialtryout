@@ -2,16 +2,16 @@ import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 
 // import AppAppBar from './components/AppAppBar';
-// import MainContent from '@/components/Client/MainContent';
-// import Latest from '@/components/Client/Latest';
+// import MainContent from '@/Components/Client/MainContent';
+// import Latest from '@/Components/Client/Latest';
 // import Footer from './components/Footer';
 import ClientLayout from '@/Layouts/ClientLayout';
 
-import useRefComp from '@/components/Client/useRefComp';
+import useRefComp from '@/Components/Client/useRefComp';
 
 
 // import AppTheme from '../shared-theme/AppTheme';
-// import CircularSke from '@/components/Skeletons';
+// import CircularSke from '@/Components/Skeletons';
 
 import Grid from '@mui/material/Grid2';
 import { Link, router } from "@inertiajs/react";
