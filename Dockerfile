@@ -30,7 +30,9 @@ WORKDIR /var/www
 COPY . /var/www
 
 # Install dependencies
-RUN composer install
+# RUN composer install
+RUN composer install --no-dev --optimize-autoloader
+
 
 # Change ownership of our applications
 RUN chown -R www-data:www-data /var/www
