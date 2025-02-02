@@ -29,6 +29,9 @@ WORKDIR /var/www
 # Copy existing application directory contents
 COPY . /var/www
 
+# After COPY . /var/www
+RUN chmod +x /var/www/deploy.sh
+
 # Install dependencies
 # RUN composer install
 RUN composer install --no-dev --optimize-autoloader
