@@ -11,6 +11,6 @@ php artisan config:cache
 echo "Caching routes..."
 php artisan route:cache
 
-echo "Running migrations and Seeding database..."
-php artisan migrate:fresh --seed
+# echo "Running migrations and Seeding database..."
+# php artisan migrate:fresh --seed
 
