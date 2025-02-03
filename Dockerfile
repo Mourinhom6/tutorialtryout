@@ -42,7 +42,10 @@ WORKDIR /var/www
 
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+
+RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
 # RUN npm install --legacy-peer-deps --production && npm run build -- --mode production
 # RUN npm install --legacy-peer-deps && \
